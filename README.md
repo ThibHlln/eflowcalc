@@ -8,7 +8,7 @@ EFlowCalc is an open-source calculator of ecological stream flow characteristics
 
 The simplest way to install EFlowCalc is to use pip and a link to the GitHub repository:
 
-	python -m pip install git+https://github.com/ThibHlln/smartpy.git
+	python -m pip install git+https://github.com/ThibHlln/eflowcalc.git
 
 Alternatively, you can download the source code (*i.e.* the GitHub repository) and, from the downloaded directory itself, run the command:
 
