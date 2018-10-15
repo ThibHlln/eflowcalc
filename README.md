@@ -2,7 +2,7 @@
 
 # EFlowCalc - An open-source calculator of ecological stream flow characteristics in Python
 
-EFlowCalc is an open-source calculator of ecological stream flow characteristics in Python. It is licensed under GNU GPL-3.0 (see [licence file](https://github.com/ThibHlln/eflowcalc/blob/master/LICENCE.md) provided). EFlowCalc currently gives access to 17 of the 171 different ecologically relevant stream flow characteristics provided by [EflowStats](https://github.com/USGS-R/EflowStats) developed by USGS. More characteristics will gradually be added to EFlowCalc. The advantage of eFlowCalc is the vectorisation of all computations which makes for very efficient calculation of the stream flow characteristics using [numpy](https://github.com/numpy/numpy) (and hence C code under the hood).
+EFlowCalc is an open-source calculator of ecological stream flow characteristics in Python. It is licensed under GNU GPL-3.0 (see [licence file](https://github.com/ThibHlln/eflowcalc/blob/master/LICENCE.md) provided). EFlowCalc currently gives access to 17 of the 171 different ecologically relevant stream flow characteristics provided by [EflowStats](https://github.com/USGS-R/EflowStats) developed by USGS. More characteristics will gradually be added to EFlowCalc. The main advantage of EFlowCalc is the vectorisation of all computations which makes for very efficient calculation of the stream flow characteristics using [numpy](https://github.com/numpy/numpy) (and hence C code under the hood).
 
 ## How to Install
 
