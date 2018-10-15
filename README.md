@@ -16,7 +16,7 @@ Alternatively, you can download the source code (*i.e.* the GitHub repository) a
 
 ## Dependencies
 
-EFlowCalc requires the popular Python packages `numpy` and `scipy` to be installed on the Python implementation where `eflowcalc` is installed.
+EFlowCalc requires the popular Python packages `numpy` and `pandas` to be installed on the Python implementation where `eflowcalc` is installed.
 
 ## Version History
 
