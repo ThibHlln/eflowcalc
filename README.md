@@ -14,6 +14,38 @@ Alternatively, you can download the source code (*i.e.* the GitHub repository) a
 
     python setup.py install
 
+## How to Use
+
+A tutorial in the form of a [Jupyter notebook](https://github.com/ThibHlln/eflowcalc/blob/master/examples/api_usage_example.ipynb) is available to get started with the usage of EFlowCalc's API. The input file required for the tutorial is provided in the `examples/` folder.
+
+## Streamflow Characteristics Available
+
+The streamflow characteristics currently available in EFlowCalc are as follows:
+* Magnitude of flow events
+    * MA26 - Variability of March flow
+    * MA41 - Mean annual daily flow
+    * ML17 - Base flow ratio
+    * ML20 - Base flow 3
+    * MH10 - Maximum October flow
+* Frequency of flow events
+    * FL2 - Variability in low pulse count
+    * FH6 - Frequency of moderate floods
+    * FH7 - Frequency of large floods
+    * FH9 - Flood frequency
+* Duration of flow events
+    * DL9 - Variability in annual minimum of 30-day average flow
+    * DH4 - Annual maximum of 30-day average flow
+    * DH13 - Annual maximum of 30-day average flow normalised by median flow
+    * DH16 - Variability in high-flow pulse count
+* Timing of flow events
+    * TA1 - Constancy by [Colwell (1974)](https://doi.org/10.2307/1940366)
+    * TL1 - Timing of annual minimum flow
+* Rate of change in flow events
+    * RA2 - Variability in rise rate
+    * RA7 - Rate of flow recession
+    
+These streamflow characteristics are amongst the 171 hydrological indices inventoried by [Olden and Poff (2003)](https://doi.org/10.1002/rra.700). The detailed computations used in EFlowCalc are inspired by the work of [Henriksen et al. (2006)](https://doi.org/10.3133/ofr20061093), however EFlowCalc is neither endorsed by these authors nor by U.S. Geological Survey, as stipulated in the [EFlowStats](https://github.com/USGS-R/EflowStats) licence.
+
 ## Dependencies
 
 EFlowCalc requires the popular Python packages `numpy` and `pandas` to be installed on the Python implementation where `eflowcalc` is installed.
