@@ -6,10 +6,13 @@ from setuptools import setup
 with open("README.md", "r") as fh:
     long_desc = fh.read()
 
+with open('eflowcalc/version.py') as fv:
+    exec(fv.read())
+
 setup(
     name='eflowcalc',
 
-    version='0.0.1',
+    version=__version__,
 
     description='EFlowCalc: A Calculator of Ecological Stream Flow Characteristics',
     long_description=long_desc,

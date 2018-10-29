@@ -18,12 +18,5 @@
 # You should have received a copy of the GNU General Public License
 # along with EFlowCalc. If not, see <http://www.gnu.org/licenses/>.
 
-from .eflowcalc import calculator
 
-from .flow_magnitude import ma26, ma41, ml17, ml20, mh10
-from .flow_frequency import fl2, fh6, fh7, fh9
-from .flow_duration import dl9, dh4, dh13, dh16
-from .flow_timing import ta1, tl1
-from .flow_rate_change import ra2, ra7
-
-from .version import __version__
+__version__ = '0.0.1'
