@@ -47,7 +47,7 @@ def fl2(flows, datetimes, hydro_years, drainage_area):
     for hy, mask in enumerate(hydro_years):
         info[hy, :] = count_events(flows[mask, :], threshold=perc25, typ='low')
     # calculations for entire time series
-    sfc = np.std(info, axis=0) * 100 / np.mean(info, axis=0)
+    sfc = np.std(info, ddof=1, axis=0) * 100 / np.mean(info, axis=0)
 
     return sfc
 
@@ -91,7 +91,7 @@ def fh2(flows, datetimes, hydro_years, drainage_area):
     for hy, mask in enumerate(hydro_years):
         info[hy, :] = count_events(flows[mask, :], threshold=perc75, typ='high')
     # calculations for entire time series
-    sfc = np.std(info, axis=0) * 100 / np.mean(info, axis=0)
+    sfc = np.std(info, ddof=1, axis=0) * 100 / np.mean(info, axis=0)
 
     return sfc
 

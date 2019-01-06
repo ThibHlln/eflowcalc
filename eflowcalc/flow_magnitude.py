@@ -48,7 +48,7 @@ def ma3(flows, datetimes, hydro_years, drainage_area):
     # calculations per hydrological year
     info = np.zeros((hydro_years.shape[0], flows.shape[1]), dtype=np.float64)
     for hy, mask in enumerate(hydro_years):
-        info[hy, :] = np.std(flows[mask, :], axis=0) / np.mean(flows[mask, :], axis=0)
+        info[hy, :] = np.std(flows[mask, :], ddof=1, axis=0) / np.mean(flows[mask, :], axis=0)
     # calculations for entire time series
     sfc = np.mean(info, axis=0) * 100
 
@@ -62,7 +62,7 @@ def ma4(flows, datetimes, hydro_years, drainage_area):
     log_f = np.log10(log_f, dtype=np.float64)
     # calculations for entire time series
     perc = np.percentile(log_f, (5, 10, 15, 20, 25, 30, 35, 40, 45, 50, 55, 60, 65, 70, 75, 80, 85, 90, 95), axis=0)
-    sfc = np.std(perc, axis=0) * 100 / np.mean(perc, axis=0)
+    sfc = np.std(perc, ddof=1, axis=0) * 100 / np.mean(perc, axis=0)
 
     return sfc
 
@@ -458,7 +458,7 @@ def ma39(flows, datetimes, hydro_years, drainage_area):
     # calculations per month for each year
     mean_ = np.array(pd.DataFrame(flows, index=datetimes).groupby(lambda x: (x.year, x.month)).mean())
     # calculations for entire time series
-    sfc = np.std(mean_, axis=0) * 100 / np.mean(mean_, axis=0)
+    sfc = np.std(mean_, ddof=1, axis=0) * 100 / np.mean(mean_, axis=0)
 
     return sfc
 
@@ -674,7 +674,7 @@ def ml13(flows, datetimes, hydro_years, drainage_area):
     # calculations per month for each year
     min_ = np.array(pd.DataFrame(flows, index=datetimes).groupby(lambda x: (x.year, x.month)).min())
     # calculations for entire time series
-    sfc = np.std(min_, axis=0) * 100 / np.mean(min_, axis=0)
+    sfc = np.std(min_, ddof=1, axis=0) * 100 / np.mean(min_, axis=0)
 
     return sfc
 
@@ -734,7 +734,7 @@ def ml18(flows, datetimes, hydro_years, drainage_area):
     for hy, mask in enumerate(hydro_years):
         info[hy, :] = calc_bfi(flows[mask, :])
     # calculations for entire time series
-    sfc = np.std(info, axis=0) * 100 / np.mean(info, axis=0)
+    sfc = np.std(info, ddof=1, axis=0) * 100 / np.mean(info, axis=0)
 
     return sfc
 
@@ -781,7 +781,7 @@ def ml21(flows, datetimes, hydro_years, drainage_area):
     for hy, mask in enumerate(hydro_years):
         info[hy, :] = np.amin(flows[mask, :], axis=0)
     # calculations for entire time series
-    sfc = np.std(info, axis=0) * 100 / np.mean(info, axis=0)
+    sfc = np.std(info, ddof=1, axis=0) * 100 / np.mean(info, axis=0)
 
     return sfc
 
@@ -939,7 +939,7 @@ def mh13(flows, datetimes, hydro_years, drainage_area):
     # calculations per month for each year
     max_ = np.array(pd.DataFrame(flows, index=datetimes).groupby(lambda x: (x.year, x.month)).max())
     # calculations for entire time series
-    sfc = np.std(max_, axis=0) * 100 / np.mean(max_, axis=0)
+    sfc = np.std(max_, ddof=1, axis=0) * 100 / np.mean(max_, axis=0)
 
     return sfc
 
@@ -959,7 +959,7 @@ def mh14(flows, datetimes, hydro_years, drainage_area):
 # MH15 - 1% exceedance value normalised by median flow for entire record
 def mh15(flows, datetimes, hydro_years, drainage_area):
     # calculations for entire time series
-    sfc = np.percentile(flows[:, :], 99, axis=0) / np.median(flows[:, :], axis=0)
+    sfc = np.percentile(flows, 99, axis=0) / np.median(flows, axis=0)
 
     return sfc
 
@@ -967,7 +967,7 @@ def mh15(flows, datetimes, hydro_years, drainage_area):
 # MH16 - 10% exceedance value normalised by median flow for entire record
 def mh16(flows, datetimes, hydro_years, drainage_area):
     # calculations for entire time series
-    sfc = np.percentile(flows[:, :], 90, axis=0) / np.median(flows[:, :], axis=0)
+    sfc = np.percentile(flows, 90, axis=0) / np.median(flows, axis=0)
 
     return sfc
 
@@ -975,7 +975,7 @@ def mh16(flows, datetimes, hydro_years, drainage_area):
 # MH17 - 25% exceedance value normalised by median flow for entire record
 def mh17(flows, datetimes, hydro_years, drainage_area):
     # calculations for entire time series
-    sfc = np.percentile(flows[:, :], 75, axis=0) / np.median(flows[:, :], axis=0)
+    sfc = np.percentile(flows, 75, axis=0) / np.median(flows, axis=0)
 
     return sfc
 
@@ -990,7 +990,7 @@ def mh18(flows, datetimes, hydro_years, drainage_area):
     log_f = np.copy(info)
     log_f[log_f == 0.0] = 0.01  # replace log10(0) by log10(0.01) if necessary
     log_f = np.log10(log_f, dtype=np.float64)
-    sfc = np.std(log_f, axis=0) * 100 / np.mean(log_f, axis=0)
+    sfc = np.std(log_f, ddof=1, axis=0) * 100 / np.mean(log_f, axis=0)
 
     return sfc
 
@@ -1009,7 +1009,7 @@ def mh19(flows, datetimes, hydro_years, drainage_area):
     sum_log_f = np.sum(log_f, axis=0)
     sum_log_f_2 = np.sum(log_f ** 2, axis=0)
     sum_log_f_3 = np.sum(log_f ** 3, axis=0)
-    std_log_f = np.std(log_f, axis=0)
+    std_log_f = np.std(log_f, ddof=1, axis=0)
     sfc = ((nb_years ** 2) * sum_log_f_3 - 3 * nb_years * sum_log_f_2 * sum_log_f + 2 * (sum_log_f ** 3)) / \
           (nb_years * (nb_years - 1) * (nb_years - 2) * (std_log_f ** 3))
 

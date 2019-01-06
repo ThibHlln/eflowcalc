@@ -43,7 +43,7 @@ def ra2(flows, datetimes, hydro_years, drainage_area):
     diffs = np.diff(flows, axis=0)
     rises = np.copy(diffs)
     rises[rises <= 0] = np.nan
-    sfc = np.nanstd(rises, axis=0) * 100 / np.nanmean(rises, axis=0)
+    sfc = np.nanstd(rises, ddof=1, axis=0) * 100 / np.nanmean(rises, axis=0)
 
     return sfc
 
@@ -67,7 +67,7 @@ def ra4(flows, datetimes, hydro_years, drainage_area):
     falls = np.copy(diffs)
     falls[falls >= 0] = np.nan
     falls = np.abs(falls)
-    sfc = np.nanstd(falls, axis=0) * 100 / np.nanmean(falls, axis=0)
+    sfc = np.nanstd(falls, ddof=1, axis=0) * 100 / np.nanmean(falls, axis=0)
 
     return sfc
 
@@ -125,6 +125,6 @@ def ra9(flows, datetimes, hydro_years, drainage_area):
     for hy, mask in enumerate(hydro_years):
         info[hy, :] = count_reversals(flows[mask, :])
     # calculations for entire time series
-    sfc = np.std(info, axis=0) * 100 / np.mean(info, axis=0)
+    sfc = np.std(info, ddof=1, axis=0) * 100 / np.mean(info, axis=0)
 
     return sfc

@@ -134,7 +134,7 @@ def dl6(flows, datetimes, hydro_years, drainage_area):
     for hy, mask in enumerate(hydro_years):
         info[hy, :] = np.amin(flows[mask, :], axis=0)
     # calculations for entire time series
-    sfc = np.std(info, axis=0) * 100 / np.mean(info, axis=0)
+    sfc = np.std(info, ddof=1, axis=0) * 100 / np.mean(info, axis=0)
 
     return sfc
 
@@ -156,7 +156,7 @@ def dl7(flows, datetimes, hydro_years, drainage_area):
             info[hy, :] = np.amin(roll_3[i:(i + np.sum(mask)), :], axis=0)
             i += np.sum(mask)
     # calculations for entire time series
-    sfc = np.std(info, axis=0) * 100 / np.mean(info, axis=0)
+    sfc = np.std(info, ddof=1, axis=0) * 100 / np.mean(info, axis=0)
 
     return sfc
 
@@ -178,7 +178,7 @@ def dl8(flows, datetimes, hydro_years, drainage_area):
             info[hy, :] = np.amin(roll_7[i:(i + np.sum(mask)), :], axis=0)
             i += np.sum(mask)
     # calculations for entire time series
-    sfc = np.std(info, axis=0) * 100 / np.mean(info, axis=0)
+    sfc = np.std(info, ddof=1, axis=0) * 100 / np.mean(info, axis=0)
 
     return sfc
 
@@ -200,7 +200,7 @@ def dl9(flows, datetimes, hydro_years, drainage_area):
             info[hy, :] = np.amin(roll_30[i:(i + np.sum(mask)), :], axis=0)
             i += np.sum(mask)
     # calculations for entire time series
-    sfc = np.std(info, axis=0) * 100 / np.mean(info, axis=0)
+    sfc = np.std(info, ddof=1, axis=0) * 100 / np.mean(info, axis=0)
 
     return sfc
 
@@ -222,7 +222,7 @@ def dl10(flows, datetimes, hydro_years, drainage_area):
             info[hy, :] = np.amin(roll_90[i:(i + np.sum(mask)), :], axis=0)
             i += np.sum(mask)
     # calculations for entire time series
-    sfc = np.std(info, axis=0) * 100 / np.mean(info, axis=0)
+    sfc = np.std(info, ddof=1, axis=0) * 100 / np.mean(info, axis=0)
 
     return sfc
 
@@ -327,7 +327,7 @@ def dl17(flows, datetimes, hydro_years, drainage_area):
     for hy, mask in enumerate(hydro_years):
         info[hy, :] = calc_events_avg_duration(flows[mask, :], perc25, typ='low')
     # calculations for entire time series
-    sfc = np.std(info, axis=0) * 100 / np.mean(info, axis=0)
+    sfc = np.std(info, ddof=1, axis=0) * 100 / np.mean(info, axis=0)
 
     return sfc
 
@@ -477,7 +477,7 @@ def dh6(flows, datetimes, hydro_years, drainage_area):
     for hy, mask in enumerate(hydro_years):
         info[hy, :] = np.amax(flows[mask, :], axis=0)
     # calculations for entire time series
-    sfc = np.std(info, axis=0) * 100 / np.mean(info, axis=0)
+    sfc = np.std(info, ddof=1, axis=0) * 100 / np.mean(info, axis=0)
 
     return sfc
 
@@ -499,7 +499,7 @@ def dh7(flows, datetimes, hydro_years, drainage_area):
             info[hy, :] = np.amax(roll_3[i:(i + np.sum(mask)), :], axis=0)
             i += np.sum(mask)
     # calculations for entire time series
-    sfc = np.std(info, axis=0) * 100 / np.mean(info, axis=0)
+    sfc = np.std(info, ddof=1, axis=0) * 100 / np.mean(info, axis=0)
 
     return sfc
 
@@ -521,7 +521,7 @@ def dh8(flows, datetimes, hydro_years, drainage_area):
             info[hy, :] = np.amax(roll_7[i:(i + np.sum(mask)), :], axis=0)
             i += np.sum(mask)
     # calculations for entire time series
-    sfc = np.std(info, axis=0) * 100 / np.mean(info, axis=0)
+    sfc = np.std(info, ddof=1, axis=0) * 100 / np.mean(info, axis=0)
 
     return sfc
 
@@ -543,7 +543,7 @@ def dh9(flows, datetimes, hydro_years, drainage_area):
             info[hy, :] = np.amax(roll_30[i:(i + np.sum(mask)), :], axis=0)
             i += np.sum(mask)
     # calculations for entire time series
-    sfc = np.std(info, axis=0) * 100 / np.mean(info, axis=0)
+    sfc = np.std(info, ddof=1, axis=0) * 100 / np.mean(info, axis=0)
 
     return sfc
 
@@ -565,7 +565,7 @@ def dh10(flows, datetimes, hydro_years, drainage_area):
             info[hy, :] = np.amax(roll_90[i:(i + np.sum(mask)), :], axis=0)
             i += np.sum(mask)
     # calculations for entire time series
-    sfc = np.std(info, axis=0) * 100 / np.mean(info, axis=0)
+    sfc = np.std(info, ddof=1, axis=0) * 100 / np.mean(info, axis=0)
 
     return sfc
 
@@ -661,7 +661,7 @@ def dh16(flows, datetimes, hydro_years, drainage_area):
     for hy, mask in enumerate(hydro_years):
         info[hy, :] = calc_events_avg_duration(flows[mask, :], perc75, typ='high')
     # calculations for entire time series
-    sfc = np.std(info, axis=0) * 100 / np.mean(info, axis=0)
+    sfc = np.std(info, ddof=1, axis=0) * 100 / np.mean(info, axis=0)
 
     return sfc
 
