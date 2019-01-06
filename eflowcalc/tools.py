@@ -21,11 +21,11 @@
 import numpy as np
 
 
-def rolling_window(a, window):
+def rolling_window(arr, window):
     # From Erik Rigtorp (http://www.rigtorp.se/2011/01/01/rolling-statistics-numpy.html)
-    shape = a.shape[:-1] + (a.shape[-1] - window + 1, window)
-    strides = a.strides + (a.strides[-1],)
-    return np.lib.stride_tricks.as_strided(a, shape=shape, strides=strides)
+    shape = (arr.shape[0] - window + 1, window, arr.shape[1])
+    strides = (arr.strides[0], arr.strides[0], arr.strides[1])
+    return np.lib.stride_tricks.as_strided(arr, shape=shape, strides=strides)
 
 
 def count_events(arr, threshold, typ='high'):
@@ -33,7 +33,7 @@ def count_events(arr, threshold, typ='high'):
         m = arr > threshold
     else:
         m = arr < threshold
-    return np.sum((np.diff(m * 1, axis=-1) > 0), axis=-1) + m[:, 0]
+    return np.sum((np.diff(m * 1, axis=0) > 0), axis=0) + m[0, :]
 
 
 def count_days(arr, threshold, typ='high'):
@@ -41,23 +41,23 @@ def count_days(arr, threshold, typ='high'):
         m = arr > threshold
     else:
         m = arr < threshold
-    return np.sum(m, axis=-1)
+    return np.sum(m, axis=0)
 
 
 def count_reversals(arr):
-    diff = np.diff(arr, axis=-1)
+    diff = np.diff(arr, axis=0)
     diff[diff == 0] = np.nan
 
     # https://stackoverflow.com/a/41191127
     mask = np.isnan(diff)
-    idx = np.where(~mask, np.arange(mask.shape[-1]), 0)
-    np.maximum.accumulate(idx, axis=-1, out=idx)
-    diff[mask] = diff[np.nonzero(mask)[0], idx[mask]]
+    idx = np.where(~mask, np.reshape(np.arange(mask.shape[0]), (mask.shape[0], 1)), 0)
+    np.maximum.accumulate(idx, axis=0, out=idx)
+    diff[mask] = diff[idx[mask], np.nonzero(mask)[0]]
 
     diff_pos = (diff > 0)
     diff_neg = (diff < 0)
-    events_pos = np.sum((np.diff(diff_pos * 1, axis=-1) > 0), axis=-1) + diff_pos[:, 0]
-    events_neg = np.sum((np.diff(diff_neg * 1, axis=-1) > 0), axis=-1) + diff_neg[:, 0]
+    events_pos = np.sum((np.diff(diff_pos * 1, axis=0) > 0), axis=0) + diff_pos[0, :]
+    events_neg = np.sum((np.diff(diff_neg * 1, axis=0) > 0), axis=0) + diff_neg[0, :]
 
     return events_pos + events_neg - 1
 
@@ -67,21 +67,21 @@ def calc_events_avg_duration(arr, threshold, typ='high'):
         m = arr > threshold
     else:
         m = arr < threshold
-    count = np.sum((np.diff(m * 1, axis=-1) > 0), axis=-1) + m[:, 0]
-    avg_duration = np.true_divide(np.sum(m * 1, axis=-1), count, where=(count != 0))
+    count = np.sum((np.diff(m * 1, axis=0) > 0), axis=0) + m[0, :]
+    avg_duration = np.true_divide(np.sum(m * 1, axis=0), count, where=(count != 0))
     avg_duration[count == 0] = 0.0
     return avg_duration
 
 
 def calc_events_avg_volume_above(arr, threshold):
     m = arr > threshold
-    count = np.sum((np.diff(m * 1, axis=-1) > 0), axis=-1) + m[:, 0]
+    count = np.sum((np.diff(m * 1, axis=0) > 0), axis=0) + m[0, :]
     above = arr - threshold
     above[~m] = 0.0
-    avg_volume = np.true_divide(np.sum(above, axis=-1), count, where=(count != 0))
+    avg_volume = np.true_divide(np.sum(above, axis=0), count, where=(count != 0))
     avg_volume[count == 0] = 0.0
     return avg_volume
 
 
 def calc_bfi(arr):
-    return np.amin(np.mean(rolling_window(arr, 7), axis=-1), axis=-1) / np.mean(arr, axis=-1)
+    return np.amin(np.mean(rolling_window(arr, 7), axis=1), axis=0) / np.mean(arr, axis=0)

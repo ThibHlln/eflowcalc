@@ -22,7 +22,7 @@ from datetime import datetime, timedelta
 import numpy as np
 
 
-def calculator(sfc_s, datetimes, simulation_s, drainage_area, axis=1,
+def calculator(sfc_s, datetimes, simulation_s, drainage_area, axis=0,
                hydro_year='01/10', years=None):
     # check the format of the different arguments given
     if not isinstance(datetimes, np.ndarray):
@@ -38,12 +38,12 @@ def calculator(sfc_s, datetimes, simulation_s, drainage_area, axis=1,
 
     # check the dimensions of the simulation data provided
     if simulation_s.ndim == 1:
-        my_simu = np.reshape(simulation_s, (1, simulation_s.size))
+        my_simu = np.reshape(simulation_s, (simulation_s.size, 1))
     elif simulation_s.ndim == 2:
         if axis == 0:
-            my_simu = simulation_s.T
-        else:
             my_simu = simulation_s
+        else:
+            my_simu = simulation_s.T
     else:
         raise Exception('The simulation array contains more than 2 dimensions.')
 
@@ -51,26 +51,26 @@ def calculator(sfc_s, datetimes, simulation_s, drainage_area, axis=1,
     if years and hasattr(years, '__iter__'):  # i.e. user provided specific hydrological years
 
         # subset the time series to only include the hydrological years requested
-        my_subset = np.zeros((my_simu.shape[1],), dtype=bool)
+        my_subset = np.zeros((my_simu.shape[0],), dtype=bool)
         for hydro_year in years:
             start_hydro_year = datetime.strptime("{}-10-01 00:00:00".format(hydro_year), "%Y-%m-%d %H:%M:%S")
             end_hydro_year = datetime.strptime("{}-09-30 00:00:00".format(hydro_year + 1), "%Y-%m-%d %H:%M:%S")
             my_subset += ((datetimes >= start_hydro_year) & (datetimes <= end_hydro_year))
 
         my_time = datetimes[my_subset]
-        my_simu = my_simu[:, my_subset]
+        my_simu = my_simu[my_subset, :]
 
         # determine mask for each hydrological year requested
-        my_masks = np.zeros((len(years), my_simu.shape[1]), dtype=bool)
+        my_masks = np.zeros((len(years), my_simu.shape[0]), dtype=bool)
         for hy, hydro_year in enumerate(years):
             start_hydro_year = datetime.strptime("{}-10-01 00:00:00".format(hydro_year), "%Y-%m-%d %H:%M:%S")
             end_hydro_year = datetime.strptime("{}-09-30 00:00:00".format(hydro_year + 1), "%Y-%m-%d %H:%M:%S")
             my_masks[hy, :] = (my_time >= start_hydro_year) & (my_time <= end_hydro_year)
 
             # check that there is no missing data
-            if np.isnan(my_simu[:, my_masks[hy, :]]).any():
+            if np.isnan(my_simu[my_masks[hy, :], :]).any():
                 raise Exception('The hydrological year {} contain(s) invalid values (NaN).'.format(hydro_year))
-            if not my_simu[:, my_masks[hy, :]].shape[1] == (end_hydro_year - start_hydro_year).days + 1:
+            if not my_simu[my_masks[hy, :], :].shape[0] == (end_hydro_year - start_hydro_year).days + 1:
                 raise Exception('The hydrological year {} is not complete (missing days).'.format(hydro_year))
 
     else:  # i.e. user did not provide specific hydrological years, so work on the whole time series
@@ -84,16 +84,16 @@ def calculator(sfc_s, datetimes, simulation_s, drainage_area, axis=1,
         tail = end if datetimes[-1] >= end else end.replace(year=datetimes[-1].year - 1)
 
         my_time = datetimes[(datetimes >= head) & (datetimes <= tail)]
-        my_simu = my_simu[:, (datetimes >= head) & (datetimes <= tail)]
+        my_simu = my_simu[(datetimes >= head) & (datetimes <= tail), :]
 
         # check that there is no missing data
         if np.isnan(my_simu).any():
             raise Exception('The simulation(s) time series contain(s) invalid values (NaN).')
-        if not my_simu.shape[1] == (my_time[-1] - my_time[0]).days + 1:
+        if not my_simu.shape[0] == (my_time[-1] - my_time[0]).days + 1:
             raise Exception('The simulation(s) time series is (are) not complete (missing days).')
 
         # determine mask for each hydrological year in the whole series (from start to end)
-        my_masks = np.zeros(((my_time[-1].year - my_time[0].year), my_simu.shape[1]), dtype=bool)
+        my_masks = np.zeros(((my_time[-1].year - my_time[0].year), my_simu.shape[0]), dtype=bool)
         for hy, hydro_year in enumerate(range(my_time[0].year, my_time[-1].year, 1)):
             start_hydro_year = datetime.strptime("{}-10-01 00:00:00".format(hydro_year), "%Y-%m-%d %H:%M:%S")
             end_hydro_year = datetime.strptime("{}-09-30 00:00:00".format(hydro_year + 1), "%Y-%m-%d %H:%M:%S")
@@ -101,13 +101,13 @@ def calculator(sfc_s, datetimes, simulation_s, drainage_area, axis=1,
 
     # calculate the SFC(s)
     if hasattr(sfc_s, '__iter__'):
-        calc_sfc = np.zeros((my_simu.shape[0], len(sfc_s)), dtype=np.float32)
+        calc_sfc = np.zeros((len(sfc_s), my_simu.shape[1]), dtype=np.float32)
         calc_sfc[:] = np.nan
         for i, sfc in enumerate(sfc_s):
-            calc_sfc[:, i] = sfc(my_simu, my_time, my_masks, drainage_area)
+            calc_sfc[i, :] = sfc(my_simu, my_time, my_masks, drainage_area)
     else:
-        calc_sfc = np.zeros((my_simu.shape[0], 1), dtype=np.float32)
+        calc_sfc = np.zeros((1, my_simu.shape[1]), dtype=np.float32)
         calc_sfc[:] = np.nan
-        calc_sfc[:, 0] = sfc_s(my_simu, my_time, my_masks, drainage_area)
+        calc_sfc[0, :] = sfc_s(my_simu, my_time, my_masks, drainage_area)
 
     return calc_sfc
