@@ -3,7 +3,7 @@
 
 # EFlowCalc - An open-source calculator of ecological stream flow characteristics in Python
 
-EFlowCalc is an open-source calculator of ecological stream flow characteristics in Python. It is licensed under GNU GPL-3.0 (see [licence file](https://github.com/ThibHlln/eflowcalc/blob/master/LICENCE.md) provided). EFlowCalc currently gives access to 17 of the 171 different ecologically relevant stream flow characteristics inventoried by [Olden and Poff (2003)](https://doi.org/10.1002/rra.700). More characteristics will gradually be added to EFlowCalc. A key strength of EFlowCalc is the vectorisation of all calculations (using [numpy](https://github.com/numpy/numpy), and therefore C code in the background) which makes for very efficient computation of the stream flow characteristics.
+EFlowCalc is an open-source calculator of ecological stream flow characteristics in Python. It is licensed under GNU GPL-3.0 (see [licence file](https://github.com/ThibHlln/eflowcalc/blob/master/LICENCE.md) provided). EFlowCalc currently gives access to 159 of the 171 different ecologically relevant stream flow characteristics inventoried by [Olden and Poff (2003)](https://doi.org/10.1002/rra.700). More characteristics are gradually added to EFlowCalc. A key strength of EFlowCalc is the vectorisation of all calculations (using [numpy](https://github.com/numpy/numpy), and therefore C code in the background) which makes for very efficient computation of the stream flow characteristics.
 
 ## How to Install
 
@@ -27,27 +27,21 @@ A tutorial in the form of a [Jupyter notebook](https://github.com/ThibHlln/eflow
 
 The stream flow characteristics currently available in EFlowCalc are as follows:
 * Magnitude of flow events
-    * MA26 - Variability of March flow
-    * MA41 - Mean annual daily flow
-    * ML17 - Base flow ratio
-    * ML20 - Base flow 3
-    * MH10 - Maximum October flow
+    * Average flow events: MA1 to MA45
+    * Low flow events: ML1 to ML22
+    * High flow events: MH1 to MH23
 * Frequency of flow events
-    * FL2 - Variability in low pulse count
-    * FH6 - Frequency of moderate floods
-    * FH7 - Frequency of large floods
-    * FH9 - Flood frequency
+    * Low flow events: FL1 to FL3
+    * High flow events: FH1 to FH10
 * Duration of flow events
-    * DL9 - Variability in annual minimum of 30-day average flow
-    * DH4 - Annual maximum of 30-day average flow
-    * DH13 - Annual maximum of 30-day average flow normalised by median flow
-    * DH16 - Variability in high-flow pulse count
+    * Low flow events: DL1 to DL20
+    * High flow events: DH1 to DH21
 * Timing of flow events
-    * TA1 - Constancy by [Colwell (1974)](https://doi.org/10.2307/1940366)
-    * TL1 - Timing of annual minimum flow
+    * Average flow events: TA1 and TA2
+    * Low flow events: TL1 and TL2
+    * High flow events: TH1 and TH2
 * Rate of change in flow events
-    * RA2 - Variability in rise rate
-    * RA7 - Rate of flow recession
+    * Average flow events: RA1 to RA9
     
 These stream flow characteristics are amongst the 171 hydrological indices inventoried by [Olden and Poff (2003)](https://doi.org/10.1002/rra.700). The computations implemented in EFlowCalc are partially inspired by the work of [Henriksen et al. (2006)](https://doi.org/10.3133/ofr20061093), however EFlowCalc is neither endorsed by these authors nor by the U.S. Geological Survey.
 

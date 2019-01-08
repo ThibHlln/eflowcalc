@@ -27,7 +27,7 @@ import math
 # AVERAGE FLOWS
 # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-# TA1 - Constancy by Colwell (1974)
+# TA1 - Constancy by Colwell (1974) [https://doi.org/10.2307/1940366]
 def ta1(flows, datetimes, hydro_years, drainage_area):
     mean = np.mean(flows, axis=0)
     log_mean = np.log10(mean)
@@ -75,7 +75,7 @@ def ta1(flows, datetimes, hydro_years, drainage_area):
     return sfc
 
 
-# TA2 - Predictability by Colwell (1974)
+# TA2 - Predictability by Colwell (1974) [https://doi.org/10.2307/1940366]
 def ta2(flows, datetimes, hydro_years, drainage_area):
     mean = np.mean(flows, axis=0)
     log_mean = np.log10(mean)
