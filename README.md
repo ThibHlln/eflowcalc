@@ -1,6 +1,6 @@
 [![License: GPL v3](https://img.shields.io/badge/License-GPL%20v3-blue.svg)](https://www.gnu.org/licenses/gpl-3.0)
 [![PyPI Version](https://badge.fury.io/py/eflowcalc.svg)](https://pypi.python.org/pypi/eflowcalc)
-[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.2566758.svg)](https://doi.org/10.5281/zenodo.2566758)
+[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.2566762.svg)](https://doi.org/10.5281/zenodo.2566762)
 
 # EFlowCalc - An open-source calculator of ecological streamflow characteristics in Python
 
