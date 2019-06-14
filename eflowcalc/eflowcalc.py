@@ -35,6 +35,11 @@ def calculator(sfc_s, datetimes, streamflow_s, drainage_area, axis=0,
         raise Exception('The streamflow data given is not in a NumPy array.')
     if not ((axis == 0) or (axis == 1)):
         raise Exception('The index for axis must be 0 or 1.')
+    try:
+        datetime.strptime(hydro_year, '%d/%m')
+    except ValueError:
+        raise Exception('The \'hydro_year\' argument does not match the format \'%d/%m\' '
+                        'or it is semantically incorrect.')
 
     # check the dimensions of the streamflow data provided
     if streamflow_s.ndim == 1:  # if this is a flat array, reshape to a 2D array
@@ -52,9 +57,10 @@ def calculator(sfc_s, datetimes, streamflow_s, drainage_area, axis=0,
 
         # subset the time series to only include the hydrological years requested
         my_subset = np.zeros((my_streamflow.shape[0],), dtype=bool)
-        for hydro_year in years:
-            start_hydro_year = datetime.strptime("{}-10-01 00:00:00".format(hydro_year), "%Y-%m-%d %H:%M:%S")
-            end_hydro_year = datetime.strptime("{}-09-30 00:00:00".format(hydro_year + 1), "%Y-%m-%d %H:%M:%S")
+        for year_ in years:
+            start_hydro_year = datetime.strptime('{}/{} 00:00:00'.format(hydro_year, year_), "%d/%m/%Y %H:%M:%S")
+            end_hydro_year = datetime.strptime('{}/{} 00:00:00'.format(hydro_year, year_ + 1), "%d/%m/%Y %H:%M:%S") - \
+                timedelta(days=1)
             my_subset += ((datetimes >= start_hydro_year) & (datetimes <= end_hydro_year))
 
         my_time = datetimes[my_subset]
@@ -62,15 +68,16 @@ def calculator(sfc_s, datetimes, streamflow_s, drainage_area, axis=0,
 
         # determine mask for each hydrological year requested
         my_masks_hy = np.zeros((len(years), my_streamflow.shape[0]), dtype=bool)
-        for hy, hydro_year in enumerate(years):
-            start_hydro_year = datetime.strptime("{}-10-01 00:00:00".format(hydro_year), "%Y-%m-%d %H:%M:%S")
-            end_hydro_year = datetime.strptime("{}-09-30 00:00:00".format(hydro_year + 1), "%Y-%m-%d %H:%M:%S")
-            my_masks_hy[hy, :] = (my_time >= start_hydro_year) & (my_time <= end_hydro_year)
+        for y, year_ in enumerate(years):
+            start_hydro_year = datetime.strptime('{}/{} 00:00:00'.format(hydro_year, year_), "%d/%m/%Y %H:%M:%S")
+            end_hydro_year = datetime.strptime('{}/{} 00:00:00'.format(hydro_year, year_ + 1), "%d/%m/%Y %H:%M:%S") - \
+                timedelta(days=1)
+            my_masks_hy[y, :] = (my_time >= start_hydro_year) & (my_time <= end_hydro_year)
 
-            # check that there is no missing data
-            if np.isnan(my_streamflow[my_masks_hy[hy, :], :]).any():
+            # check that there is no invalid or missing data
+            if np.isnan(my_streamflow[my_masks_hy[y, :], :]).any():
                 raise Exception('The hydrological year {} contain(s) invalid values (NaN).'.format(hydro_year))
-            if not my_streamflow[my_masks_hy[hy, :], :].shape[0] == (end_hydro_year - start_hydro_year).days + 1:
+            if not my_streamflow[my_masks_hy[y, :], :].shape[0] == (end_hydro_year - start_hydro_year).days + 1:
                 raise Exception('The hydrological year {} is not complete (missing days).'.format(hydro_year))
 
     else:  # i.e. user did not provide specific hydrological years, so work on the whole time series
@@ -86,7 +93,7 @@ def calculator(sfc_s, datetimes, streamflow_s, drainage_area, axis=0,
         my_time = datetimes[(datetimes >= head) & (datetimes <= tail)]
         my_streamflow = my_streamflow[(datetimes >= head) & (datetimes <= tail), :]
 
-        # check that there is no missing data
+        # check that there is no invalid or missing data
         if np.isnan(my_streamflow).any():
             raise Exception('The simulation(s) time series contain(s) invalid values (NaN).')
         if not my_streamflow.shape[0] == (my_time[-1] - my_time[0]).days + 1:
@@ -94,10 +101,11 @@ def calculator(sfc_s, datetimes, streamflow_s, drainage_area, axis=0,
 
         # determine mask for each hydrological year in the whole series (from start to end)
         my_masks_hy = np.zeros(((my_time[-1].year - my_time[0].year), my_streamflow.shape[0]), dtype=bool)
-        for hy, hydro_year in enumerate(range(my_time[0].year, my_time[-1].year, 1)):
-            start_hydro_year = datetime.strptime("{}-10-01 00:00:00".format(hydro_year), "%Y-%m-%d %H:%M:%S")
-            end_hydro_year = datetime.strptime("{}-09-30 00:00:00".format(hydro_year + 1), "%Y-%m-%d %H:%M:%S")
-            my_masks_hy[hy, :] = (my_time >= start_hydro_year) & (my_time <= end_hydro_year)
+        for y, year_ in enumerate(range(my_time[0].year, my_time[-1].year, 1)):
+            start_hydro_year = datetime.strptime('{}/{} 00:00:00'.format(hydro_year, year_), "%d/%m/%Y %H:%M:%S")
+            end_hydro_year = datetime.strptime('{}/{} 00:00:00'.format(hydro_year, year_ + 1), "%d/%m/%Y %H:%M:%S") - \
+                timedelta(days=1)
+            my_masks_hy[y, :] = (my_time >= start_hydro_year) & (my_time <= end_hydro_year)
 
     # calculate the requested Streamflow Characteristic(s)
     if hasattr(sfc_s, '__iter__'):
