@@ -62,6 +62,7 @@ def fl3(flows, datetimes, hydro_years, drainage_area):
     # calculations for entire time series
     info[info <= 0] = np.nan
     sfc = np.nanmean(info, axis=0)
+    sfc[np.isnan(sfc)] = 0.0
 
     return sfc
 

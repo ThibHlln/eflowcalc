@@ -351,7 +351,9 @@ def dl19(flows, datetimes, hydro_years, drainage_area):
     for hy, mask in enumerate(hydro_years):
         info[hy, :] = np.sum(flows[mask, :] == 0, axis=0)
     # calculations for entire time series
-    sfc = np.std(info, axis=0) * 100 / np.mean(info, axis=0)
+    mean_ = np.mean(info, axis=0)
+    sfc = np.true_divide(np.std(info, axis=0) * 100, mean_, where=(mean_ != 0))
+    sfc[mean_ == 0] = 0.0
 
     return sfc
 
