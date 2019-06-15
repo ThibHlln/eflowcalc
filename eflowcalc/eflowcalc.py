@@ -107,7 +107,7 @@ def calculator(sfc_s, datetimes, streamflow_s, drainage_area, axis=0,
                 timedelta(days=1)
             my_masks_hy[y, :] = (my_time >= start_hydro_year) & (my_time <= end_hydro_year)
 
-    # calculate the requested Streamflow Characteristic(s)
+    # calculate the requested streamflow characteristic(s)
     if hasattr(sfc_s, '__iter__'):
         calc_sfc = np.zeros((len(sfc_s), my_streamflow.shape[1]), dtype=np.float32)
         calc_sfc[:] = np.nan
@@ -118,4 +118,8 @@ def calculator(sfc_s, datetimes, streamflow_s, drainage_area, axis=0,
         calc_sfc[:] = np.nan
         calc_sfc[0, :] = sfc_s(my_streamflow, my_time, my_masks_hy, drainage_area)
 
-    return calc_sfc
+    # return array in its original orientation
+    if axis == 0:
+        return calc_sfc
+    else:
+        return calc_sfc.T
