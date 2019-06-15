@@ -19,6 +19,7 @@
 # along with EFlowCalc. If not, see <http://www.gnu.org/licenses/>.
 
 import numpy as np
+import warnings
 from .tools import count_events, count_days
 
 
@@ -61,7 +62,9 @@ def fl3(flows, datetimes, hydro_years, drainage_area):
         info[hy, :] = count_events(flows[mask, :], threshold=mean_ * 0.05, typ='low')
     # calculations for entire time series
     info[info <= 0] = np.nan
-    sfc = np.nanmean(info, axis=0)
+    with warnings.catch_warnings():  # info could be an empty slice that would rather an unnecessary warning
+        warnings.simplefilter("ignore", category=RuntimeWarning)
+        sfc = np.nanmean(info, axis=0)
     sfc[np.isnan(sfc)] = 0.0
 
     return sfc
