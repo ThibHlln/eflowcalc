@@ -48,11 +48,12 @@ def count_reversals(arr):
     diff = np.diff(arr, axis=0)
     diff[diff == 0] = np.nan
 
+    # replace locations with null difference by the most recent non null value prior to it
     # https://stackoverflow.com/a/41191127
     mask = np.isnan(diff)
     idx = np.where(~mask, np.reshape(np.arange(mask.shape[0]), (mask.shape[0], 1)), 0)
     np.maximum.accumulate(idx, axis=0, out=idx)
-    diff[mask] = diff[idx[mask], np.nonzero(mask)[0]]
+    diff[mask] = diff[idx[mask], np.nonzero(mask)[1]]
 
     diff_pos = (diff > 0)
     diff_neg = (diff < 0)
