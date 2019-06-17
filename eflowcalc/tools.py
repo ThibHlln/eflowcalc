@@ -55,6 +55,12 @@ def count_reversals(arr):
     np.maximum.accumulate(idx, axis=0, out=idx)
     diff[mask] = diff[idx[mask], np.nonzero(mask)[1]]
 
+    # deal with the special case of a null difference at the very start of the time series
+    mask = np.isnan(diff)
+    idx = np.where(~mask, np.reshape(np.arange(mask.shape[0]), (mask.shape[0], 1)), diff.shape[0] - 1)
+    np.minimum.accumulate(idx[::-1], axis=0, out=idx)
+    diff[mask] = diff[idx[::-1][mask], np.nonzero(mask)[1]]
+
     diff_pos = (diff > 0)
     diff_neg = (diff < 0)
     events_pos = np.sum((np.diff(diff_pos * 1, axis=0) > 0), axis=0) + diff_pos[0, :]
