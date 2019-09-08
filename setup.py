@@ -14,7 +14,7 @@ setup(
 
     version=__version__,
 
-    description='EFlowCalc: A Calculator of Ecological Stream Flow Characteristics',
+    description='EFlowCalc: An Efficient Calculator of Ecological Streamflow Characteristics in Python',
     long_description=long_desc,
     long_description_content_type="text/markdown",
 

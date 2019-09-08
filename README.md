@@ -1,10 +1,10 @@
 [![License: GPL v3](https://img.shields.io/badge/License-GPL%20v3-blue.svg)](https://www.gnu.org/licenses/gpl-3.0)
 [![PyPI Version](https://badge.fury.io/py/eflowcalc.svg)](https://pypi.python.org/pypi/eflowcalc)
-[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.2566762.svg)](https://doi.org/10.5281/zenodo.2566762)
+[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.2566757.svg)](https://doi.org/10.5281/zenodo.2566757)
 
 # EFlowCalc - An open-source calculator of ecological streamflow characteristics in Python
 
-EFlowCalc is an open-source calculator of ecological streamflow characteristics in Python. It is licensed under GNU GPL-3.0 (see [licence file](https://github.com/ThibHlln/eflowcalc/blob/master/LICENCE.md) provided). EFlowCalc currently gives access to 159 of the 171 different ecologically relevant streamflow characteristics inventoried by [Olden and Poff (2003)](https://doi.org/10.1002/rra.700). More characteristics are gradually added to EFlowCalc. A key strength of EFlowCalc is the vectorisation of all calculations (using [numpy](https://github.com/numpy/numpy), and therefore C code in the background) which makes for very efficient computation of the streamflow characteristics.
+EFlowCalc is an open-source calculator of ecological streamflow characteristics in Python. It is licensed under GNU GPL-3.0 (see [licence file](https://github.com/ThibHlln/eflowcalc/blob/master/LICENCE.md) provided). EFlowCalc currently gives access to 159 ecologically relevant streamflow characteristics inventoried by [Olden and Poff (2003)](https://doi.org/10.1002/rra.700). More characteristics are gradually added to EFlowCalc. A key strength of EFlowCalc is the vectorisation of all calculations (using [numpy](https://github.com/numpy/numpy), and therefore C code in the background) which makes for very efficient computation of the streamflow characteristics.
 
 ## How to Install
 
@@ -24,10 +24,10 @@ Alternatively, you can download the source code (*i.e.* the GitHub repository) a
 
 A tutorial in the form of a [Jupyter notebook](https://github.com/ThibHlln/eflowcalc/blob/master/examples/api_usage_example.ipynb) is available to get started with the usage of EFlowCalc's API. The input file required for the tutorial is provided in the `examples/` folder.
 
-
 ## How to Cite
 
-If you are using EFlowCalc, please consider citing the software using the DOI provided in the header of this file.
+If you are using EFlowCalc, please consider citing the software as follows (click on the link to get the DOI of a specific version):
+* Hallouin, T. (XXXX). EFlowCalc: Ecological Streamflow Characteristics Calculator (Version X.X.X). Zenodo. https://doi.org/10.5281/zenodo.2566757
 
 ## Streamflow Characteristics Available
 
