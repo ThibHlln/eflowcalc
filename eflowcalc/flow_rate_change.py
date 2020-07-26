@@ -1,9 +1,11 @@
 # -*- coding: utf-8 -*-
 
-# This file is part of EFlowCalc: A Calculator of Ecological Streamflow Characteristics
+# This file is part of EFlowCalc:
+# A Calculator of Ecological Streamflow Characteristics
 # Copyright (C) 2019  Thibault Hallouin (1)
 #
-# (1) Dooge Centre for Water Resources Research, University College Dublin, Ireland
+# (1) Dooge Centre for Water Resources Research,
+#     University College Dublin, Ireland
 #
 # EFlowCalc is free software: you can redistribute it and/or modify
 # it under the terms of the GNU General Public License as published by
@@ -22,9 +24,9 @@ import numpy as np
 from .tools import count_reversals
 
 
-# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 # ALL FLOWS
-# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 # RA1 - Average rise rate
 def ra1(flows, datetimes, hydro_years, drainage_area):
@@ -86,7 +88,8 @@ def ra5(flows, datetimes, hydro_years, drainage_area):
 def ra6(flows, datetimes, hydro_years, drainage_area):
     # calculations for entire time series
     cp_flows = np.copy(flows)
-    cp_flows[cp_flows == 0.0] = 0.01  # replace 0 by 0.01 if necessary (to avoid log(0))
+    # replace 0 by 0.01 if necessary (to avoid log(0))
+    cp_flows[cp_flows == 0.0] = 0.01
     diffs_log = np.diff(np.log(cp_flows), axis=0)
     diffs_log[diffs_log <= 0] = np.nan  # take rises only
     sfc = np.nanmedian(np.abs(diffs_log), axis=0)
@@ -98,7 +101,8 @@ def ra6(flows, datetimes, hydro_years, drainage_area):
 def ra7(flows, datetimes, hydro_years, drainage_area):
     # calculations for entire time series
     cp_flows = np.copy(flows)
-    cp_flows[cp_flows == 0.0] = 0.01  # replace 0 by 0.01 if necessary (to avoid log(0))
+    # replace 0 by 0.01 if necessary (to avoid log(0))
+    cp_flows[cp_flows == 0.0] = 0.01
     diffs_log = np.diff(np.log(cp_flows), axis=0)
     diffs_log[diffs_log >= 0] = np.nan  # take falls only
     sfc = np.nanmedian(np.abs(diffs_log), axis=0)

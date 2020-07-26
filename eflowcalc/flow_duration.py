@@ -1,9 +1,11 @@
 # -*- coding: utf-8 -*-
 
-# This file is part of EFlowCalc: A Calculator of Ecological Streamflow Characteristics
+# This file is part of EFlowCalc:
+# A Calculator of Ecological Streamflow Characteristics
 # Copyright (C) 2019  Thibault Hallouin (1)
 #
-# (1) Dooge Centre for Water Resources Research, University College Dublin, Ireland
+# (1) Dooge Centre for Water Resources Research,
+#     University College Dublin, Ireland
 #
 # EFlowCalc is free software: you can redistribute it and/or modify
 # it under the terms of the GNU General Public License as published by
@@ -23,9 +25,9 @@ import pandas as pd
 from .tools import rolling_window, calc_events_avg_duration
 
 
-# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 # LOW FLOWS
-# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 # DL1 - Annual minimum average daily flow
 def dl1(flows, datetimes, hydro_years, drainage_area):
@@ -94,7 +96,8 @@ def dl4(flows, datetimes, hydro_years, drainage_area):
             info[hy, :] = np.amin(roll_30[0:(np.sum(mask) - 14), :], axis=0)
             i += np.sum(mask) - 14
         elif hy == (np.sum(mask) - 1):  # i.e. last year in period
-            info[hy, :] = np.amin(roll_30[i:(i + np.sum(mask) - 15), :], axis=0)
+            info[hy, :] = np.amin(roll_30[i:(i + np.sum(mask) - 15), :],
+                                  axis=0)
             i += np.sum(mask)
         else:
             info[hy, :] = np.amin(roll_30[i:(i + np.sum(mask)), :], axis=0)
@@ -116,7 +119,8 @@ def dl5(flows, datetimes, hydro_years, drainage_area):
             info[hy, :] = np.amin(roll_90[0:(np.sum(mask) - 44), :], axis=0)
             i += np.sum(mask) - 44
         elif hy == (np.sum(mask) - 1):  # i.e. last year in period
-            info[hy, :] = np.amin(roll_90[i:(i + np.sum(mask) - 45), :], axis=0)
+            info[hy, :] = np.amin(roll_90[i:(i + np.sum(mask) - 45), :],
+                                  axis=0)
             i += np.sum(mask)
         else:
             info[hy, :] = np.amin(roll_90[i:(i + np.sum(mask)), :], axis=0)
@@ -194,7 +198,8 @@ def dl9(flows, datetimes, hydro_years, drainage_area):
             info[hy, :] = np.amin(roll_30[0:(np.sum(mask) - 14), :], axis=0)
             i += np.sum(mask) - 14
         elif hy == (np.sum(mask) - 1):  # i.e. last year in period
-            info[hy, :] = np.amin(roll_30[i:(i + np.sum(mask) - 15), :], axis=0)
+            info[hy, :] = np.amin(roll_30[i:(i + np.sum(mask) - 15), :],
+                                  axis=0)
             i += np.sum(mask)
         else:
             info[hy, :] = np.amin(roll_30[i:(i + np.sum(mask)), :], axis=0)
@@ -216,7 +221,8 @@ def dl10(flows, datetimes, hydro_years, drainage_area):
             info[hy, :] = np.amin(roll_90[0:(np.sum(mask) - 44), :], axis=0)
             i += np.sum(mask) - 14
         elif hy == (np.sum(mask) - 1):  # i.e. last year in period
-            info[hy, :] = np.amin(roll_90[i:(i + np.sum(mask) - 45), :], axis=0)
+            info[hy, :] = np.amin(roll_90[i:(i + np.sum(mask) - 45), :],
+                                  axis=0)
             i += np.sum(mask)
         else:
             info[hy, :] = np.amin(roll_90[i:(i + np.sum(mask)), :], axis=0)
@@ -227,7 +233,8 @@ def dl10(flows, datetimes, hydro_years, drainage_area):
     return sfc
 
 
-# DL11 - Mean annual minimum average flow normalised by median flow (of the whole record)
+# DL11 - Mean annual minimum average flow normalised by median flow
+# (of the whole record)
 def dl11(flows, datetimes, hydro_years, drainage_area):
     median = np.median(flows, axis=0)
     # calculations per hydrological year
@@ -240,7 +247,8 @@ def dl11(flows, datetimes, hydro_years, drainage_area):
     return sfc
 
 
-# DL12 - Mean annual minimum of 7-day average flow normalised by median flow (of the whole record)
+# DL12 - Mean annual minimum of 7-day average flow normalised by median flow
+# (of the whole record)
 def dl12(flows, datetimes, hydro_years, drainage_area):
     median = np.median(flows, axis=0)
     roll_7 = np.mean(rolling_window(flows, 7), axis=1)
@@ -263,7 +271,8 @@ def dl12(flows, datetimes, hydro_years, drainage_area):
     return sfc
 
 
-# DL13 - Mean annual minimum of 30-day average flow normalised by median flow (of the whole record)
+# DL13 - Mean annual minimum of 30-day average flow normalised
+# by median flow (of the whole record)
 def dl13(flows, datetimes, hydro_years, drainage_area):
     median = np.median(flows, axis=0)
     roll_30 = np.mean(rolling_window(flows, 30), axis=1)
@@ -275,7 +284,8 @@ def dl13(flows, datetimes, hydro_years, drainage_area):
             info[hy, :] = np.amin(roll_30[0:(np.sum(mask) - 14), :], axis=0)
             i += np.sum(mask) - 14
         elif hy == (np.sum(mask) - 1):  # i.e. last year in period
-            info[hy, :] = np.amin(roll_30[i:(i + np.sum(mask) - 15), :], axis=0)
+            info[hy, :] = np.amin(roll_30[i:(i + np.sum(mask) - 15), :],
+                                  axis=0)
             i += np.sum(mask)
         else:
             info[hy, :] = np.amin(roll_30[i:(i + np.sum(mask)), :], axis=0)
@@ -286,7 +296,8 @@ def dl13(flows, datetimes, hydro_years, drainage_area):
     return sfc
 
 
-# DL14 - Q75 exceedance value normalised by median flow (of the whole record)
+# DL14 - Q75 exceedance value normalised by median flow
+# (of the whole record)
 def dl14(flows, datetimes, hydro_years, drainage_area):
     median = np.median(flows, axis=0)
     perc25 = np.percentile(flows, 25, axis=0)
@@ -312,7 +323,8 @@ def dl16(flows, datetimes, hydro_years, drainage_area):
     # calculations per hydrological year
     info = np.zeros((hydro_years.shape[0], flows.shape[1]), dtype=np.float64)
     for hy, mask in enumerate(hydro_years):
-        info[hy, :] = calc_events_avg_duration(flows[mask, :], perc25, typ='low')
+        info[hy, :] = calc_events_avg_duration(flows[mask, :], perc25,
+                                               typ='low')
     # calculations for entire time series
     sfc = np.median(info, axis=0)
 
@@ -325,7 +337,8 @@ def dl17(flows, datetimes, hydro_years, drainage_area):
     # calculations per hydrological year
     info = np.zeros((hydro_years.shape[0], flows.shape[1]), dtype=np.float64)
     for hy, mask in enumerate(hydro_years):
-        info[hy, :] = calc_events_avg_duration(flows[mask, :], perc25, typ='low')
+        info[hy, :] = calc_events_avg_duration(flows[mask, :], perc25,
+                                               typ='low')
     # calculations for entire time series
     sfc = np.std(info, ddof=1, axis=0) * 100 / np.mean(info, axis=0)
 
@@ -361,16 +374,17 @@ def dl19(flows, datetimes, hydro_years, drainage_area):
 # DL20 - Annual number of zero flow months
 def dl20(flows, datetimes, hydro_years, drainage_area):
     # calculations per month for each year
-    zero_flow = np.array(pd.DataFrame(flows != 0, index=datetimes).groupby(lambda x: (x.year, x.month)).sum())
+    zero_flow = np.array(pd.DataFrame(flows != 0, index=datetimes).groupby(
+        lambda x: (x.year, x.month)).sum())
     # calculations for entire time series
     sfc = np.sum(zero_flow == 0, axis=0)
 
     return sfc
 
 
-# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 # HIGH FLOWS
-# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 # DH1 - Annual maximum average daily flow
 def dh1(flows, datetimes, hydro_years, drainage_area):
@@ -439,7 +453,8 @@ def dh4(flows, datetimes, hydro_years, drainage_area):
             info[hy, :] = np.amax(roll_30[0:(np.sum(mask) - 14), :], axis=0)
             i += np.sum(mask) - 14
         elif hy == (np.sum(mask) - 1):  # i.e. last year in period
-            info[hy, :] = np.amax(roll_30[i:(i + np.sum(mask) - 15), :], axis=0)
+            info[hy, :] = np.amax(roll_30[i:(i + np.sum(mask) - 15), :],
+                                  axis=0)
             i += np.sum(mask)
         else:
             info[hy, :] = np.amax(roll_30[i:(i + np.sum(mask)), :], axis=0)
@@ -461,7 +476,8 @@ def dh5(flows, datetimes, hydro_years, drainage_area):
             info[hy, :] = np.amax(roll_90[0:(np.sum(mask) - 44), :], axis=0)
             i += np.sum(mask) - 44
         elif hy == (np.sum(mask) - 1):  # i.e. last year in period
-            info[hy, :] = np.amax(roll_90[i:(i + np.sum(mask) - 45), :], axis=0)
+            info[hy, :] = np.amax(roll_90[i:(i + np.sum(mask) - 45), :],
+                                  axis=0)
             i += np.sum(mask)
         else:
             info[hy, :] = np.amax(roll_90[i:(i + np.sum(mask)), :], axis=0)
@@ -539,7 +555,8 @@ def dh9(flows, datetimes, hydro_years, drainage_area):
             info[hy, :] = np.amax(roll_30[0:(np.sum(mask) - 14), :], axis=0)
             i += np.sum(mask) - 14
         elif hy == (np.sum(mask) - 1):  # i.e. last year in period
-            info[hy, :] = np.amax(roll_30[i:(i + np.sum(mask) - 15), :], axis=0)
+            info[hy, :] = np.amax(roll_30[i:(i + np.sum(mask) - 15), :],
+                                  axis=0)
             i += np.sum(mask)
         else:
             info[hy, :] = np.amax(roll_30[i:(i + np.sum(mask)), :], axis=0)
@@ -561,7 +578,8 @@ def dh10(flows, datetimes, hydro_years, drainage_area):
             info[hy, :] = np.amax(roll_90[0:(np.sum(mask) - 44), :], axis=0)
             i += np.sum(mask) - 44
         elif hy == (np.sum(mask) - 1):  # i.e. last year in period
-            info[hy, :] = np.amax(roll_90[i:(i + np.sum(mask) - 45), :], axis=0)
+            info[hy, :] = np.amax(roll_90[i:(i + np.sum(mask) - 45), :],
+                                  axis=0)
             i += np.sum(mask)
         else:
             info[hy, :] = np.amax(roll_90[i:(i + np.sum(mask)), :], axis=0)
@@ -572,7 +590,8 @@ def dh10(flows, datetimes, hydro_years, drainage_area):
     return sfc
 
 
-# DH11 - Mean annual minimum average flow normalised by median flow (of the whole record)
+# DH11 - Mean annual minimum average flow normalised by median flow
+# (of the whole record)
 def dh11(flows, datetimes, hydro_years, drainage_area):
     median = np.median(flows, axis=0)
     # calculations per hydrological year
@@ -585,7 +604,8 @@ def dh11(flows, datetimes, hydro_years, drainage_area):
     return sfc
 
 
-# DH12 - Mean annual minimum of 7-day average flow normalised by median flow (of the whole record)
+# DH12 - Mean annual minimum of 7-day average flow normalised
+# by median flow (of the whole record)
 def dh12(flows, datetimes, hydro_years, drainage_area):
     median = np.median(flows, axis=0)
     roll_7 = np.mean(rolling_window(flows, 7), axis=1)
@@ -608,7 +628,8 @@ def dh12(flows, datetimes, hydro_years, drainage_area):
     return sfc
 
 
-# DH13 - Annual maximum of 30-day average flow normalised by median flow (of the whole record)
+# DH13 - Annual maximum of 30-day average flow normalised by median flow
+# (of the whole record)
 def dh13(flows, datetimes, hydro_years, drainage_area):
     median = np.median(flows, axis=0)
     roll_30 = np.mean(rolling_window(flows, 30), axis=1)
@@ -620,7 +641,8 @@ def dh13(flows, datetimes, hydro_years, drainage_area):
             info[hy, :] = np.amax(roll_30[0:(np.sum(mask) - 14), :], axis=0)
             i += np.sum(mask) - 14
         elif hy == (np.sum(mask) - 1):  # i.e. last year in period
-            info[hy, :] = np.amax(roll_30[i:(i + np.sum(mask) - 15), :], axis=0)
+            info[hy, :] = np.amax(roll_30[i:(i + np.sum(mask) - 15), :],
+                                  axis=0)
             i += np.sum(mask)
         else:
             info[hy, :] = np.amax(roll_30[i:(i + np.sum(mask)), :], axis=0)
@@ -631,10 +653,12 @@ def dh13(flows, datetimes, hydro_years, drainage_area):
     return sfc
 
 
-# DH14 - Annual maximum of 30-day average flow normalised by median flow (of the whole record)
+# DH14 - Annual maximum of 30-day average flow normalised by median flow
+# (of the whole record)
 def dh14(flows, datetimes, hydro_years, drainage_area):
     # calculations per month for each year
-    mean = np.array(pd.DataFrame(flows, index=datetimes).groupby(lambda x: (x.year, x.month)).mean())
+    mean = np.array(pd.DataFrame(flows, index=datetimes).groupby(
+        lambda x: (x.year, x.month)).mean())
     # calculations for entire time series
     perc95 = np.percentile(mean, 95, axis=0)
     sfc = perc95 / np.mean(mean, axis=0)
@@ -648,7 +672,8 @@ def dh15(flows, datetimes, hydro_years, drainage_area):
     # calculations per hydrological year
     info = np.zeros((hydro_years.shape[0], flows.shape[1]), dtype=np.float64)
     for hy, mask in enumerate(hydro_years):
-        info[hy, :] = calc_events_avg_duration(flows[mask, :], perc75, typ='high')
+        info[hy, :] = calc_events_avg_duration(flows[mask, :], perc75,
+                                               typ='high')
     # calculations for entire time series
     sfc = np.median(info, axis=0)
 
@@ -661,14 +686,16 @@ def dh16(flows, datetimes, hydro_years, drainage_area):
     # calculations per hydrological year
     info = np.zeros((hydro_years.shape[0], flows.shape[1]), dtype=np.float64)
     for hy, mask in enumerate(hydro_years):
-        info[hy, :] = calc_events_avg_duration(flows[mask, :], perc75, typ='high')
+        info[hy, :] = calc_events_avg_duration(flows[mask, :], perc75,
+                                               typ='high')
     # calculations for entire time series
     sfc = np.std(info, ddof=1, axis=0) * 100 / np.mean(info, axis=0)
 
     return sfc
 
 
-# DH17 - Average duration of high flow events for entire record above median flow
+# DH17 - Average duration of high flow events for entire record
+# above median flow
 def dh17(flows, datetimes, hydro_years, drainage_area):
     median = np.median(flows, axis=0)
     # calculations for entire time series
@@ -677,7 +704,8 @@ def dh17(flows, datetimes, hydro_years, drainage_area):
     return sfc
 
 
-# DH18 - Average duration of high flow events for entire record above three times the median flow
+# DH18 - Average duration of high flow events for entire record
+# above three times the median flow
 def dh18(flows, datetimes, hydro_years, drainage_area):
     median = np.median(flows, axis=0)
     # calculations for entire time series
@@ -686,7 +714,8 @@ def dh18(flows, datetimes, hydro_years, drainage_area):
     return sfc
 
 
-# DH19 - Average duration of high flow events for entire record above seven times the median flow
+# DH19 - Average duration of high flow events for entire record
+# above seven times the median flow
 def dh19(flows, datetimes, hydro_years, drainage_area):
     median = np.median(flows, axis=0)
     # calculations for entire time series
@@ -695,7 +724,8 @@ def dh19(flows, datetimes, hydro_years, drainage_area):
     return sfc
 
 
-# DH20 - Average duration of high flow events for entire record above Q25
+# DH20 - Average duration of high flow events for entire record
+# above Q25
 def dh20(flows, datetimes, hydro_years, drainage_area):
     perc75 = np.percentile(flows, 75, axis=0)
     # calculations for entire time series
@@ -704,7 +734,8 @@ def dh20(flows, datetimes, hydro_years, drainage_area):
     return sfc
 
 
-# DH21 - Average duration of high flow events for entire record above Q75
+# DH21 - Average duration of high flow events for entire record
+# above Q75
 def dh21(flows, datetimes, hydro_years, drainage_area):
     perc25 = np.percentile(flows, 25, axis=0)
     # calculations for entire time series

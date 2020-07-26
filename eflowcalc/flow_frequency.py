@@ -1,9 +1,11 @@
 # -*- coding: utf-8 -*-
 
-# This file is part of EFlowCalc: A Calculator of Ecological Streamflow Characteristics
+# This file is part of EFlowCalc:
+# A Calculator of Ecological Streamflow Characteristics
 # Copyright (C) 2019  Thibault Hallouin (1)
 #
-# (1) Dooge Centre for Water Resources Research, University College Dublin, Ireland
+# (1) Dooge Centre for Water Resources Research,
+#     University College Dublin, Ireland
 #
 # EFlowCalc is free software: you can redistribute it and/or modify
 # it under the terms of the GNU General Public License as published by
@@ -23,9 +25,9 @@ import warnings
 from .tools import count_events, count_days
 
 
-# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 # LOW FLOWS
-# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 # FL1 - Mean annual low flow pulse count (below 25th percentile)
 def fl1(flows, datetimes, hydro_years, drainage_area):
@@ -59,10 +61,13 @@ def fl3(flows, datetimes, hydro_years, drainage_area):
     # calculations per hydrological year
     info = np.zeros((hydro_years.shape[0], flows.shape[1]), dtype=np.float64)
     for hy, mask in enumerate(hydro_years):
-        info[hy, :] = count_events(flows[mask, :], threshold=mean_ * 0.05, typ='low')
+        info[hy, :] = count_events(flows[mask, :], threshold=mean_ * 0.05,
+                                   typ='low')
     # calculations for entire time series
     info[info <= 0] = np.nan
-    with warnings.catch_warnings():  # info could be an empty slice that would rather an unnecessary warning
+    with warnings.catch_warnings():
+        # info could be an empty slice that would rather an
+        # unnecessary warning
         warnings.simplefilter("ignore", category=RuntimeWarning)
         sfc = np.nanmean(info, axis=0)
     sfc[np.isnan(sfc)] = 0.0
@@ -70,17 +75,19 @@ def fl3(flows, datetimes, hydro_years, drainage_area):
     return sfc
 
 
-# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 # HIGH FLOWS
-# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 # FH1 - Mean annual high flow pulse count (above 75th percentile)
 def fh1(flows, datetimes, hydro_years, drainage_area):
     perc75 = np.percentile(flows, 75, axis=0)
     # calculations per hydrological year
-    info = np.zeros((hydro_years.shape[0], flows.shape[1]), dtype=np.float64)
+    info = np.zeros((hydro_years.shape[0], flows.shape[1]),
+                    dtype=np.float64)
     for hy, mask in enumerate(hydro_years):
-        info[hy, :] = count_events(flows[mask, :], threshold=perc75, typ='high')
+        info[hy, :] = count_events(flows[mask, :], threshold=perc75,
+                                   typ='high')
     # calculations for entire time series
     sfc = np.mean(info, axis=0)
 
@@ -93,7 +100,8 @@ def fh2(flows, datetimes, hydro_years, drainage_area):
     # calculations per hydrological year
     info = np.zeros((hydro_years.shape[0], flows.shape[1]), dtype=np.float64)
     for hy, mask in enumerate(hydro_years):
-        info[hy, :] = count_events(flows[mask, :], threshold=perc75, typ='high')
+        info[hy, :] = count_events(flows[mask, :], threshold=perc75,
+                                   typ='high')
     # calculations for entire time series
     sfc = np.std(info, ddof=1, axis=0) * 100 / np.mean(info, axis=0)
 
@@ -106,7 +114,8 @@ def fh3(flows, datetimes, hydro_years, drainage_area):
     # calculations per hydrological year
     info = np.zeros((hydro_years.shape[0], flows.shape[1]), dtype=np.float64)
     for hy, mask in enumerate(hydro_years):
-        info[hy, :] = count_days(flows[mask, :], threshold=median_ * 3, typ='high')
+        info[hy, :] = count_days(flows[mask, :], threshold=median_ * 3,
+                                 typ='high')
     # calculations for entire time series
     sfc = np.mean(info, axis=0)
 
@@ -119,7 +128,8 @@ def fh4(flows, datetimes, hydro_years, drainage_area):
     # calculations per hydrological year
     info = np.zeros((hydro_years.shape[0], flows.shape[1]), dtype=np.float64)
     for hy, mask in enumerate(hydro_years):
-        info[hy, :] = count_days(flows[mask, :], threshold=median_ * 7, typ='high')
+        info[hy, :] = count_days(flows[mask, :], threshold=median_ * 7,
+                                 typ='high')
     # calculations for entire time series
     sfc = np.mean(info, axis=0)
 
@@ -172,7 +182,8 @@ def fh8(flows, datetimes, hydro_years, drainage_area):
     # calculations per hydrological year
     info = np.zeros((hydro_years.shape[0], flows.shape[1]), dtype=np.float64)
     for hy, mask in enumerate(hydro_years):
-        info[hy, :] = count_events(flows[mask, :], threshold=perc75, typ='high')
+        info[hy, :] = count_events(flows[mask, :], threshold=perc75,
+                                   typ='high')
     # calculations for entire time series
     sfc = np.mean(info, axis=0)
 
@@ -185,7 +196,8 @@ def fh9(flows, datetimes, hydro_years, drainage_area):
     # calculations per hydrological year
     info = np.zeros((hydro_years.shape[0], flows.shape[1]), dtype=np.float64)
     for hy, mask in enumerate(hydro_years):
-        info[hy, :] = count_events(flows[mask, :], threshold=perc25, typ='high')
+        info[hy, :] = count_events(flows[mask, :], threshold=perc25,
+                                   typ='high')
     # calculations for entire time series
     sfc = np.mean(info, axis=0)
 
@@ -201,7 +213,8 @@ def fh10(flows, datetimes, hydro_years, drainage_area):
     median_ = np.median(min_, axis=0)
     info = np.zeros((hydro_years.shape[0], flows.shape[1]), dtype=np.float64)
     for hy, mask in enumerate(hydro_years):
-        info[hy, :] = count_events(flows[mask, :], threshold=median_, typ='high')
+        info[hy, :] = count_events(flows[mask, :], threshold=median_,
+                                   typ='high')
     # calculations for entire time series
     info[info <= 0] = np.nan
     sfc = np.nanmean(info, axis=0)
