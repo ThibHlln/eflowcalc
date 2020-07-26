@@ -1,9 +1,9 @@
-# -*- coding: utf-8 -*-
-
-# This file is part of EFlowCalc: A Calculator of Ecological Streamflow Characteristics
-# Copyright (C) 2019  Thibault Hallouin (1)
+# This file is part of EFlowCalc:
+# A Calculator of Ecological Streamflow Characteristics
+# Copyright (C) 2020  Thibault Hallouin (1)
 #
-# (1) Dooge Centre for Water Resources Research, University College Dublin, Ireland
+# (1) Dooge Centre for Water Resources Research,
+#     University College Dublin, Ireland
 #
 # EFlowCalc is free software: you can redistribute it and/or modify
 # it under the terms of the GNU General Public License as published by
