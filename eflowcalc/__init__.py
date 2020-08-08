@@ -18,7 +18,7 @@
 # You should have received a copy of the GNU General Public License
 # along with EFlowCalc. If not, see <http://www.gnu.org/licenses/>.
 
-from .eflowcalc import calculator
+from .eflowcalc import calculator, parallel_calculator
 
 from .flow_magnitude import (
     ma1, ma2, ma3, ma4, ma5, ma6, ma7, ma8, ma9, ma10, ma11, ma12, ma13, ma14,

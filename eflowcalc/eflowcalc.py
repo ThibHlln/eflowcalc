@@ -19,6 +19,10 @@
 # along with EFlowCalc. If not, see <http://www.gnu.org/licenses/>.
 
 from datetime import datetime, timedelta
+from multiprocessing import Pool, cpu_count, log_to_stderr
+from itertools import count
+import logging
+import traceback
 import numpy as np
 
 
@@ -173,3 +177,57 @@ def calculator(sfcs, datetimes, streamflows, drainage_area, axis=0,
         return calc_sfc
     else:
         return calc_sfc.T
+
+
+def _unpack_arg_and_call_calculator(args):
+    return _call_calculator(*args)
+
+
+def _call_calculator(sfcs, datetimes, streamflows, drainage_area,
+                     axis, hydro_year, years, logging_level, index):
+    mp_logger = log_to_stderr()
+    mp_logger.setLevel(logging.INFO if logging_level is None
+                       else logging_level)
+
+    try:
+        return calculator(sfcs, datetimes, streamflows, drainage_area,
+                          axis, hydro_year, years)
+    except Exception as e:
+        mp_logger.error(
+            "exception for item {} with area {}:".format(
+                index, drainage_area)
+        )
+        traceback.print_exc()
+        raise e
+
+
+def parallel_calculator(sfcs, datetimes, streamflows, drainage_areas, axis=0,
+                        hydro_year='01/10', years=None, processes=None,
+                        max_tasks_per_child=1, logging_level=None):
+
+    # check length of series given
+    if ((len(datetimes) != len(streamflows))
+            or (len(datetimes) != len(drainage_areas))):
+        raise RuntimeError('The series given feature different lengths.')
+    if years is not None:
+        if len(years) != len(streamflows):
+            raise RuntimeError('The series given feature different lengths.')
+
+    # 'processes' is the number of simultaneous runs (children) allowed
+    # (maximum and default = number of processors available)
+    # 'maxtasksperchild' is set to 1 to kill each child after
+    # task completion to make sure to clean memory properly
+    pool = Pool(processes=cpu_count() if processes is None else processes,
+                maxtasksperchild=max_tasks_per_child)
+
+    arguments = [(sfcs, dt, sf, ar, axis, hydro_year, yr, logging_level, idx)
+                 for dt, sf, ar, yr, idx
+                 in zip(datetimes, streamflows,
+                        drainage_areas, years, count())]
+
+    calc_sfc = pool.imap(_unpack_arg_and_call_calculator, iterable=arguments)
+
+    pool.close()
+    pool.join()
+
+    return list(calc_sfc)
