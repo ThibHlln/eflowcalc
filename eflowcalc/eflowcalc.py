@@ -28,6 +28,57 @@ import numpy as np
 
 def calculator(sfcs, datetimes, streamflows, drainage_area,
                hydro_year='01/10', years=None, axis=0):
+    """Calculate streamflow characteristics for one time series stored
+    in a 1D array (or several time series of equal length stored  in a
+    2D array). Typically used for streamflow time series for a same
+    period and for a same catchment.
+
+    :Parameters:
+
+        sfcs: (sequence of) `eflowcalc` SFC functions
+            The (sequence of) streamflow characteristic(s) to be
+            calculated for the given *streamflows* series.
+
+            *Parameter example:* ::
+
+                sfcs=ma41
+
+            *Parameter example: ::
+
+                sfcs=(ma41, dh4, ra7)
+
+            *Parameter example:* ::
+
+                sfcs=everything
+
+        datetimes: `numpy.ndarray`
+            The array of datetimes corresponding to the
+            date and time of the *streamflows* values.
+
+        streamflows: `numpy.ndarray`
+            The array of streamflow values in cubic metres per second
+            on which to calculate the given *sfcs*.
+
+        drainage_area: `int` or `float`
+            The drainage area of the catchment in square kilometres
+            for which *streamflows* are provided.
+
+        hydro_year: `str`, optional
+            The day and month of the beginning of the hydrological
+            (or water) year. Typically '01/10' (i.e. 1st of October)
+            for the Northern Hemisphere, and '01/07' (i.e. 1st of July)
+            for the Southern Hemisphere. If not provided, set to default
+            value '01/10'.
+
+        years: sequence of `int`, optional
+            A sequence of years to use to subset the *streamflows*
+            series. If not provided, no subset is carried out and the
+            whole series is considered by the calculator.
+
+        axis: `int`, optional
+            The axis along which the *streamflows* time dimension is.
+
+    """
     # check the format of the different arguments given,
     # if not compliant, abort
     if not isinstance(datetimes, np.ndarray):
@@ -203,7 +254,67 @@ def _call_calculator(sfcs, datetimes, streamflows, drainage_area,
 def parallel_calculator(sfcs, datetimes, streamflows, drainage_areas,
                         hydro_year='01/10', years=None, axis=0,
                         processes=None):
+    """Calculate streamflow characteristics for several time series of
+    possibly non-equal length stored in a list of arrays (1D array if
+    for one time series for the given length, or 2D array if for several
+    time series for the given length). Typically used for streamflow
+    time series for different periods and/or for different catchments.
 
+    :Parameters:
+
+        sfcs: (sequence of) `eflowcalc` SFC functions
+            The (sequence of) streamflow characteristic(s) to be
+            calculated for the given *streamflows* series.
+
+            *Parameter example:* ::
+
+                sfcs=ma41
+
+            *Parameter example: ::
+
+                sfcs=(ma41, dh4, ra7)
+
+            *Parameter example:* ::
+
+                sfcs=everything
+
+        datetimes: sequence of `numpy.ndarray`
+            The sequence of arrays of datetimes corresponding to the
+            date and time of the streamflow values at the same index
+            in the sequence of *streamflows*.
+
+        streamflows: sequence of `numpy.ndarray`
+            The sequence of arrays of streamflow values in cubic metres
+            per second on which to calculate the given *sfcs*.
+
+        drainage_area: sequence of `int` or `float`
+            The sequence of drainage areas of the catchments in square
+            kilometres for which streamflow values are provided at the
+            same index in the sequence of *streamflows*.
+
+        hydro_year: `str`, optional
+            The day and month of the beginning of the hydrological
+            (or water) year. Typically '01/10' (i.e. 1st of October)
+            for the Northern Hemisphere, and '01/07' (i.e. 1st of July)
+            for the Southern Hemisphere. If not provided, set to default
+            value '01/10'.
+
+        years: sequence of sequences of `int`, optional
+            The sequence of sequences of years to use to subset the
+            *streamflows* series at the same index. If not provided,
+            no subset is carried out and the whole series is considered
+            by the calculator.
+
+        axis: `int`, optional
+            The axis along which the time dimension is in the arrays in
+            the *streamflows* sequence.
+
+        processes: `int`, optional
+            The number of parallel processes that should be started. If
+            not provided, set to the maximum number of CPU cores
+            available.
+
+    """
     # check length of series given
     if ((len(datetimes) != len(streamflows))
             or (len(datetimes) != len(drainage_areas))):
