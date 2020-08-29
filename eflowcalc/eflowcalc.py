@@ -184,10 +184,9 @@ def _unpack_arg_and_call_calculator(args):
 
 
 def _call_calculator(sfcs, datetimes, streamflows, drainage_area,
-                     hydro_year, years, axis, logging_level, index):
+                     hydro_year, years, axis, index):
     mp_logger = log_to_stderr()
-    mp_logger.setLevel(logging.INFO if logging_level is None
-                       else logging_level)
+    mp_logger.setLevel(logging.INFO)
 
     try:
         return calculator(sfcs, datetimes, streamflows, drainage_area,
@@ -202,8 +201,8 @@ def _call_calculator(sfcs, datetimes, streamflows, drainage_area,
 
 
 def parallel_calculator(sfcs, datetimes, streamflows, drainage_areas,
-                        hydro_year='01/10', years=None, axis=0, processes=None,
-                        max_tasks_per_child=1, logging_level=None):
+                        hydro_year='01/10', years=None, axis=0,
+                        processes=None):
 
     # check length of series given
     if ((len(datetimes) != len(streamflows))
@@ -218,10 +217,10 @@ def parallel_calculator(sfcs, datetimes, streamflows, drainage_areas,
     # 'maxtasksperchild' is set to 1 to kill each child after
     # task completion to make sure to clean memory properly
     pool = Pool(processes=cpu_count() if processes is None else processes,
-                maxtasksperchild=max_tasks_per_child)
+                maxtasksperchild=1)
 
     arguments = [
-        (sfcs, dt, sf, ar, hydro_year, yr, axis, logging_level, idx)
+        (sfcs, dt, sf, ar, hydro_year, yr, axis, idx)
         for dt, sf, ar, yr, idx
         in zip(datetimes, streamflows, drainage_areas, years, count())
     ]
