@@ -26,8 +26,8 @@ import traceback
 import numpy as np
 
 
-def calculator(sfcs, datetimes, streamflows, drainage_area, axis=0,
-               hydro_year='01/10', years=None):
+def calculator(sfcs, datetimes, streamflows, drainage_area,
+               hydro_year='01/10', years=None, axis=0):
     # check the format of the different arguments given,
     # if not compliant, abort
     if not isinstance(datetimes, np.ndarray):
@@ -184,14 +184,14 @@ def _unpack_arg_and_call_calculator(args):
 
 
 def _call_calculator(sfcs, datetimes, streamflows, drainage_area,
-                     axis, hydro_year, years, logging_level, index):
+                     hydro_year, years, axis, logging_level, index):
     mp_logger = log_to_stderr()
     mp_logger.setLevel(logging.INFO if logging_level is None
                        else logging_level)
 
     try:
         return calculator(sfcs, datetimes, streamflows, drainage_area,
-                          axis, hydro_year, years)
+                          hydro_year, years, axis)
     except Exception as e:
         mp_logger.error(
             "exception for item {} with area {}:".format(
@@ -201,8 +201,8 @@ def _call_calculator(sfcs, datetimes, streamflows, drainage_area,
         raise e
 
 
-def parallel_calculator(sfcs, datetimes, streamflows, drainage_areas, axis=0,
-                        hydro_year='01/10', years=None, processes=None,
+def parallel_calculator(sfcs, datetimes, streamflows, drainage_areas,
+                        hydro_year='01/10', years=None, axis=0, processes=None,
                         max_tasks_per_child=1, logging_level=None):
 
     # check length of series given
@@ -220,10 +220,11 @@ def parallel_calculator(sfcs, datetimes, streamflows, drainage_areas, axis=0,
     pool = Pool(processes=cpu_count() if processes is None else processes,
                 maxtasksperchild=max_tasks_per_child)
 
-    arguments = [(sfcs, dt, sf, ar, axis, hydro_year, yr, logging_level, idx)
-                 for dt, sf, ar, yr, idx
-                 in zip(datetimes, streamflows,
-                        drainage_areas, years, count())]
+    arguments = [
+        (sfcs, dt, sf, ar, hydro_year, yr, axis, logging_level, idx)
+        for dt, sf, ar, yr, idx
+        in zip(datetimes, streamflows, drainage_areas, years, count())
+    ]
 
     calc_sfc = pool.imap(_unpack_arg_and_call_calculator, iterable=arguments)
 
