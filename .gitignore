@@ -1,1 +1,5 @@
 *pyc
+.DS_Store
+
+# ignore documentation built because copied in docs/ root already
+docs/_doc_build

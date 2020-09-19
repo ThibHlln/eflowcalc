@@ -26,8 +26,14 @@ from .tools import count_reversals
 # ALL FLOWS
 # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-# RA1 - Average rise rate
 def ra1(flows, datetimes, hydro_years, drainage_area):
+    """Average rise rate.
+
+    :Calculation Details:
+        Identify the flow rises (i.e. the increases in daily flows from
+        one day to the next). Calculate the mean of these rises.
+
+    """
     # calculations for entire time series
     diffs = np.diff(flows, axis=0)
     rises = np.copy(diffs)
@@ -37,8 +43,16 @@ def ra1(flows, datetimes, hydro_years, drainage_area):
     return sfc
 
 
-# RA2 - Variability in rise rate
 def ra2(flows, datetimes, hydro_years, drainage_area):
+    """Variability in rise rate.
+
+    :Calculation Details:
+        Identify the flow rises (i.e. the increases in daily flows from
+        one day to the next). Calculate the standard deviation and the
+        mean of these rises, multiply the former by 100, and divide the
+        result by the latter.
+
+    """
     # calculations for entire time series
     diffs = np.diff(flows, axis=0)
     rises = np.copy(diffs)
@@ -48,8 +62,14 @@ def ra2(flows, datetimes, hydro_years, drainage_area):
     return sfc
 
 
-# RA3 - Average fall rate
 def ra3(flows, datetimes, hydro_years, drainage_area):
+    """Average fall rate.
+
+    :Calculation Details:
+        Identify the flow falls (i.e. the decreases in daily flows from
+        one day to the next). Calculate the mean of these falls.
+
+    """
     # calculations for entire time series
     diffs = np.diff(flows, axis=0)
     falls = np.copy(diffs)
@@ -60,8 +80,16 @@ def ra3(flows, datetimes, hydro_years, drainage_area):
     return sfc
 
 
-# RA4 - Variability in fall rate
 def ra4(flows, datetimes, hydro_years, drainage_area):
+    """Variability in fall rate.
+
+    :Calculation Details:
+        Identify the flow falls (i.e. the decreases in daily flows from
+        one day to the next). Calculate the standard deviation and the
+        mean of these falls, multiply the former by 100, and divide the
+        result by the latter.
+
+    """
     # calculations for entire time series
     diffs = np.diff(flows, axis=0)
     falls = np.copy(diffs)
@@ -72,8 +100,15 @@ def ra4(flows, datetimes, hydro_years, drainage_area):
     return sfc
 
 
-# RA5 - Ratio of days with flow rise
 def ra5(flows, datetimes, hydro_years, drainage_area):
+    """Ratio of days with flow rise.
+
+    :Calculation Details:
+        Calculate the number of days with flow rises (i.e. the increases
+        in daily flows from one day to the next). Divide this number by
+        the total number of days in the daily flow record.
+
+    """
     # calculations for entire time series
     diffs = np.diff(flows, axis=0)
     rises = np.copy(diffs)
@@ -82,8 +117,16 @@ def ra5(flows, datetimes, hydro_years, drainage_area):
     return sfc
 
 
-# RA6 - Rate of flow rise
 def ra6(flows, datetimes, hydro_years, drainage_area):
+    """Change of flow rises.
+
+    :Calculation Details:
+        Compute the natural logarithm of the daily flow record. Identify
+        the rises in log-transformed flows (i.e. the increases in daily
+        log flows from one day to the next). Calculate the median of
+        these rises.
+
+    """
     # calculations for entire time series
     cp_flows = np.copy(flows)
     # replace 0 by 0.01 if necessary (to avoid log(0))
@@ -95,8 +138,16 @@ def ra6(flows, datetimes, hydro_years, drainage_area):
     return sfc
 
 
-# RA7 - Rate of flow recession
 def ra7(flows, datetimes, hydro_years, drainage_area):
+    """Change of flow falls.
+
+    :Calculation Details:
+        Compute the natural logarithm of the daily flow record. Identify
+        the falls in log-transformed flows (i.e. the decreases in daily
+        log flows from one day to the next). Calculate the median of
+        these falls.
+
+    """
     # calculations for entire time series
     cp_flows = np.copy(flows)
     # replace 0 by 0.01 if necessary (to avoid log(0))
@@ -108,8 +159,17 @@ def ra7(flows, datetimes, hydro_years, drainage_area):
     return sfc
 
 
-# RA8 - Average annual number of reversals
 def ra8(flows, datetimes, hydro_years, drainage_area):
+    """Average annual number of reversals.
+
+    :Calculation Details:
+        Count the number of flow reversals (change from a period of
+        increasing daily flows from one day to the next to a period of
+        decreasing daily flows from one day to the next) for each
+        hydrological year in the daily flow record. Calculate the mean
+        of these numbers.
+
+    """
     # calculations per hydrological year
     info = np.zeros((hydro_years.shape[0], flows.shape[1]), dtype=np.float64)
     for hy, mask in enumerate(hydro_years):
@@ -120,8 +180,18 @@ def ra8(flows, datetimes, hydro_years, drainage_area):
     return sfc
 
 
-# RA9 - Variability in number of annual reversals
 def ra9(flows, datetimes, hydro_years, drainage_area):
+    """Variability in annual number of reversals.
+
+    :Calculation Details:
+        Count the number of flow reversals (change from a period of
+        increasing daily flows from one day to the next to a period of
+        decreasing daily flows from one day to the next) for each
+        hydrological year in the daily flow record. Calculate the
+        standard deviation and the mean of these numbers. Multiply the
+        former by 100, and divide the result by the latter.
+
+    """
     # calculations per hydrological year
     info = np.zeros((hydro_years.shape[0], flows.shape[1]), dtype=np.float64)
     for hy, mask in enumerate(hydro_years):

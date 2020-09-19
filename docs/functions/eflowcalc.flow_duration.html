@@ -1,0 +1,432 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Characteristics on flow duration &mdash; eflowcalc 0.0.3 documentation</title>
+  
+
+  
+  <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/theme_overrides.css" type="text/css" />
+
+  
+  
+  
+  
+    <link rel="canonical" href="https://thibhlln.github.io/eflowcalcfunctions/eflowcalc.flow_duration.html"/>
+  
+
+  
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+        <script src="../_static/jquery.js"></script>
+        <script src="../_static/underscore.js"></script>
+        <script src="../_static/doctools.js"></script>
+        <script src="../_static/language_data.js"></script>
+        <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    
+    <script type="text/javascript" src="../_static/js/theme.js"></script>
+
+    
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="eflowcalc.dl1" href="eflowcalc.dl1.html" />
+    <link rel="prev" title="Calculator on array" href="eflowcalc.calculator.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="../index.html" class="icon icon-home" alt="Documentation Home"> eflowcalc
+          
+
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                0.0.3
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">Contents</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../overview.html">Overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../installation.html">Installation</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../api.html">API</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="eflowcalc.calculator.html">Calculator on array</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">Characteristics on flow duration</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#low-flow-events">Low flow events</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#high-flow-events">High flow events</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="eflowcalc.flow_magnitude.html">Characteristics on flow magnitude</a></li>
+<li class="toctree-l2"><a class="reference internal" href="eflowcalc.flow_frequency.html">Characteristics on flow frequency</a></li>
+<li class="toctree-l2"><a class="reference internal" href="eflowcalc.flow_rate_change.html">Characteristics on flow rate of change</a></li>
+<li class="toctree-l2"><a class="reference internal" href="eflowcalc.flow_timing.html">Characteristics on flow timing</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../tutorial.html">Tutorial</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Appendices</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../genindex.html">Index</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../licence.html">Licence</a></li>
+</ul>
+
+            
+          
+        </div>
+        
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">eflowcalc</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../index.html" class="icon icon-home"></a> &raquo;</li>
+        
+          <li><a href="../api.html">API</a> &raquo;</li>
+        
+      <li>Characteristics on flow duration</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  
+<style>
+/* CSS overrides for sphinx_rtd_theme */
+
+/* 24px margin */
+.nbinput.nblast.container,
+.nboutput.nblast.container {
+    margin-bottom: 19px;  /* padding has already 5px */
+}
+
+/* ... except between code cells! */
+.nblast.container + .nbinput.container {
+    margin-top: -19px;
+}
+
+.admonition > p:before {
+    margin-right: 4px;  /* make room for the exclamation icon */
+}
+
+/* Fix math alignment, see https://github.com/rtfd/sphinx_rtd_theme/pull/686 */
+.math {
+    text-align: unset;
+}
+</style>
+<div class="section" id="characteristics-on-flow-duration">
+<h1>Characteristics on flow duration<a class="headerlink" href="#characteristics-on-flow-duration" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="low-flow-events">
+<h2>Low flow events<a class="headerlink" href="#low-flow-events" title="Permalink to this headline">¶</a></h2>
+<table class="longtable docutils align-default">
+<colgroup>
+<col style="width: 10%" />
+<col style="width: 90%" />
+</colgroup>
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="eflowcalc.dl1.html#eflowcalc.dl1" title="eflowcalc.dl1"><code class="xref py py-obj docutils literal notranslate"><span class="pre">dl1</span></code></a></p></td>
+<td><p>Mean annual minimum daily flow.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="eflowcalc.dl2.html#eflowcalc.dl2" title="eflowcalc.dl2"><code class="xref py py-obj docutils literal notranslate"><span class="pre">dl2</span></code></a></p></td>
+<td><p>Mean annual minimum of 3-day daily flow.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="eflowcalc.dl3.html#eflowcalc.dl3" title="eflowcalc.dl3"><code class="xref py py-obj docutils literal notranslate"><span class="pre">dl3</span></code></a></p></td>
+<td><p>Mean annual minimum of 7-day daily flow.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="eflowcalc.dl4.html#eflowcalc.dl4" title="eflowcalc.dl4"><code class="xref py py-obj docutils literal notranslate"><span class="pre">dl4</span></code></a></p></td>
+<td><p>Mean annual minimum of 30-day daily flow.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="eflowcalc.dl5.html#eflowcalc.dl5" title="eflowcalc.dl5"><code class="xref py py-obj docutils literal notranslate"><span class="pre">dl5</span></code></a></p></td>
+<td><p>Mean annual minimum of 90-day daily flow.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="eflowcalc.dl6.html#eflowcalc.dl6" title="eflowcalc.dl6"><code class="xref py py-obj docutils literal notranslate"><span class="pre">dl6</span></code></a></p></td>
+<td><p>Variability in annual minimum daily flow.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="eflowcalc.dl7.html#eflowcalc.dl7" title="eflowcalc.dl7"><code class="xref py py-obj docutils literal notranslate"><span class="pre">dl7</span></code></a></p></td>
+<td><p>Variability in annual minimum of 3-day daily flow.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="eflowcalc.dl8.html#eflowcalc.dl8" title="eflowcalc.dl8"><code class="xref py py-obj docutils literal notranslate"><span class="pre">dl8</span></code></a></p></td>
+<td><p>Variability in annual minimum of 7-day daily flow.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="eflowcalc.dl9.html#eflowcalc.dl9" title="eflowcalc.dl9"><code class="xref py py-obj docutils literal notranslate"><span class="pre">dl9</span></code></a></p></td>
+<td><p>Variability in annual minimum of 30-day daily flow.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="eflowcalc.dl10.html#eflowcalc.dl10" title="eflowcalc.dl10"><code class="xref py py-obj docutils literal notranslate"><span class="pre">dl10</span></code></a></p></td>
+<td><p>Variability in annual minimum of 90-day daily flow.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="eflowcalc.dl11.html#eflowcalc.dl11" title="eflowcalc.dl11"><code class="xref py py-obj docutils literal notranslate"><span class="pre">dl11</span></code></a></p></td>
+<td><p>Mean annual minimum daily flow normalised by overall median daily flow.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="eflowcalc.dl12.html#eflowcalc.dl12" title="eflowcalc.dl12"><code class="xref py py-obj docutils literal notranslate"><span class="pre">dl12</span></code></a></p></td>
+<td><p>Mean annual minimum of 7-day daily flow normalised by overall median daily flow.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="eflowcalc.dl13.html#eflowcalc.dl13" title="eflowcalc.dl13"><code class="xref py py-obj docutils literal notranslate"><span class="pre">dl13</span></code></a></p></td>
+<td><p>Mean annual minimum of 30-day daily flow normalised by overall median daily flow.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="eflowcalc.dl14.html#eflowcalc.dl14" title="eflowcalc.dl14"><code class="xref py py-obj docutils literal notranslate"><span class="pre">dl14</span></code></a></p></td>
+<td><p>Q75 exceedance value normalised by overall median daily flow.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="eflowcalc.dl15.html#eflowcalc.dl15" title="eflowcalc.dl15"><code class="xref py py-obj docutils literal notranslate"><span class="pre">dl15</span></code></a></p></td>
+<td><p>Q90 exceedance value normalised by overall median daily flow.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="eflowcalc.dl16.html#eflowcalc.dl16" title="eflowcalc.dl16"><code class="xref py py-obj docutils literal notranslate"><span class="pre">dl16</span></code></a></p></td>
+<td><p>Median low-flow pulse duration.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="eflowcalc.dl17.html#eflowcalc.dl17" title="eflowcalc.dl17"><code class="xref py py-obj docutils literal notranslate"><span class="pre">dl17</span></code></a></p></td>
+<td><p>Variability in low-flow pulse duration.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="eflowcalc.dl18.html#eflowcalc.dl18" title="eflowcalc.dl18"><code class="xref py py-obj docutils literal notranslate"><span class="pre">dl18</span></code></a></p></td>
+<td><p>Mean annual number of zero flow days.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="eflowcalc.dl19.html#eflowcalc.dl19" title="eflowcalc.dl19"><code class="xref py py-obj docutils literal notranslate"><span class="pre">dl19</span></code></a></p></td>
+<td><p>Variability in annual number of zero flow days.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="eflowcalc.dl20.html#eflowcalc.dl20" title="eflowcalc.dl20"><code class="xref py py-obj docutils literal notranslate"><span class="pre">dl20</span></code></a></p></td>
+<td><p>Mean annual number of zero flow days.</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="high-flow-events">
+<h2>High flow events<a class="headerlink" href="#high-flow-events" title="Permalink to this headline">¶</a></h2>
+<table class="longtable docutils align-default">
+<colgroup>
+<col style="width: 10%" />
+<col style="width: 90%" />
+</colgroup>
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="eflowcalc.dh1.html#eflowcalc.dh1" title="eflowcalc.dh1"><code class="xref py py-obj docutils literal notranslate"><span class="pre">dh1</span></code></a></p></td>
+<td><p>Mean annual maximum daily flow.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="eflowcalc.dh2.html#eflowcalc.dh2" title="eflowcalc.dh2"><code class="xref py py-obj docutils literal notranslate"><span class="pre">dh2</span></code></a></p></td>
+<td><p>Mean annual maximum of 3-day daily flow.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="eflowcalc.dh3.html#eflowcalc.dh3" title="eflowcalc.dh3"><code class="xref py py-obj docutils literal notranslate"><span class="pre">dh3</span></code></a></p></td>
+<td><p>Mean annual maximum of 7-day daily flow.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="eflowcalc.dh4.html#eflowcalc.dh4" title="eflowcalc.dh4"><code class="xref py py-obj docutils literal notranslate"><span class="pre">dh4</span></code></a></p></td>
+<td><p>Mean annual maximum of 30-day daily flow.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="eflowcalc.dh5.html#eflowcalc.dh5" title="eflowcalc.dh5"><code class="xref py py-obj docutils literal notranslate"><span class="pre">dh5</span></code></a></p></td>
+<td><p>Mean annual maximum of 90-day daily flow.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="eflowcalc.dh6.html#eflowcalc.dh6" title="eflowcalc.dh6"><code class="xref py py-obj docutils literal notranslate"><span class="pre">dh6</span></code></a></p></td>
+<td><p>Variability in annual maximum daily flow.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="eflowcalc.dh7.html#eflowcalc.dh7" title="eflowcalc.dh7"><code class="xref py py-obj docutils literal notranslate"><span class="pre">dh7</span></code></a></p></td>
+<td><p>Variability in annual maximum of 3-day daily flow.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="eflowcalc.dh8.html#eflowcalc.dh8" title="eflowcalc.dh8"><code class="xref py py-obj docutils literal notranslate"><span class="pre">dh8</span></code></a></p></td>
+<td><p>Variability in annual maximum of 7-day daily flow.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="eflowcalc.dh9.html#eflowcalc.dh9" title="eflowcalc.dh9"><code class="xref py py-obj docutils literal notranslate"><span class="pre">dh9</span></code></a></p></td>
+<td><p>Variability in annual maximum of 30-day daily flow.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="eflowcalc.dh10.html#eflowcalc.dh10" title="eflowcalc.dh10"><code class="xref py py-obj docutils literal notranslate"><span class="pre">dh10</span></code></a></p></td>
+<td><p>Variability in annual maximum of 90-day daily flow.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="eflowcalc.dh11.html#eflowcalc.dh11" title="eflowcalc.dh11"><code class="xref py py-obj docutils literal notranslate"><span class="pre">dh11</span></code></a></p></td>
+<td><p>Mean annual maximum daily flow normalised by overall median daily flow.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="eflowcalc.dh12.html#eflowcalc.dh12" title="eflowcalc.dh12"><code class="xref py py-obj docutils literal notranslate"><span class="pre">dh12</span></code></a></p></td>
+<td><p>Mean annual maximum of 7-day daily flow normalised by overall median daily flow.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="eflowcalc.dh13.html#eflowcalc.dh13" title="eflowcalc.dh13"><code class="xref py py-obj docutils literal notranslate"><span class="pre">dh13</span></code></a></p></td>
+<td><p>Mean annual maximum of 30-day daily flow normalised by overall median daily flow.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="eflowcalc.dh14.html#eflowcalc.dh14" title="eflowcalc.dh14"><code class="xref py py-obj docutils literal notranslate"><span class="pre">dh14</span></code></a></p></td>
+<td><p>Q5 exceedance monthly mean flow value normalised by overall mean monthly mean flow.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="eflowcalc.dh15.html#eflowcalc.dh15" title="eflowcalc.dh15"><code class="xref py py-obj docutils literal notranslate"><span class="pre">dh15</span></code></a></p></td>
+<td><p>Median high-flow pulse duration.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="eflowcalc.dh16.html#eflowcalc.dh16" title="eflowcalc.dh16"><code class="xref py py-obj docutils literal notranslate"><span class="pre">dh16</span></code></a></p></td>
+<td><p>Variability in high-flow pulse duration.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="eflowcalc.dh17.html#eflowcalc.dh17" title="eflowcalc.dh17"><code class="xref py py-obj docutils literal notranslate"><span class="pre">dh17</span></code></a></p></td>
+<td><p>Mean duration of flow events above the median flow for the whole record.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="eflowcalc.dh18.html#eflowcalc.dh18" title="eflowcalc.dh18"><code class="xref py py-obj docutils literal notranslate"><span class="pre">dh18</span></code></a></p></td>
+<td><p>Mean duration of flow events above three times the median flow for the whole record.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="eflowcalc.dh19.html#eflowcalc.dh19" title="eflowcalc.dh19"><code class="xref py py-obj docutils literal notranslate"><span class="pre">dh19</span></code></a></p></td>
+<td><p>Mean duration of flow events above seven times the median flow for the whole record.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="eflowcalc.dh20.html#eflowcalc.dh20" title="eflowcalc.dh20"><code class="xref py py-obj docutils literal notranslate"><span class="pre">dh20</span></code></a></p></td>
+<td><p>Mean duration of flow events above Q25 for the whole record.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="eflowcalc.dh21.html#eflowcalc.dh21" title="eflowcalc.dh21"><code class="xref py py-obj docutils literal notranslate"><span class="pre">dh21</span></code></a></p></td>
+<td><p>Mean duration of flow events above Q75 for the whole record.</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        
+        &copy; Copyright 2020, Thibault Hallouin.
+      <span class="lastupdated">
+        Last updated on Sep 19, 2020.
+      </span>
+
+    </p>
+  </div>
+    
+    
+    
+    Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a
+    
+    <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a>
+    
+    provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+<div class="rst-versions" data-toggle="rst-versions" role="note" aria-label="versions">
+<span class="rst-current-version" data-toggle="rst-current-version">
+  <div style="float:left;">
+    <span class="fa fa-archive"> eflowcalc</span>
+  </div>
+  <div style="float:right;">
+    v: 0.0.3
+    <span class="fa fa-caret-down"></span>
+  </div>
+</span>
+<div class="rst-other-versions">
+  
+  <dl>
+    <dt>Versions</dt>
+    
+      <dd><a href="https://thibhlln.github.io/eflowcalc/">v0.0.3</a></dd>
+    
+  </dl>
+  
+  <dl>
+    <dt>External Links</dt>
+    
+      <dd><a href="https://github.com/ThibHlln/eflowcalc.git"><span class="fa fa-github"> GitHub Repository</a></dd>
+    
+  </dl>
+  
+</div>
+</div>
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

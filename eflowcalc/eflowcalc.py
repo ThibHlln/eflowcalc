@@ -22,8 +22,59 @@ from datetime import datetime, timedelta
 import numpy as np
 
 
-def calculator(sfcs, datetimes, streamflows, drainage_area, axis=0,
-               hydro_year='01/10', years=None):
+def calculator(sfcs, datetimes, streamflows, drainage_area,
+               hydro_year='01/10', years=None, axis=0):
+    """Calculate streamflow characteristics for one time series stored
+    in a 1D array (or several time series of equal length stored  in a
+    2D array). Typically used for streamflow time series for a same
+    period and for a same catchment.
+
+    :Parameters:
+
+        sfcs: (sequence of) `eflowcalc` SFC functions
+            The (sequence of) streamflow characteristic(s) to be
+            calculated for the given *streamflows* series.
+
+            *Parameter example:* ::
+
+                sfcs=ma41
+
+            *Parameter example:* ::
+
+                sfcs=(ma41, dh4, ra7)
+
+            *Parameter example:* ::
+
+                sfcs=everything
+
+        datetimes: `numpy.ndarray`
+            The array of datetimes corresponding to the
+            date and time of the *streamflows* values.
+
+        streamflows: `numpy.ndarray`
+            The array of daily streamflow values in cubic metres per
+            second on which to calculate the given *sfcs*.
+
+        drainage_area: `int` or `float`
+            The drainage area of the catchment in square kilometres
+            for which *streamflows* are provided.
+
+        hydro_year: `str`, optional
+            The day and month of the beginning of the hydrological
+            (or water) year. Typically '01/10' (i.e. 1st of October)
+            for the Northern Hemisphere, and '01/07' (i.e. 1st of July)
+            for the Southern Hemisphere. If not provided, set to default
+            value '01/10'.
+
+        years: sequence of `int`, optional
+            A sequence of years to use to subset the *streamflows*
+            series. If not provided, no subset is carried out and the
+            whole series is considered by the calculator.
+
+        axis: `int`, optional
+            The axis along which the *streamflows* time dimension is.
+
+    """
     # check the format of the different arguments given,
     # if not compliant, abort
     if not isinstance(datetimes, np.ndarray):
