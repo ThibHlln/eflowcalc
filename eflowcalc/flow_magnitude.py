@@ -27,24 +27,43 @@ from .tools import calc_bfi, rolling_window, calc_events_avg_volume_above
 # AVERAGE FLOWS
 # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-# MA1 - Mean of the entire record
 def ma1(flows, datetimes, hydro_years, drainage_area):
+    """Mean daily flow for the entire daily flow record.
+
+    :Calculation Details:
+        Calculate the mean for the whole daily flow record.
+
+    """
     # calculations for entire time series
     sfc = np.mean(flows, axis=0)
 
     return sfc
 
 
-# MA2 - Median of the entire record
 def ma2(flows, datetimes, hydro_years, drainage_area):
+    """Median daily flow for the entire daily flow record.
+
+    :Calculation Details:
+        Calculate the median for the whole daily flow record.
+
+    """
     # calculations for entire time series
     sfc = np.median(flows, axis=0)
 
     return sfc
 
 
-# MA3 - Mean of the annual coefficients of variation
 def ma3(flows, datetimes, hydro_years, drainage_area):
+    """Mean annual coefficient of variation for daily flows.
+
+    :Calculation Details:
+        Calculate the standard deviation and the mean of the daily flows
+        for each hydrological year. Divide the values of the former by
+        the values of the latter to get the coefficients of variation
+        for each hydrological year. Calculate the mean of these
+        coefficients.
+
+    """
     # calculations per hydrological year
     info = np.zeros((hydro_years.shape[0], flows.shape[1]), dtype=np.float64)
     for hy, mask in enumerate(hydro_years):
@@ -56,8 +75,18 @@ def ma3(flows, datetimes, hydro_years, drainage_area):
     return sfc
 
 
-# MA4 - Variability in the percentiles on log10 for the entire record
 def ma4(flows, datetimes, hydro_years, drainage_area):
+    """Variability in the percentiles on log10 for the entire daily
+    flow record.
+
+    :Calculation Details:
+        Compute the decimal logarithm of the daily flow values.
+        Calculate the 5th, 10th, 15th, ..., 95th percentiles of these
+        log-transformed values. Calculate the standard deviation and the
+        mean of the 19 percentile values. Multiply the former by 100 and
+        divide the result by the latter.
+
+    """
     log_f = np.copy(flows)
     # replace log10(0) by log10(0.01) if necessary
     log_f[log_f == 0.0] = 0.01
@@ -70,44 +99,74 @@ def ma4(flows, datetimes, hydro_years, drainage_area):
     return sfc
 
 
-# MA5 - Skewness of the entire record
 def ma5(flows, datetimes, hydro_years, drainage_area):
+    """Skewness of the daily flow values.
+
+    :Calculation Details:
+        Calculate the mean flow for the whole daily flow record. Divide
+        by the median flow for the whole daily flow record.
+
+    """
     # calculations for entire time series
     sfc = np.mean(flows, axis=0) / np.median(flows, axis=0)
 
     return sfc
 
 
-# MA6 - Ratio for range between 90th and 10th percentile
-# for the entire record
 def ma6(flows, datetimes, hydro_years, drainage_area):
+    """Ratio between 90th and 10th percentiles for the entire record.
+
+    :Calculation Details:
+        Calculate the 90th percentile and the 10th percentile of the
+        daily flow record. Divide the former value by the latter value.
+
+    """
     # calculations for entire time series
     sfc = np.percentile(flows, 90, axis=0) / np.percentile(flows, 10, axis=0)
 
     return sfc
 
 
-# MA7 - Ratio for range between 80th and 20th percentile
-# for the entire record
 def ma7(flows, datetimes, hydro_years, drainage_area):
+    """Ratio between 80th and 20th percentiles for the entire record.
+
+    :Calculation Details:
+        Calculate the 80th percentile and the 20th percentile of the
+        daily flow record. Divide the former value by the latter value.
+
+    """
     # calculations for entire time series
     sfc = np.percentile(flows, 80, axis=0) / np.percentile(flows, 20, axis=0)
 
     return sfc
 
 
-# MA8 - Ratio for range between 75th and 25th percentile
-# for the entire record
 def ma8(flows, datetimes, hydro_years, drainage_area):
+    """Ratio between 75th and 25th percentiles for the entire record.
+
+    :Calculation Details:
+        Calculate the 75th percentile and the 25th percentile of the
+        daily flow record. Divide the former value by the latter value.
+
+    """
     # calculations for entire time series
     sfc = np.percentile(flows, 75, axis=0) / np.percentile(flows, 25, axis=0)
 
     return sfc
 
 
-# MA9 - Spread in range between 90th and 10th percentile on log10
-# for the entire record
 def ma9(flows, datetimes, hydro_years, drainage_area):
+    """Spread in 90th-10th percentile range on decimal logarithm
+    transformed daily flows.
+
+    :Calculation Details:
+        Compute the decimal logarithm of the daily flow values.
+        Calculate the 90th percentile and the 10th percentile of these
+        log-transformed flow values. Subtract the latter to the former.
+        Divide this value by the median of the log-transformed flow
+        values.
+
+    """
     log_f = np.copy(flows)
     # replace log10(0) by log10(0.01) if necessary
     log_f[log_f == 0.0] = 0.01
@@ -120,9 +179,18 @@ def ma9(flows, datetimes, hydro_years, drainage_area):
     return sfc
 
 
-# MA10 - Spread in range between 80th and 20th percentile on log10
-# for the entire record
 def ma10(flows, datetimes, hydro_years, drainage_area):
+    """Spread in 80th-20th percentile range on decimal logarithm
+    transformed daily flows.
+
+    :Calculation Details:
+        Compute the decimal logarithm of the daily flow values.
+        Calculate the 80th percentile and the 20th percentile of these
+        log-transformed flow values. Subtract the latter to the former.
+        Divide this value by the median of the log-transformed flow
+        values.
+
+    """
     log_f = np.copy(flows)
     # replace log10(0) by log10(0.01) if necessary
     log_f[log_f == 0.0] = 0.01
@@ -135,9 +203,18 @@ def ma10(flows, datetimes, hydro_years, drainage_area):
     return sfc
 
 
-# MA11 - Spread in range between 75th and 25th percentile on log10
-# for the entire record
 def ma11(flows, datetimes, hydro_years, drainage_area):
+    """Spread in 75th-25th percentile range on decimal logarithm
+    transformed daily flows.
+
+    :Calculation Details:
+        Compute the decimal logarithm of the daily flow values.
+        Calculate the 75th percentile and the 25th percentile of these
+        log-transformed flow values. Subtract the latter to the former.
+        Divide this value by the median of the log-transformed flow
+        values.
+
+    """
     log_f = np.copy(flows)
     # replace log10(0) by log10(0.01) if necessary
     log_f[log_f == 0.0] = 0.01
@@ -150,8 +227,14 @@ def ma11(flows, datetimes, hydro_years, drainage_area):
     return sfc
 
 
-# MA12 - Mean of January flows
 def ma12(flows, datetimes, hydro_years, drainage_area):
+    """Mean of January flows.
+
+    :Calculation Details:
+        Compute the mean daily flow values for each month in the record.
+        Take the mean value for January.
+
+    """
     # calculations per month
     info = np.array(pd.DataFrame(flows, index=datetimes).groupby(
         lambda x: x.month).mean())
@@ -161,8 +244,14 @@ def ma12(flows, datetimes, hydro_years, drainage_area):
     return sfc
 
 
-# MA13 - Mean of February flows
 def ma13(flows, datetimes, hydro_years, drainage_area):
+    """Mean of February flows.
+
+    :Calculation Details:
+        Compute the mean daily flow values for each month in the record.
+        Take the mean value for February.
+
+    """
     # calculations per month
     info = np.array(pd.DataFrame(flows, index=datetimes).groupby(
         lambda x: x.month).mean())
@@ -172,8 +261,14 @@ def ma13(flows, datetimes, hydro_years, drainage_area):
     return sfc
 
 
-# MA14 - Mean of March flows
 def ma14(flows, datetimes, hydro_years, drainage_area):
+    """Mean of March flows.
+
+    :Calculation Details:
+        Compute the mean daily flow values for each month in the record.
+        Take the mean value for March.
+
+    """
     # calculations per month
     info = np.array(pd.DataFrame(flows, index=datetimes).groupby(
         lambda x: x.month).mean())
@@ -183,8 +278,14 @@ def ma14(flows, datetimes, hydro_years, drainage_area):
     return sfc
 
 
-# MA15 - Mean of April flows
 def ma15(flows, datetimes, hydro_years, drainage_area):
+    """Mean of April flows.
+
+    :Calculation Details:
+        Compute the mean daily flow values for each month in the record.
+        Take the mean value for April.
+
+    """
     # calculations per month
     info = np.array(pd.DataFrame(flows, index=datetimes).groupby(
         lambda x: x.month).mean())
@@ -194,8 +295,14 @@ def ma15(flows, datetimes, hydro_years, drainage_area):
     return sfc
 
 
-# MA16 - Mean of May flows
 def ma16(flows, datetimes, hydro_years, drainage_area):
+    """Mean of May flows.
+
+    :Calculation Details:
+        Compute the mean daily flow values for each month in the record.
+        Take the mean value for May.
+
+    """
     # calculations per month
     info = np.array(pd.DataFrame(flows, index=datetimes).groupby(
         lambda x: x.month).mean())
@@ -205,8 +312,14 @@ def ma16(flows, datetimes, hydro_years, drainage_area):
     return sfc
 
 
-# MA17 - Mean of June flows
 def ma17(flows, datetimes, hydro_years, drainage_area):
+    """Mean of June flows.
+
+    :Calculation Details:
+        Compute the mean daily flow values for each month in the record.
+        Take the mean value for June.
+
+    """
     # calculations per month
     info = np.array(pd.DataFrame(flows, index=datetimes).groupby(
         lambda x: x.month).mean())
@@ -216,8 +329,14 @@ def ma17(flows, datetimes, hydro_years, drainage_area):
     return sfc
 
 
-# MA18 - Mean of July flows
 def ma18(flows, datetimes, hydro_years, drainage_area):
+    """Mean of July flows.
+
+    :Calculation Details:
+        Compute the mean daily flow values for each month in the record.
+        Take the mean value for July.
+
+    """
     # calculations per month
     info = np.array(pd.DataFrame(flows, index=datetimes).groupby(
         lambda x: x.month).mean())
@@ -227,8 +346,14 @@ def ma18(flows, datetimes, hydro_years, drainage_area):
     return sfc
 
 
-# MA19 - Mean of August flows
 def ma19(flows, datetimes, hydro_years, drainage_area):
+    """Mean of August flows.
+
+    :Calculation Details:
+        Compute the mean daily flow values for each month in the record.
+        Take the mean value for August.
+
+    """
     # calculations per month
     info = np.array(pd.DataFrame(flows, index=datetimes).groupby(
         lambda x: x.month).mean())
@@ -238,8 +363,14 @@ def ma19(flows, datetimes, hydro_years, drainage_area):
     return sfc
 
 
-# MA20 - Mean of September flows
 def ma20(flows, datetimes, hydro_years, drainage_area):
+    """Mean of September flows.
+
+    :Calculation Details:
+        Compute the mean daily flow values for each month in the record.
+        Take the mean value for September.
+
+    """
     # calculations per month
     info = np.array(pd.DataFrame(flows, index=datetimes).groupby(
         lambda x: x.month).mean())
@@ -249,8 +380,14 @@ def ma20(flows, datetimes, hydro_years, drainage_area):
     return sfc
 
 
-# MA21 - Mean of October flows
 def ma21(flows, datetimes, hydro_years, drainage_area):
+    """Mean of October flows.
+
+    :Calculation Details:
+        Compute the mean daily flow values for each month in the record.
+        Take the mean value for October.
+
+    """
     # calculations per month
     info = np.array(pd.DataFrame(flows, index=datetimes).groupby(
         lambda x: x.month).mean())
@@ -260,8 +397,14 @@ def ma21(flows, datetimes, hydro_years, drainage_area):
     return sfc
 
 
-# MA22 - Mean of November flows
 def ma22(flows, datetimes, hydro_years, drainage_area):
+    """Mean of November flows.
+
+    :Calculation Details:
+        Compute the mean daily flow values for each month in the record.
+        Take the mean value for November.
+
+    """
     # calculations per month
     info = np.array(pd.DataFrame(flows, index=datetimes).groupby(
         lambda x: x.month).mean())
@@ -271,8 +414,14 @@ def ma22(flows, datetimes, hydro_years, drainage_area):
     return sfc
 
 
-# MA23 - Mean of December flows
 def ma23(flows, datetimes, hydro_years, drainage_area):
+    """Mean of December flows.
+
+    :Calculation Details:
+        Compute the mean daily flow values for each month in the record.
+        Take the mean value for December.
+
+    """
     # calculations per month
     info = np.array(pd.DataFrame(flows, index=datetimes).groupby(
         lambda x: x.month).mean())
@@ -282,8 +431,17 @@ def ma23(flows, datetimes, hydro_years, drainage_area):
     return sfc
 
 
-# MA24 - Variability of January flow
 def ma24(flows, datetimes, hydro_years, drainage_area):
+    """Variability in January flows.
+
+    :Calculation Details:
+        Compute the standard deviation and the mean of the daily flow
+        values for each month in the record. Multiply the former values
+        by 100 and divide the results by the latter values to obtain
+        the coefficients of variations for each month. Take the mean
+        value for January.
+
+    """
     # calculations per month for each year
     std_ = pd.DataFrame(flows, index=datetimes).groupby(
         lambda x: (x.year, x.month)).std()
@@ -298,8 +456,17 @@ def ma24(flows, datetimes, hydro_years, drainage_area):
     return sfc
 
 
-# MA25 - Variability of February flow
 def ma25(flows, datetimes, hydro_years, drainage_area):
+    """Variability in February flows.
+
+    :Calculation Details:
+        Compute the standard deviation and the mean of the daily flow
+        values for each month in the record. Multiply the former values
+        by 100 and divide the results by the latter values to obtain
+        the coefficients of variations for each month. Take the mean
+        value for February.
+
+    """
     # calculations per month for each year
     std_ = pd.DataFrame(flows, index=datetimes).groupby(
         lambda x: (x.year, x.month)).std()
@@ -314,8 +481,17 @@ def ma25(flows, datetimes, hydro_years, drainage_area):
     return sfc
 
 
-# MA26 - Variability of March flow
 def ma26(flows, datetimes, hydro_years, drainage_area):
+    """Variability in March flows.
+
+    :Calculation Details:
+        Compute the standard deviation and the mean of the daily flow
+        values for each month in the record. Multiply the former values
+        by 100 and divide the results by the latter values to obtain
+        the coefficients of variations for each month. Take the mean
+        value for March.
+
+    """
     # calculations per month for each year
     std_ = pd.DataFrame(flows, index=datetimes).groupby(
         lambda x: (x.year, x.month)).std()
@@ -330,8 +506,17 @@ def ma26(flows, datetimes, hydro_years, drainage_area):
     return sfc
 
 
-# MA27 - Variability of April flow
 def ma27(flows, datetimes, hydro_years, drainage_area):
+    """Variability in April flows.
+
+    :Calculation Details:
+        Compute the standard deviation and the mean of the daily flow
+        values for each month in the record. Multiply the former values
+        by 100 and divide the results by the latter values to obtain
+        the coefficients of variations for each month. Take the mean
+        value for April.
+
+    """
     # calculations per month for each year
     std_ = pd.DataFrame(flows, index=datetimes).groupby(
         lambda x: (x.year, x.month)).std()
@@ -346,8 +531,17 @@ def ma27(flows, datetimes, hydro_years, drainage_area):
     return sfc
 
 
-# MA28 - Variability of May flow
 def ma28(flows, datetimes, hydro_years, drainage_area):
+    """Variability in May flows.
+
+    :Calculation Details:
+        Compute the standard deviation and the mean of the daily flow
+        values for each month in the record. Multiply the former values
+        by 100 and divide the results by the latter values to obtain
+        the coefficients of variations for each month. Take the mean
+        value for May.
+
+    """
     # calculations per month for each year
     std_ = pd.DataFrame(flows, index=datetimes).groupby(
         lambda x: (x.year, x.month)).std()
@@ -362,8 +556,17 @@ def ma28(flows, datetimes, hydro_years, drainage_area):
     return sfc
 
 
-# MA29 - Variability of June flow
 def ma29(flows, datetimes, hydro_years, drainage_area):
+    """Variability in June flows.
+
+    :Calculation Details:
+        Compute the standard deviation and the mean of the daily flow
+        values for each month in the record. Multiply the former values
+        by 100 and divide the results by the latter values to obtain
+        the coefficients of variations for each month. Take the mean
+        value for June.
+
+    """
     # calculations per month for each year
     std_ = pd.DataFrame(flows, index=datetimes).groupby(
         lambda x: (x.year, x.month)).std()
@@ -378,8 +581,17 @@ def ma29(flows, datetimes, hydro_years, drainage_area):
     return sfc
 
 
-# MA30 - Variability of July flow
 def ma30(flows, datetimes, hydro_years, drainage_area):
+    """Variability in July flows.
+
+    :Calculation Details:
+        Compute the standard deviation and the mean of the daily flow
+        values for each month in the record. Multiply the former values
+        by 100 and divide the results by the latter values to obtain
+        the coefficients of variations for each month. Take the mean
+        value for July.
+
+    """
     # calculations per month for each year
     std_ = pd.DataFrame(flows, index=datetimes).groupby(
         lambda x: (x.year, x.month)).std()
@@ -394,8 +606,17 @@ def ma30(flows, datetimes, hydro_years, drainage_area):
     return sfc
 
 
-# MA31 - Variability of August flow
 def ma31(flows, datetimes, hydro_years, drainage_area):
+    """Variability in August flows.
+
+    :Calculation Details:
+        Compute the standard deviation and the mean of the daily flow
+        values for each month in the record. Multiply the former values
+        by 100 and divide the results by the latter values to obtain
+        the coefficients of variations for each month. Take the mean
+        value for August.
+
+    """
     # calculations per month for each year
     std_ = pd.DataFrame(flows, index=datetimes).groupby(
         lambda x: (x.year, x.month)).std()
@@ -410,8 +631,17 @@ def ma31(flows, datetimes, hydro_years, drainage_area):
     return sfc
 
 
-# MA32 - Variability of September flow
 def ma32(flows, datetimes, hydro_years, drainage_area):
+    """Variability in September flows.
+
+    :Calculation Details:
+        Compute the standard deviation and the mean of the daily flow
+        values for each month in the record. Multiply the former values
+        by 100 and divide the results by the latter values to obtain
+        the coefficients of variations for each month. Take the mean
+        value for September.
+
+    """
     # calculations per month for each year
     std_ = pd.DataFrame(flows, index=datetimes).groupby(
         lambda x: (x.year, x.month)).std()
@@ -426,8 +656,17 @@ def ma32(flows, datetimes, hydro_years, drainage_area):
     return sfc
 
 
-# MA33 - Variability of October flow
 def ma33(flows, datetimes, hydro_years, drainage_area):
+    """Variability in October flows.
+
+    :Calculation Details:
+        Compute the standard deviation and the mean of the daily flow
+        values for each month in the record. Multiply the former values
+        by 100 and divide the results by the latter values to obtain
+        the coefficients of variations for each month. Take the mean
+        value for October.
+
+    """
     # calculations per month for each year
     std_ = pd.DataFrame(flows, index=datetimes).groupby(
         lambda x: (x.year, x.month)).std()
@@ -442,8 +681,17 @@ def ma33(flows, datetimes, hydro_years, drainage_area):
     return sfc
 
 
-# MA34 - Variability of November flow
 def ma34(flows, datetimes, hydro_years, drainage_area):
+    """Variability in November flows.
+
+    :Calculation Details:
+        Compute the standard deviation and the mean of the daily flow
+        values for each month in the record. Multiply the former values
+        by 100 and divide the results by the latter values to obtain
+        the coefficients of variations for each month. Take the mean
+        value for November.
+
+    """
     # calculations per month for each year
     std_ = pd.DataFrame(flows, index=datetimes).groupby(
         lambda x: (x.year, x.month)).std()
@@ -458,8 +706,17 @@ def ma34(flows, datetimes, hydro_years, drainage_area):
     return sfc
 
 
-# MA35 - Variability of December flow
 def ma35(flows, datetimes, hydro_years, drainage_area):
+    """Variability in December flows.
+
+    :Calculation Details:
+        Compute the standard deviation and the mean of the daily flow
+        values for each month in the record. Multiply the former values
+        by 100 and divide the results by the latter values to obtain
+        the coefficients of variations for each month. Take the mean
+        value for December.
+
+    """
     # calculations per month for each year
     std_ = pd.DataFrame(flows, index=datetimes).groupby(
         lambda x: (x.year, x.month)).std()
@@ -474,8 +731,16 @@ def ma35(flows, datetimes, hydro_years, drainage_area):
     return sfc
 
 
-# MA36 - Skewness of mean monthly flow using min and max
 def ma36(flows, datetimes, hydro_years, drainage_area):
+    """Skewness in mean monthly flow using min and max.
+
+    :Calculation Details:
+        Compute the mean of the daily flow values for each month in the
+        record. Calculate the minimum, maximum, and median of these mean
+        values. Subtract this maximum to this minimum, and divide the
+        result by this median.
+
+    """
     # calculations per month for each year
     mean_ = np.array(pd.DataFrame(flows, index=datetimes).groupby(
         lambda x: (x.year, x.month)).mean())
@@ -486,8 +751,16 @@ def ma36(flows, datetimes, hydro_years, drainage_area):
     return sfc
 
 
-# MA37 - Skewness of mean monthly flow using 25th and 75th percentiles
 def ma37(flows, datetimes, hydro_years, drainage_area):
+    """Skewness in mean monthly flow using 25th and 75th percentiles.
+
+    :Calculation Details:
+        Compute the mean of the daily flow values for each month in the
+        record. Calculate the 75th percentile, 25th percentile, and
+        median of these mean values. Subtract this 75th percentile to
+        this 25th percentile, and divide the result by this median.
+
+    """
     # calculations per month for each year
     mean_ = np.array(pd.DataFrame(flows, index=datetimes).groupby(
         lambda x: (x.year, x.month)).mean())
@@ -498,8 +771,16 @@ def ma37(flows, datetimes, hydro_years, drainage_area):
     return sfc
 
 
-# MA38 - Skewness of mean monthly flow using 10th and 90th percentiles
 def ma38(flows, datetimes, hydro_years, drainage_area):
+    """Skewness in mean monthly flow using 10th and 90th percentiles.
+
+    :Calculation Details:
+        Compute the mean of the daily flow values for each month in the
+        record. Calculate the 90th percentile, 10th percentile, and
+        median of these mean values. Subtract this 90th percentile to
+        this 10th percentile, and divide the result by this median.
+
+    """
     # calculations per month for each year
     mean_ = np.array(pd.DataFrame(flows, index=datetimes).groupby(
         lambda x: (x.year, x.month)).mean())
@@ -510,8 +791,16 @@ def ma38(flows, datetimes, hydro_years, drainage_area):
     return sfc
 
 
-# MA39 - Variability in mean monthly flow
 def ma39(flows, datetimes, hydro_years, drainage_area):
+    """Variability in mean monthly flow.
+
+    :Calculation Details:
+        Compute the mean of the daily flow values for each month in the
+        record. Compute the standard deviation and the mean of these
+        mean values. Multiply the former by 100, and divide the result
+        by the latter.
+
+    """
     # calculations per month for each year
     mean_ = np.array(pd.DataFrame(flows, index=datetimes).groupby(
         lambda x: (x.year, x.month)).mean())
@@ -521,8 +810,16 @@ def ma39(flows, datetimes, hydro_years, drainage_area):
     return sfc
 
 
-# MA40 - Skewness in mean monthly flow
 def ma40(flows, datetimes, hydro_years, drainage_area):
+    """Skewness in mean monthly flow.
+
+    :Calculation Details:
+        Compute the mean of the daily flow values for each month in the
+        record. Compute the mean and the median of these mean values.
+        Subtract this median to this mean, and divide the result by this
+        median.
+
+    """
     # calculations per month for each year
     mean_ = np.array(pd.DataFrame(flows, index=datetimes).groupby(
         lambda x: (x.year, x.month)).mean())
@@ -533,8 +830,15 @@ def ma40(flows, datetimes, hydro_years, drainage_area):
     return sfc
 
 
-# MA41 - Mean annual daily flow normalised with drainage area
 def ma41(flows, datetimes, hydro_years, drainage_area):
+    """Mean annual daily flow normalised by drainage area.
+
+    :Calculation Details:
+        Calculate the mean daily flow value for each hydrological year.
+        Divide these mean values by the catchment drainage area.
+        Calculate the mean of these normalised values.
+
+    """
     # calculations per hydrological year
     info = np.zeros((hydro_years.shape[0], flows.shape[1]), dtype=np.float64)
     for hy, mask in enumerate(hydro_years):
@@ -545,8 +849,16 @@ def ma41(flows, datetimes, hydro_years, drainage_area):
     return sfc
 
 
-# MA42 - Skewness of mean annual flow using min and max
 def ma42(flows, datetimes, hydro_years, drainage_area):
+    """Skewness in mean annual flow using min and max.
+
+    :Calculation Details:
+        Compute the mean of the daily flow values for each hydrological
+        year. Calculate the minimum, maximum, and median of these mean
+        values. Subtract this maximum to this minimum, and divide the
+        result by this median.
+
+    """
     # calculations per hydrological year
     info = np.zeros((hydro_years.shape[0], flows.shape[1]), dtype=np.float64)
     for hy, mask in enumerate(hydro_years):
@@ -558,8 +870,16 @@ def ma42(flows, datetimes, hydro_years, drainage_area):
     return sfc
 
 
-# MA43 - Skewness of mean annual flow using 25th and 75th percentiles
 def ma43(flows, datetimes, hydro_years, drainage_area):
+    """Skewness in mean annual flow using 25th and 75th percentiles.
+
+    :Calculation Details:
+        Compute the mean of the daily flow values for each hydrological
+        year. Calculate the 75th percentile, 25th percentile, and median
+        of these mean values. Subtract this 75th percentile to this 25th
+        percentile, and divide the result by this median.
+
+    """
     # calculations per hydrological year
     info = np.zeros((hydro_years.shape[0], flows.shape[1]), dtype=np.float64)
     for hy, mask in enumerate(hydro_years):
@@ -571,8 +891,16 @@ def ma43(flows, datetimes, hydro_years, drainage_area):
     return sfc
 
 
-# MA44 - Skewness of mean annual flow using 10th and 90th percentiles
 def ma44(flows, datetimes, hydro_years, drainage_area):
+    """Skewness in mean annual flow using 10th and 90th percentiles.
+
+    :Calculation Details:
+        Compute the mean of the daily flow values for each hydrological
+        year. Calculate the 90th percentile, 10th percentile, and median
+        of these mean values. Subtract this 90th percentile to this 10th
+        percentile, and divide the result by this median.
+
+    """
     # calculations per hydrological year
     info = np.zeros((hydro_years.shape[0], flows.shape[1]), dtype=np.float64)
     for hy, mask in enumerate(hydro_years):
@@ -586,6 +914,15 @@ def ma44(flows, datetimes, hydro_years, drainage_area):
 
 # MA45 - Skewness in mean annual flow
 def ma45(flows, datetimes, hydro_years, drainage_area):
+    """Skewness in mean annual flow.
+
+    :Calculation Details:
+        Compute the mean of the daily flow values for each hydrological
+        year. Calculate the mean, and median of these mean values.
+        Subtract this mean to this median, and divide the result by this
+        median.
+
+    """
     # calculations per hydrological year
     info = np.zeros((hydro_years.shape[0], flows.shape[1]), dtype=np.float64)
     for hy, mask in enumerate(hydro_years):
@@ -601,8 +938,14 @@ def ma45(flows, datetimes, hydro_years, drainage_area):
 # LOW FLOWS
 # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-# ML1 - Minimum January flow
 def ml1(flows, datetimes, hydro_years, drainage_area):
+    """Mean minimum flow for January.
+
+    :Calculation Details:
+        Compute the minimum flow values for each month in the daily
+        record. Take the mean of these minima for January.
+
+    """
     # calculations per month for each year
     min_ = pd.DataFrame(flows, index=datetimes).groupby(
         lambda x: (x.year, x.month)).min()
@@ -613,8 +956,14 @@ def ml1(flows, datetimes, hydro_years, drainage_area):
     return sfc
 
 
-# ML2 - Minimum February flow
 def ml2(flows, datetimes, hydro_years, drainage_area):
+    """Mean minimum flow for February.
+
+    :Calculation Details:
+        Compute the minimum flow values for each month in the daily
+        record. Take the mean of these minima for February.
+
+    """
     # calculations per month for each year
     min_ = pd.DataFrame(flows, index=datetimes).groupby(
         lambda x: (x.year, x.month)).min()
@@ -625,8 +974,14 @@ def ml2(flows, datetimes, hydro_years, drainage_area):
     return sfc
 
 
-# ML3 - Minimum March flow
 def ml3(flows, datetimes, hydro_years, drainage_area):
+    """Mean minimum flow for March.
+
+    :Calculation Details:
+        Compute the minimum flow values for each month in the daily
+        record. Take the mean of these minima for March.
+
+    """
     # calculations per month for each year
     min_ = pd.DataFrame(flows, index=datetimes).groupby(
         lambda x: (x.year, x.month)).min()
@@ -637,8 +992,14 @@ def ml3(flows, datetimes, hydro_years, drainage_area):
     return sfc
 
 
-# ML4 - Minimum April flow
 def ml4(flows, datetimes, hydro_years, drainage_area):
+    """Mean minimum flow for April.
+
+    :Calculation Details:
+        Compute the minimum flow values for each month in the daily
+        record. Take the mean of these minima for April.
+
+    """
     # calculations per month for each year
     min_ = pd.DataFrame(flows, index=datetimes).groupby(
         lambda x: (x.year, x.month)).min()
@@ -649,8 +1010,14 @@ def ml4(flows, datetimes, hydro_years, drainage_area):
     return sfc
 
 
-# ML5 - Minimum May flow
 def ml5(flows, datetimes, hydro_years, drainage_area):
+    """Mean minimum flow for May.
+
+    :Calculation Details:
+        Compute the minimum flow values for each month in the daily
+        record. Take the mean of these minima for May.
+
+    """
     # calculations per month for each year
     min_ = pd.DataFrame(flows, index=datetimes).groupby(
         lambda x: (x.year, x.month)).min()
@@ -661,8 +1028,14 @@ def ml5(flows, datetimes, hydro_years, drainage_area):
     return sfc
 
 
-# ML6 - Minimum June flow
 def ml6(flows, datetimes, hydro_years, drainage_area):
+    """Mean minimum flow for June.
+
+    :Calculation Details:
+        Compute the minimum flow values for each month in the daily
+        record. Take the mean of these minima for June.
+
+    """
     # calculations per month for each year
     min_ = pd.DataFrame(flows, index=datetimes).groupby(
         lambda x: (x.year, x.month)).min()
@@ -673,8 +1046,14 @@ def ml6(flows, datetimes, hydro_years, drainage_area):
     return sfc
 
 
-# ML7 - Minimum July flow
 def ml7(flows, datetimes, hydro_years, drainage_area):
+    """Mean minimum flow for July.
+
+    :Calculation Details:
+        Compute the minimum flow values for each month in the daily
+        record. Take the mean of these minima for July.
+
+    """
     # calculations per month for each year
     min_ = pd.DataFrame(flows, index=datetimes).groupby(
         lambda x: (x.year, x.month)).min()
@@ -685,8 +1064,14 @@ def ml7(flows, datetimes, hydro_years, drainage_area):
     return sfc
 
 
-# ML8 - Minimum August flow
 def ml8(flows, datetimes, hydro_years, drainage_area):
+    """Mean minimum flow for August.
+
+    :Calculation Details:
+        Compute the minimum flow values for each month in the daily
+        record. Take the mean of these minima for August.
+
+    """
     # calculations per month for each year
     min_ = pd.DataFrame(flows, index=datetimes).groupby(
         lambda x: (x.year, x.month)).min()
@@ -697,8 +1082,14 @@ def ml8(flows, datetimes, hydro_years, drainage_area):
     return sfc
 
 
-# ML9 - Minimum September flow
 def ml9(flows, datetimes, hydro_years, drainage_area):
+    """Mean minimum flow for September.
+
+    :Calculation Details:
+        Compute the minimum flow values for each month in the daily
+        record. Take the mean of these minima for September.
+
+    """
     # calculations per month for each year
     min_ = pd.DataFrame(flows, index=datetimes).groupby(
         lambda x: (x.year, x.month)).min()
@@ -709,8 +1100,14 @@ def ml9(flows, datetimes, hydro_years, drainage_area):
     return sfc
 
 
-# ML10 - Minimum October flow
 def ml10(flows, datetimes, hydro_years, drainage_area):
+    """Mean minimum flow for October.
+
+    :Calculation Details:
+        Compute the minimum flow values for each month in the daily
+        record. Take the mean of these minima for October.
+
+    """
     # calculations per month for each year
     min_ = pd.DataFrame(flows, index=datetimes).groupby(
         lambda x: (x.year, x.month)).min()
@@ -721,8 +1118,14 @@ def ml10(flows, datetimes, hydro_years, drainage_area):
     return sfc
 
 
-# ML11 - Minimum November flow
 def ml11(flows, datetimes, hydro_years, drainage_area):
+    """Mean minimum flow for November.
+
+    :Calculation Details:
+        Compute the minimum flow values for each month in the daily
+        record. Take the mean of these minima for November.
+
+    """
     # calculations per month for each year
     min_ = pd.DataFrame(flows, index=datetimes).groupby(
         lambda x: (x.year, x.month)).min()
@@ -733,8 +1136,14 @@ def ml11(flows, datetimes, hydro_years, drainage_area):
     return sfc
 
 
-# ML12 - Minimum December flow
 def ml12(flows, datetimes, hydro_years, drainage_area):
+    """Mean minimum flow for December.
+
+    :Calculation Details:
+        Compute the minimum flow values for each month in the daily
+        record. Take the mean of these minima for December.
+
+    """
     # calculations per month for each year
     min_ = pd.DataFrame(flows, index=datetimes).groupby(
         lambda x: (x.year, x.month)).min()
@@ -745,8 +1154,16 @@ def ml12(flows, datetimes, hydro_years, drainage_area):
     return sfc
 
 
-# ML13 - Variability in minimum monthly flow
 def ml13(flows, datetimes, hydro_years, drainage_area):
+    """Variability in minimum monthly flow.
+
+    :Calculation Details:
+        Compute the minimum flow values for each month in the daily
+        record. Calculate the standard deviation and the mean of these
+        minimum values. Multiply the former by 100 and divide the result
+        by the latter.
+
+    """
     # calculations per month for each year
     min_ = np.array(pd.DataFrame(flows, index=datetimes).groupby(
         lambda x: (x.year, x.month)).min())
@@ -756,8 +1173,15 @@ def ml13(flows, datetimes, hydro_years, drainage_area):
     return sfc
 
 
-# ML14 - Mean of minimum annual flow normalised by annual median flow
 def ml14(flows, datetimes, hydro_years, drainage_area):
+    """Mean of minimum annual flow normalised by their annual median flow.
+
+    :Calculation Details:
+        Compute the minimum and median flow values for each hydrological
+        year in the record, and divide the former by the latter.
+        Calculate the mean of these ratios.
+
+    """
     # calculations per hydrological year
     info = np.zeros((hydro_years.shape[0], flows.shape[1]), dtype=np.float64)
     for hy, mask in enumerate(hydro_years):
@@ -769,8 +1193,15 @@ def ml14(flows, datetimes, hydro_years, drainage_area):
     return sfc
 
 
-# ML15 - Mean of minimum annual flow normalised by annual mean flow
 def ml15(flows, datetimes, hydro_years, drainage_area):
+    """Mean of minimum annual flow normalised by their annual mean flow.
+
+    :Calculation Details:
+        Compute the minimum and mean flow values for each hydrological
+        year in the record, and divide the former by the latter.
+        Calculate the mean of these ratios.
+
+    """
     # calculations per hydrological year
     info = np.zeros((hydro_years.shape[0], flows.shape[1]), dtype=np.float64)
     for hy, mask in enumerate(hydro_years):
@@ -782,8 +1213,15 @@ def ml15(flows, datetimes, hydro_years, drainage_area):
     return sfc
 
 
-# ML16 - Median of minimum annual flow normalised by annual median flow
 def ml16(flows, datetimes, hydro_years, drainage_area):
+    """Median of minimum annual flow normalised by their annual median flow.
+
+    :Calculation Details:
+        Compute the minimum and median flow values for each hydrological
+        year in the record, and divide the former by the latter.
+        Calculate the median of these ratios.
+
+    """
     # calculations per hydrological year
     info = np.zeros((hydro_years.shape[0], flows.shape[1]), dtype=np.float64)
     for hy, mask in enumerate(hydro_years):
@@ -795,8 +1233,17 @@ def ml16(flows, datetimes, hydro_years, drainage_area):
     return sfc
 
 
-# ML17 - Base flow 1
 def ml17(flows, datetimes, hydro_years, drainage_area):
+    """Base flow 1.
+
+    :Calculation Details:
+        Compute the 7-day rolling mean flows for each hydrological year,
+        take the minimum rolling mean value, and divide this minimum by
+        the mean flow for the whole daily record to obtain the base flow
+        index for the hydrological year. Compute the mean of the base
+        flow indices.
+
+    """
     # calculations per hydrological year
     info = np.zeros((hydro_years.shape[0], flows.shape[1]), dtype=np.float64)
     for hy, mask in enumerate(hydro_years):
@@ -807,8 +1254,18 @@ def ml17(flows, datetimes, hydro_years, drainage_area):
     return sfc
 
 
-# ML18 - Variability in base flow 1
 def ml18(flows, datetimes, hydro_years, drainage_area):
+    """Variability in base flow 1.
+
+    :Calculation Details:
+        Compute the 7-day rolling mean flows for each hydrological year,
+        take the minimum rolling mean value, and divide this minimum by
+        the mean flow for the whole daily record to obtain the base flow
+        index for the hydrological year. Compute the standard deviation
+        and the mean of the base flow indices. Multiply the former by
+        100 and divide the result by the latter.
+
+    """
     # calculations per hydrological year
     info = np.zeros((hydro_years.shape[0], flows.shape[1]), dtype=np.float64)
     for hy, mask in enumerate(hydro_years):
@@ -819,8 +1276,15 @@ def ml18(flows, datetimes, hydro_years, drainage_area):
     return sfc
 
 
-# ML19 - Base flow 2
 def ml19(flows, datetimes, hydro_years, drainage_area):
+    """Base flow 2.
+
+    :Calculation Details:
+        Calculate the minimum and mean flow values for each hydrological
+        year, and divide the former by the latter. Compute the mean of
+        these ratios and multiply by 100.
+
+    """
     # calculations per hydrological year
     info = np.zeros((hydro_years.shape[0], flows.shape[1]), dtype=np.float64)
     for hy, mask in enumerate(hydro_years):
@@ -832,23 +1296,47 @@ def ml19(flows, datetimes, hydro_years, drainage_area):
     return sfc
 
 
-# ML20 - Base flow 3
 def ml20(flows, datetimes, hydro_years, drainage_area):
+    """Base flow 3.
+
+    :Calculation Details:
+        Divide the whole record into 5-day blocks. Calculate the minimum
+        daily flow values in each block. For each block, base flow is
+        taken as this minimum value if 90% of this minimum is less than
+        the minimum for the blocks on either side of the block.
+        Otherwise, base flow is linearly interpolated from the blocks
+        that do meet the condition previously mentioned. Calculate the
+        sum of five times these base flow values, and the sum of all
+        daily flows. Divide the former by the latter.
+
+    """
     # calculations for entire time series
+
+    # divide the flow record into 5-day blocks
     nb_blocks = flows.shape[0] // 5
     flows_5day_blocks = flows[0:5 * nb_blocks, :].reshape(nb_blocks, 5,
                                                           flows.shape[1])
+
+    # compute the minimum in each block
     blocks_min = np.amin(flows_5day_blocks, axis=1)
+    # compute the 3-block rolling minimum as a mean to compare blocks
+    # with their preceding and succeeding neighbouring blocks
     rolling_blocks_min = np.amin(rolling_window(blocks_min, 3), axis=1)
 
+    # compute base flow values
     base_flow = np.zeros(blocks_min.shape, dtype=np.float64)
     base_flow[:] = np.nan
 
+    # take base flow value as block minimum if 90% of it is less than
+    # the minimum of the blocks on either side of the block (using the
+    # 3-block rolling minimum to do so)
     check = blocks_min[1:-1, :] * 0.90 < rolling_blocks_min
     base_flow[1:-1, :][check] = blocks_min[1:-1, :][check]
     base_flow[0, :] = blocks_min[0, :]
     base_flow[-1, :] = blocks_min[-1, :]
 
+    # for those blocks not meeting the condition above, infer base flow
+    # value through linear interpolation
     base_flow_ = pd.DataFrame(base_flow).interpolate(
         method='linear', axis=0).values
 
@@ -857,8 +1345,17 @@ def ml20(flows, datetimes, hydro_years, drainage_area):
     return sfc
 
 
-# ML21 - Variability in annual minimum daily flow
 def ml21(flows, datetimes, hydro_years, drainage_area):
+    """Variability in annual minimum daily flow.
+
+    *Note:* this streamflow characteristic is equivalent to `dl6`.
+
+    :Calculation Details:
+        Take the minimum flow for each hydrological year. Calculate
+        the standard deviation and mean of these minimum values.
+        Multiply the former by 100 and divide the result by the latter.
+
+    """
     # calculations per hydrological year
     info = np.zeros((hydro_years.shape[0], flows.shape[1]), dtype=np.float64)
     for hy, mask in enumerate(hydro_years):
@@ -871,6 +1368,13 @@ def ml21(flows, datetimes, hydro_years, drainage_area):
 
 # ML22 - Mean in annual minimum daily flow
 def ml22(flows, datetimes, hydro_years, drainage_area):
+    """Mean annual minimum daily flow.
+
+    :Calculation Details:
+        Take the minimum flow for each hydrological year. Calculate
+        the mean of these minimum values.
+
+    """
     # calculations per hydrological year
     info = np.zeros((hydro_years.shape[0], flows.shape[1]), dtype=np.float64)
     for hy, mask in enumerate(hydro_years):
@@ -885,8 +1389,14 @@ def ml22(flows, datetimes, hydro_years, drainage_area):
 # HIGH FLOWS
 # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-# MH1 - Maximum January flow
 def mh1(flows, datetimes, hydro_years, drainage_area):
+    """Mean maximum flow for January.
+
+    :Calculation Details:
+        Compute the maximum flow values for each month in the daily
+        record. Take the mean of these maxima for January.
+
+    """
     # calculations per month for each year
     max_ = pd.DataFrame(flows, index=datetimes).groupby(
         lambda x: (x.year, x.month)).max()
@@ -897,8 +1407,14 @@ def mh1(flows, datetimes, hydro_years, drainage_area):
     return sfc
 
 
-# MH2 - Maximum February flow
 def mh2(flows, datetimes, hydro_years, drainage_area):
+    """Mean maximum flow for February.
+
+    :Calculation Details:
+        Compute the maximum flow values for each month in the daily
+        record. Take the mean of these maxima for February.
+
+    """
     # calculations per month for each year
     max_ = pd.DataFrame(flows, index=datetimes).groupby(
         lambda x: (x.year, x.month)).max()
@@ -909,8 +1425,14 @@ def mh2(flows, datetimes, hydro_years, drainage_area):
     return sfc
 
 
-# MH3 - Maximum March flow
 def mh3(flows, datetimes, hydro_years, drainage_area):
+    """Mean maximum flow for March.
+
+    :Calculation Details:
+        Compute the maximum flow values for each month in the daily
+        record. Take the mean of these maxima for March.
+
+    """
     # calculations per month for each year
     max_ = pd.DataFrame(flows, index=datetimes).groupby(
         lambda x: (x.year, x.month)).max()
@@ -921,8 +1443,14 @@ def mh3(flows, datetimes, hydro_years, drainage_area):
     return sfc
 
 
-# MH4 - Maximum April flow
 def mh4(flows, datetimes, hydro_years, drainage_area):
+    """Mean maximum flow for April.
+
+    :Calculation Details:
+        Compute the maximum flow values for each month in the daily
+        record. Take the mean of these maxima for April.
+
+    """
     # calculations per month for each year
     max_ = pd.DataFrame(flows, index=datetimes).groupby(
         lambda x: (x.year, x.month)).max()
@@ -933,8 +1461,14 @@ def mh4(flows, datetimes, hydro_years, drainage_area):
     return sfc
 
 
-# MH5 - Maximum May flow
 def mh5(flows, datetimes, hydro_years, drainage_area):
+    """Mean maximum flow for May.
+
+    :Calculation Details:
+        Compute the maximum flow values for each month in the daily
+        record. Take the mean of these maxima for May.
+
+    """
     # calculations per month for each year
     max_ = pd.DataFrame(flows, index=datetimes).groupby(
         lambda x: (x.year, x.month)).max()
@@ -945,8 +1479,14 @@ def mh5(flows, datetimes, hydro_years, drainage_area):
     return sfc
 
 
-# MH6 - Maximum June flow
 def mh6(flows, datetimes, hydro_years, drainage_area):
+    """Mean maximum flow for June.
+
+    :Calculation Details:
+        Compute the maximum flow values for each month in the daily
+        record. Take the mean of these maxima for June.
+
+    """
     # calculations per month for each year
     max_ = pd.DataFrame(flows, index=datetimes).groupby(
         lambda x: (x.year, x.month)).max()
@@ -957,8 +1497,14 @@ def mh6(flows, datetimes, hydro_years, drainage_area):
     return sfc
 
 
-# MH7 - Maximum July flow
 def mh7(flows, datetimes, hydro_years, drainage_area):
+    """Mean maximum flow for July.
+
+    :Calculation Details:
+        Compute the maximum flow values for each month in the daily
+        record. Take the mean of these maxima for July.
+
+    """
     # calculations per month for each year
     max_ = pd.DataFrame(flows, index=datetimes).groupby(
         lambda x: (x.year, x.month)).max()
@@ -969,8 +1515,14 @@ def mh7(flows, datetimes, hydro_years, drainage_area):
     return sfc
 
 
-# MH8 - Maximum August flow
 def mh8(flows, datetimes, hydro_years, drainage_area):
+    """Mean maximum flow for August.
+
+    :Calculation Details:
+        Compute the maximum flow values for each month in the daily
+        record. Take the mean of these maxima for August.
+
+    """
     # calculations per month for each year
     max_ = pd.DataFrame(flows, index=datetimes).groupby(
         lambda x: (x.year, x.month)).max()
@@ -981,8 +1533,14 @@ def mh8(flows, datetimes, hydro_years, drainage_area):
     return sfc
 
 
-# MH9 - Maximum September flow
 def mh9(flows, datetimes, hydro_years, drainage_area):
+    """Mean maximum flow for September.
+
+    :Calculation Details:
+        Compute the maximum flow values for each month in the daily
+        record. Take the mean of these maxima for September.
+
+    """
     # calculations per month for each year
     max_ = pd.DataFrame(flows, index=datetimes).groupby(
         lambda x: (x.year, x.month)).max()
@@ -993,8 +1551,14 @@ def mh9(flows, datetimes, hydro_years, drainage_area):
     return sfc
 
 
-# MH10 - Maximum October flow
 def mh10(flows, datetimes, hydro_years, drainage_area):
+    """Mean maximum flow for October.
+
+    :Calculation Details:
+        Compute the maximum flow values for each month in the daily
+        record. Take the mean of these maxima for October.
+
+    """
     # calculations per month for each year
     max_ = pd.DataFrame(flows, index=datetimes).groupby(
         lambda x: (x.year, x.month)).max()
@@ -1005,8 +1569,14 @@ def mh10(flows, datetimes, hydro_years, drainage_area):
     return sfc
 
 
-# MH11 - Maximum November flow
 def mh11(flows, datetimes, hydro_years, drainage_area):
+    """Mean maximum flow for November.
+
+    :Calculation Details:
+        Compute the maximum flow values for each month in the daily
+        record. Take the mean of these maxima for November.
+
+    """
     # calculations per month for each year
     max_ = pd.DataFrame(flows, index=datetimes).groupby(
         lambda x: (x.year, x.month)).max()
@@ -1017,8 +1587,14 @@ def mh11(flows, datetimes, hydro_years, drainage_area):
     return sfc
 
 
-# MH12 - Maximum December flow
 def mh12(flows, datetimes, hydro_years, drainage_area):
+    """Mean maximum flow for December.
+
+    :Calculation Details:
+        Compute the maximum flow values for each month in the daily
+        record. Take the mean of these maxima for December.
+
+    """
     # calculations per month for each year
     max_ = pd.DataFrame(flows, index=datetimes).groupby(
         lambda x: (x.year, x.month)).max()
@@ -1029,8 +1605,16 @@ def mh12(flows, datetimes, hydro_years, drainage_area):
     return sfc
 
 
-# MH13 - Variability in maximum monthly flow
 def mh13(flows, datetimes, hydro_years, drainage_area):
+    """Variability in maximum monthly flow.
+
+    :Calculation Details:
+        Compute the maximum flow values for each month in the daily
+        record. Calculate the standard deviation and the mean of these
+        maximum values. Multiply the former by 100 and divide the result
+        by the latter.
+
+    """
     # calculations per month for each year
     max_ = np.array(pd.DataFrame(flows, index=datetimes).groupby(
         lambda x: (x.year, x.month)).max())
@@ -1040,8 +1624,15 @@ def mh13(flows, datetimes, hydro_years, drainage_area):
     return sfc
 
 
-# MH14 - Mean of maximum annual flow normalised by annual median flow
 def mh14(flows, datetimes, hydro_years, drainage_area):
+    """Median of maximum annual flow normalised by their annual median flow.
+
+    :Calculation Details:
+        Compute the maximum and median flow values for each hydrological
+        year in the record, and divide the former by the latter.
+        Calculate the median of these ratios.
+
+    """
     # calculations per hydrological year
     info = np.zeros((hydro_years.shape[0], flows.shape[1]), dtype=np.float64)
     for hy, mask in enumerate(hydro_years):
@@ -1053,34 +1644,62 @@ def mh14(flows, datetimes, hydro_years, drainage_area):
     return sfc
 
 
-# MH15 - 1% exceedance value normalised by median flow for entire record
 def mh15(flows, datetimes, hydro_years, drainage_area):
+    """Q1 exceedance value normalised by overall median daily flow.
+
+    :Calculation Details:
+        Calculate the 99th percentile of the whole daily flow record.
+        Divide this percentile by the median of the whole daily flow
+        record.
+
+    """
     # calculations for entire time series
     sfc = np.percentile(flows, 99, axis=0) / np.median(flows, axis=0)
 
     return sfc
 
 
-# MH16 - 10% exceedance value normalised by median flow
-# for entire record
 def mh16(flows, datetimes, hydro_years, drainage_area):
+    """Q10 exceedance value normalised by overall median daily flow.
+
+    :Calculation Details:
+        Calculate the 90th percentile of the whole daily flow record.
+        Divide this percentile by the median of the whole daily flow
+        record.
+
+    """
     # calculations for entire time series
     sfc = np.percentile(flows, 90, axis=0) / np.median(flows, axis=0)
 
     return sfc
 
 
-# MH17 - 25% exceedance value normalised by median flow
-# for entire record
 def mh17(flows, datetimes, hydro_years, drainage_area):
+    """Q25 exceedance value normalised by overall median daily flow.
+
+    :Calculation Details:
+        Calculate the 75th percentile of the whole daily flow record.
+        Divide this percentile by the median of the whole daily flow
+        record.
+
+    """
     # calculations for entire time series
     sfc = np.percentile(flows, 75, axis=0) / np.median(flows, axis=0)
 
     return sfc
 
 
-# MH18 - Variability in annual maximum daily flow on log10
 def mh18(flows, datetimes, hydro_years, drainage_area):
+    """Variability in log-transformed annual maximum daily flow.
+
+    :Calculation Details:
+        Compute the maximum daily flow for each hydrological year in
+        the record. Compute the decimal logarithm of the maxima.
+        Calculate the standard deviation and the mean of these
+        log-transformed maxima. Multiply the former by 100, and divide
+        the result by the latter.
+
+    """
     # calculations per hydrological year
     info = np.zeros((hydro_years.shape[0], flows.shape[1]), dtype=np.float64)
     for hy, mask in enumerate(hydro_years):
@@ -1095,8 +1714,23 @@ def mh18(flows, datetimes, hydro_years, drainage_area):
     return sfc
 
 
-# MH19 - Skewness in annual maximum daily flow
 def mh19(flows, datetimes, hydro_years, drainage_area):
+    """Skewness in annual maximum daily flow.
+
+    :Calculation Details:
+        Compute the maximum daily flow for each hydrological year in
+        the record. Calculate the skewness using the following
+        equation: ::
+
+            N**2 * Σ(log(Q)) - 3 * N * Σ(log(Q)) * Σ(log(Q)**2) + 2 * Σ(log(Q)**3)
+            ----------------------------------------------------------------------
+                             N * (N-1) * (N-2) * (σ(log(Q)))**3
+
+        where *N* is the number of years in the record, *Q* is the
+        vector of annual maxima, *log* in the decimal logarithm, *Σ* is
+        the arithmetic sum, and *σ* is the standard deviation.
+
+    """
     # calculations per hydrological year
     info = np.zeros((hydro_years.shape[0], flows.shape[1]), dtype=np.float64)
     for hy, mask in enumerate(hydro_years):
@@ -1118,8 +1752,15 @@ def mh19(flows, datetimes, hydro_years, drainage_area):
     return sfc
 
 
-# MH20 - Mean in annual maximum daily flow
 def mh20(flows, datetimes, hydro_years, drainage_area):
+    """Mean annual maximum daily flow normalised by drainage area.
+
+    :Calculation Details:
+        Take the maximum for each hydrological year in the daily flow
+        record, and divide them by the drainage area. Compute the mean
+        of these ratios.
+
+    """
     # calculations per hydrological year
     info = np.zeros((hydro_years.shape[0], flows.shape[1]), dtype=np.float64)
     for hy, mask in enumerate(hydro_years):
@@ -1130,9 +1771,16 @@ def mh20(flows, datetimes, hydro_years, drainage_area):
     return sfc
 
 
-# MH21 - Average volume of flood (above median flow) normalised
-# by median flow over entire period
 def mh21(flows, datetimes, hydro_years, drainage_area):
+    """Mean flood volume (above overall median) normalised by overall
+    median.
+
+    :Calculation Details:
+        Identify the events above the median of the whole daily flow
+        record. Calculate the mean volume of these events. Divide this
+        mean by the median of the whole daily flow record.
+
+    """
     median = np.median(flows, axis=0)
     # calculations for entire time series
     sfc = calc_events_avg_volume_above(flows, median) / median
@@ -1140,9 +1788,16 @@ def mh21(flows, datetimes, hydro_years, drainage_area):
     return sfc
 
 
-# MH22 - Average volume of flood (above twice median flow) normalised
-# by median flow over entire period
 def mh22(flows, datetimes, hydro_years, drainage_area):
+    """Mean flood volume (above twice overall median) normalised by
+    overall median.
+
+    :Calculation Details:
+        Identify the events above twice the median of the whole daily
+        flow record. Calculate the mean volume of these events. Divide
+        this mean by the median of the whole daily flow record.
+
+    """
     median = np.median(flows, axis=0)
     # calculations for entire time series
     sfc = calc_events_avg_volume_above(flows, 3 * median) / median
@@ -1150,9 +1805,16 @@ def mh22(flows, datetimes, hydro_years, drainage_area):
     return sfc
 
 
-# MH23 - Average volume of flood (above three times median flow)
-# normalised by median flow over entire period
 def mh23(flows, datetimes, hydro_years, drainage_area):
+    """Mean flood volume (above 3 times overall median) normalised by
+    overall median.
+
+    :Calculation Details:
+        Identify the events above third times the median of the whole
+        daily flow record. Calculate the mean volume of these events.
+        Divide this mean by the median of the whole daily flow record.
+
+    """
     median = np.median(flows, axis=0)
     # calculations for entire time series
     sfc = calc_events_avg_volume_above(flows, 7 * median) / median

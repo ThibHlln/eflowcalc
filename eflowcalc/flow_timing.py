@@ -27,8 +27,31 @@ import math
 # AVERAGE FLOWS
 # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-# TA1 - Constancy by Colwell (1974) [https://doi.org/10.2307/1940366]
 def ta1(flows, datetimes, hydro_years, drainage_area):
+    """Constancy by `Colwell (1974) <https://doi.org/10.2307/1940366>`_
+    applied to flows.
+
+    :Calculation Details:
+        Compute the decimal logarithm of the daily flow values.
+        Calculate the decimal logarithm of the overall mean daily flow
+        for the entire record. Compute the Colwell matrix featuring 365
+        rows for 365 d in a year (ignoring last day of February for leap
+        years) and 11 columns for 11 flow states (break points are 0.10,
+        0.25, 0.50, 0.75, 1.00, 1.25, 1.50, 1.75, 2.00, and 2.25 times
+        the log mean daily flow calculated previously) for each
+        hydrological year, incrementally adding to the tally in each
+        cell from year to year.
+
+        Calculate Y, the sum of each column (vector), and Z, the sum of
+        the whole matrix (scalar). Divide the elements of vector Y by
+        scalar Z. Multiply the elements of the new vector by their
+        respective decimal log-transformed value; sum the elements of
+        the vector to obtain a scalar; and multiply by minus one to
+        obtain the uncertainty with respect to state H(Y). Divide H(Y)
+        by the decimal log of the number of states (11), and subtract
+        this ratio from one.
+
+    """
     mean = np.mean(flows, axis=0)
     log_mean = np.log10(mean)
     # calculations per hydrological year
@@ -88,8 +111,39 @@ def ta1(flows, datetimes, hydro_years, drainage_area):
     return sfc
 
 
-# TA2 - Predictability by Colwell (1974) [https://doi.org/10.2307/1940366]
 def ta2(flows, datetimes, hydro_years, drainage_area):
+    """Predictability by `Colwell (1974) <https://doi.org/10.2307/1940366>`_
+    applied to flows.
+
+    :Calculation Details:
+        Compute the decimal logarithm of the daily flow values.
+        Calculate the decimal logarithm of the overall mean daily flow
+        for the entire record. Compute the Colwell matrix featuring 365
+        rows for 365 d in a year (ignoring last day of February for leap
+        years) and 11 columns for 11 flow states (break points are 0.10,
+        0.25, 0.50, 0.75, 1.00, 1.25, 1.50, 1.75, 2.00, and 2.25 times
+        the log mean daily flow calculated previously) for each
+        hydrological year, incrementally adding to the tally in each
+        cell from year to year.
+
+        Calculate X, the sum of each row (vector), and Z, the sum of
+        the whole matrix (scalar). Divide the elements of vector X by
+        scalar Z. Multiply the elements of the new vector by their
+        respective decimal log-transformed value; sum the elements of
+        the vector to obtain a scalar; and multiply by minus one to
+        obtain the uncertainty with respect to time H(X).
+
+        Take the Colwell matrix N. Divide the elements of matrix N by
+        scalar Z. Multiply the elements of the new matrix by their
+        respective decimal log-transformed value; sum the elements of
+        the matrix to obtain a scalar; and multiply by minus one to
+        obtain the uncertainty with respect to the interaction of time
+        and state H(XY).
+
+        Subtract H(X) to H(XY), and divide the result by the decimal log
+        of the number of states (11), and subtract this ratio from one.
+
+    """
     mean = np.mean(flows, axis=0)
     log_mean = np.log10(mean)
     # calculations per hydrological year
@@ -144,10 +198,10 @@ def ta2(flows, datetimes, hydro_years, drainage_area):
     colwell_hx = - np.nansum(np.multiply(colwell_xz, colwell_log_xz,
                                          dtype=np.float64),
                              axis=0)
-    colwell_mz = np.divide(colwell, colwell_z, dtype=np.float64)
-    colwell_log_mz = np.log10(colwell_mz, where=(colwell != 0))
-    colwell_log_mz[colwell == 0] = np.nan
-    colwell_hxy = - np.nansum(np.multiply(colwell_mz, colwell_log_mz,
+    colwell_nz = np.divide(colwell, colwell_z, dtype=np.float64)
+    colwell_log_nz = np.log10(colwell_nz, where=(colwell != 0))
+    colwell_log_nz[colwell == 0] = np.nan
+    colwell_hxy = - np.nansum(np.multiply(colwell_nz, colwell_log_nz,
                                           dtype=np.float64),
                               axis=(0, 1))
     sfc = (1 - ((colwell_hxy - colwell_hx) / np.log10(11))) * 100
@@ -162,8 +216,21 @@ def ta2(flows, datetimes, hydro_years, drainage_area):
 # LOW FLOWS
 # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-# TL1 - Timing of annual minimum flow
 def tl1(flows, datetimes, hydro_years, drainage_area):
+    """Timing of annual minimum flow.
+
+    :Calculation Details:
+        Determine the day of the year (i.e. number) in the Julian
+        calendar where the flow is minimal in each hydrological year in
+        the daily flow record. Map these dates onto a circular scale as
+        angles in radians. Determine the x and y components of these
+        angles (i.e. cosine, and sine, respectively). Compute the mean
+        of the x and y components separately. Use these means to compute
+        the corresponding mean angle, and convert this mean angle back
+        to a day of the year in the Julian calendar (using the
+        arc-tangent).
+
+    """
     # calculations per hydrological year
     info = np.zeros((hydro_years.shape[0], flows.shape[1], 2),
                     dtype=np.float64)
@@ -191,8 +258,27 @@ def tl1(flows, datetimes, hydro_years, drainage_area):
     return sfc
 
 
-# TL2 - Variability in timing of annual minimum flow
 def tl2(flows, datetimes, hydro_years, drainage_area):
+    """Variability in timing of annual minimum flow.
+
+    :Calculation Details:
+        Determine the day of the year (i.e. number) in the Julian
+        calendar where the flow is minimal in each hydrological year in
+        the daily flow record. Map these dates onto a circular scale as
+        angles in radians. Determine the x and y components of these
+        angles (i.e. cosine, and sine, respectively). Compute the mean
+        of the x and y components separately. Compute the variability
+        using the following equation: ::
+
+            √(2 * (1 - √(X*X + Y*Y))
+
+        where √ is the square root, and X and Y are the mean of the
+        x and y components of the angles, respectively.
+
+        Convert this angular variability back to a day of the year in
+        the Julian calendar.
+
+    """
     # calculations per hydrological year
     info = np.zeros((hydro_years.shape[0], flows.shape[1], 2),
                     dtype=np.float64)
@@ -218,8 +304,21 @@ def tl2(flows, datetimes, hydro_years, drainage_area):
 # HIGH FLOWS
 # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-# TH1 - Timing of annual maximum flow
 def th1(flows, datetimes, hydro_years, drainage_area):
+    """Timing of annual maximum flow.
+
+    :Calculation Details:
+        Determine the day of the year (i.e. number) in the Julian
+        calendar where the flow is maximal in each hydrological year in
+        the daily flow record. Map these dates onto a circular scale as
+        angles in radians. Determine the x and y components of these
+        angles (i.e. cosine, and sine, respectively). Compute the mean
+        of the x and y components separately. Use these means to compute
+        the corresponding mean angle, and convert this mean angle back
+        to a day of the year in the Julian calendar (using the
+        arc-tangent).
+
+    """
     # calculations per hydrological year
     info = np.zeros((hydro_years.shape[0], flows.shape[1], 2),
                     dtype=np.float64)
@@ -247,8 +346,27 @@ def th1(flows, datetimes, hydro_years, drainage_area):
     return sfc
 
 
-# TH2 - Variability in timing of annual maximum flow
 def th2(flows, datetimes, hydro_years, drainage_area):
+    """Variability in timing of annual maximum flow.
+
+    :Calculation Details:
+        Determine the day of the year (i.e. number) in the Julian
+        calendar where the flow is maximal in each hydrological year in
+        the daily flow record. Map these dates onto a circular scale as
+        angles in radians. Determine the x and y components of these
+        angles (i.e. cosine, and sine, respectively). Compute the mean
+        of the x and y components separately. Compute the variability
+        using the following equation: ::
+
+            √(2 * (1 - √(X*X + Y*Y))
+
+        where √ is the square root, and X and Y are the mean of the
+        x and y components of the angles, respectively.
+
+        Convert this angular variability back to a day of the year in
+        the Julian calendar.
+
+    """
     # calculations per hydrological year
     info = np.zeros((hydro_years.shape[0], flows.shape[1], 2),
                     dtype=np.float64)
