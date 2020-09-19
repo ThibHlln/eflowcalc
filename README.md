@@ -30,5 +30,5 @@ follows (click on the link to get the DOI of a specific version):
 
 ## Acknowledgment
 
-This tool was developed with the financial support of Ireland's 
-Environmental Protection Agency (Grant Number 2014-W-LS-5).
+Early versions of this tool were developed with the financial support of 
+Ireland’s Environmental Protection Agency (Grant Number 2014-W-LS-5).
