@@ -15,7 +15,7 @@ background) which makes for very efficient computation of the streamflow
 characteristics. 
 
 Please refer to the [online documentation](https://thibhlln.github.io/eflowcalc) 
-for further details and how to use the package. 
+for further details and learn how to use the package. 
 
 If you are using `eflowcalc`, please consider citing the software as 
 follows (click on the link to get the DOI of a specific version):
