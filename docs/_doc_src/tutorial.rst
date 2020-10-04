@@ -4,9 +4,8 @@
 Tutorial
 ========
 
-This notebook contains a simple example of the usage of the API of
-`eflowcalc` to calculate stream flow characteristics from streamflow
-time series.
+Here is a simple example of the usage of the API of `eflowcalc` to
+calculate streamflow characteristics (SFCs) from streamflow time series.
 
 .. code-block:: python
    :caption: Importing the package and checking its version.
@@ -31,7 +30,7 @@ series must be made of datetime objects from the datetime package.
    >>> from netCDF4 import Dataset
    >>> import numpy as np
    >>> from datetime import datetime, timedelta
-   >>> with Dataset('examples/catchment.sim.flow.nc', 'r', format='NETCDF4') as f:
+   >>> with Dataset('sample_data/catchment.sim.flow.nc', 'r', format='NETCDF4') as f:
    ...     streamflow = f.variables['flow'][:]  # streamflow time series
    ...     timestamps = f.variables['time'][:]  # timestamp series for the period
    ...     time_units = f.variables['time'].units
@@ -72,7 +71,7 @@ that it is on `axis=1`.
    :caption: Calculating only one streamflow characteristic (e.g. `ma41` here).
 
    >>> from eflowcalc import calculator, ma41
-   >>> my_sfc = calculator(ma41, my_dt, my_flow, 1246, axis=1)
+   >>> my_sfc = calculator(ma41, datetimes, streamflow, 1246, axis=1)
    >>> print(my_sfc[0])
    [0.00307121]
 
@@ -81,7 +80,7 @@ that it is on `axis=1`.
    :caption: Calculating multiple streamflow characteristics at once.
 
    >>> from eflowcalc import calculator, ma41, dh4, ra7
-   >>> my_sfcs = calculator((ma41, dh4, ra7), my_dt, my_flow, 1246, axis=1)
+   >>> my_sfcs = calculator((ma41, dh4, ra7), datetimes, streamflow, 1246, axis=1)
    >>> print(my_sfcs[0, :])
    [3.0712057e-03 8.4707642e+00 3.3340059e-02]
 
@@ -99,6 +98,6 @@ hydrological year starts on the 1st of July, see example below.
    :caption: Changing the definition for the hydrological year.
 
    >>> from eflowcalc import calculator, ma41
-   >>> my_sfc = calculator(ma41, my_dt, my_flow, 1246, hydro_year='01/07', axis=1)
+   >>> my_sfc = calculator(ma41, datetimes, streamflow, 1246, hydro_year='01/07', axis=1)
    >>> print(my_sfc[0])
    [0.00312234]
