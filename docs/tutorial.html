@@ -190,9 +190,8 @@
 </style>
 <div class="section" id="tutorial">
 <h1>Tutorial<a class="headerlink" href="#tutorial" title="Permalink to this headline">¶</a></h1>
-<p>This notebook contains a simple example of the usage of the API of
-<code class="xref py py-obj docutils literal notranslate"><span class="pre">eflowcalc</span></code> to calculate stream flow characteristics from streamflow
-time series.</p>
+<p>Here is a simple example of the usage of the API of <code class="xref py py-obj docutils literal notranslate"><span class="pre">eflowcalc</span></code> to
+calculate streamflow characteristics (SFCs) from streamflow time series.</p>
 <div class="literal-block-wrapper docutils container" id="id1">
 <div class="code-block-caption"><span class="caption-text">Importing the package and checking its version.</span><a class="headerlink" href="#id1" title="Permalink to this code">¶</a></div>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">eflowcalc</span>
@@ -213,7 +212,7 @@ series must be made of datetime objects from the datetime package.</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">netCDF4</span> <span class="kn">import</span> <span class="n">Dataset</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">datetime</span> <span class="kn">import</span> <span class="n">datetime</span><span class="p">,</span> <span class="n">timedelta</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="k">with</span> <span class="n">Dataset</span><span class="p">(</span><span class="s1">&#39;examples/catchment.sim.flow.nc&#39;</span><span class="p">,</span> <span class="s1">&#39;r&#39;</span><span class="p">,</span> <span class="nb">format</span><span class="o">=</span><span class="s1">&#39;NETCDF4&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="k">with</span> <span class="n">Dataset</span><span class="p">(</span><span class="s1">&#39;sample_data/catchment.sim.flow.nc&#39;</span><span class="p">,</span> <span class="s1">&#39;r&#39;</span><span class="p">,</span> <span class="nb">format</span><span class="o">=</span><span class="s1">&#39;NETCDF4&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
 <span class="gp">... </span>    <span class="n">streamflow</span> <span class="o">=</span> <span class="n">f</span><span class="o">.</span><span class="n">variables</span><span class="p">[</span><span class="s1">&#39;flow&#39;</span><span class="p">][:]</span>  <span class="c1"># streamflow time series</span>
 <span class="gp">... </span>    <span class="n">timestamps</span> <span class="o">=</span> <span class="n">f</span><span class="o">.</span><span class="n">variables</span><span class="p">[</span><span class="s1">&#39;time&#39;</span><span class="p">][:]</span>  <span class="c1"># timestamp series for the period</span>
 <span class="gp">... </span>    <span class="n">time_units</span> <span class="o">=</span> <span class="n">f</span><span class="o">.</span><span class="n">variables</span><span class="p">[</span><span class="s1">&#39;time&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">units</span>
@@ -251,7 +250,7 @@ that it is on <code class="xref py py-obj docutils literal notranslate"><span cl
 <div class="literal-block-wrapper docutils container" id="id4">
 <div class="code-block-caption"><span class="caption-text">Calculating only one streamflow characteristic (e.g. <a class="reference internal" href="functions/eflowcalc.ma41.html#eflowcalc.ma41" title="eflowcalc.ma41"><code class="xref py py-obj docutils literal notranslate"><span class="pre">ma41</span></code></a> here).</span><a class="headerlink" href="#id4" title="Permalink to this code">¶</a></div>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">eflowcalc</span> <span class="kn">import</span> <span class="n">calculator</span><span class="p">,</span> <span class="n">ma41</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">my_sfc</span> <span class="o">=</span> <span class="n">calculator</span><span class="p">(</span><span class="n">ma41</span><span class="p">,</span> <span class="n">my_dt</span><span class="p">,</span> <span class="n">my_flow</span><span class="p">,</span> <span class="mi">1246</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">my_sfc</span> <span class="o">=</span> <span class="n">calculator</span><span class="p">(</span><span class="n">ma41</span><span class="p">,</span> <span class="n">datetimes</span><span class="p">,</span> <span class="n">streamflow</span><span class="p">,</span> <span class="mi">1246</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="n">my_sfc</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
 <span class="go">[0.00307121]</span>
 </pre></div>
@@ -260,7 +259,7 @@ that it is on <code class="xref py py-obj docutils literal notranslate"><span cl
 <div class="literal-block-wrapper docutils container" id="id5">
 <div class="code-block-caption"><span class="caption-text">Calculating multiple streamflow characteristics at once.</span><a class="headerlink" href="#id5" title="Permalink to this code">¶</a></div>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">eflowcalc</span> <span class="kn">import</span> <span class="n">calculator</span><span class="p">,</span> <span class="n">ma41</span><span class="p">,</span> <span class="n">dh4</span><span class="p">,</span> <span class="n">ra7</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">my_sfcs</span> <span class="o">=</span> <span class="n">calculator</span><span class="p">((</span><span class="n">ma41</span><span class="p">,</span> <span class="n">dh4</span><span class="p">,</span> <span class="n">ra7</span><span class="p">),</span> <span class="n">my_dt</span><span class="p">,</span> <span class="n">my_flow</span><span class="p">,</span> <span class="mi">1246</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">my_sfcs</span> <span class="o">=</span> <span class="n">calculator</span><span class="p">((</span><span class="n">ma41</span><span class="p">,</span> <span class="n">dh4</span><span class="p">,</span> <span class="n">ra7</span><span class="p">),</span> <span class="n">datetimes</span><span class="p">,</span> <span class="n">streamflow</span><span class="p">,</span> <span class="mi">1246</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="n">my_sfcs</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="p">:])</span>
 <span class="go">[3.0712057e-03 8.4707642e+00 3.3340059e-02]</span>
 </pre></div>
@@ -278,7 +277,7 @@ hydrological year starts on the 1st of July, see example below.</p>
 <div class="literal-block-wrapper docutils container" id="id6">
 <div class="code-block-caption"><span class="caption-text">Changing the definition for the hydrological year.</span><a class="headerlink" href="#id6" title="Permalink to this code">¶</a></div>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">eflowcalc</span> <span class="kn">import</span> <span class="n">calculator</span><span class="p">,</span> <span class="n">ma41</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">my_sfc</span> <span class="o">=</span> <span class="n">calculator</span><span class="p">(</span><span class="n">ma41</span><span class="p">,</span> <span class="n">my_dt</span><span class="p">,</span> <span class="n">my_flow</span><span class="p">,</span> <span class="mi">1246</span><span class="p">,</span> <span class="n">hydro_year</span><span class="o">=</span><span class="s1">&#39;01/07&#39;</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">my_sfc</span> <span class="o">=</span> <span class="n">calculator</span><span class="p">(</span><span class="n">ma41</span><span class="p">,</span> <span class="n">datetimes</span><span class="p">,</span> <span class="n">streamflow</span><span class="p">,</span> <span class="mi">1246</span><span class="p">,</span> <span class="n">hydro_year</span><span class="o">=</span><span class="s1">&#39;01/07&#39;</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="n">my_sfc</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
 <span class="go">[0.00312234]</span>
 </pre></div>
@@ -300,7 +299,7 @@ hydrological year starts on the 1st of July, see example below.</p>
         
         &copy; Copyright 2020, Thibault Hallouin.
       <span class="lastupdated">
-        Last updated on Sep 19, 2020.
+        Last updated on Oct 04, 2020.
       </span>
 
     </p>
