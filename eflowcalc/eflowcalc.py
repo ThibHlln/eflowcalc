@@ -73,6 +73,7 @@ def calculator(sfcs, datetimes, streamflows, drainage_area,
 
         axis: `int`, optional
             The axis along which the *streamflows* time dimension is.
+            If not provided, set to default value 0.
 
     """
     # check the format of the different arguments given,
