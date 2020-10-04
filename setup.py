@@ -18,7 +18,7 @@ setup(
     long_description=long_desc,
     long_description_content_type="text/markdown",
 
-    url='https://github.com/ThibHlln/eflowcalc',
+    url='https://thibhlln.github.io/eflowcalc',
 
     author='Thibault Hallouin',
     author_email='thibault.hallouin@ucdconnect.ie',
