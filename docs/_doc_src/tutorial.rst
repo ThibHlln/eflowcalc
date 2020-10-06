@@ -17,7 +17,7 @@ calculate streamflow characteristics (SFCs) from streamflow time series.
 
 .. rubric:: Load streamflow time series
 
-An example file is provided in the folder *examples/* in order for anyone
+An example file is provided in the folder *sample_data/* in order for anyone
 to reproduce this tutorial. Because this is a NetCDF file, we are going
 to use the Python package `netCDF4`, but `eflowcalc` is independent of the
 file format you are working with because it only requires `numpy` arrays
