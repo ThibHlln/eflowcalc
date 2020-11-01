@@ -29,7 +29,7 @@ import numpy as np
 def calculator(sfcs, datetimes, streamflows, drainage_area,
                hydro_year='01/10', years=None, axis=0):
     """Calculate streamflow characteristics for one time series stored
-    in a 1D array (or several time series of equal length stored  in a
+    in a 1D array (or several time series of equal length stored in a
     2D array). Typically used for streamflow time series for a same
     period and for a same catchment.
 
