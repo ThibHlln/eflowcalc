@@ -3,7 +3,7 @@
 from setuptools import setup
 
 
-with open("README.md", "r") as fh:
+with open("README.rst", "r") as fh:
     long_desc = fh.read()
 
 with open('eflowcalc/version.py') as fv:
@@ -14,11 +14,16 @@ setup(
 
     version=__version__,
 
-    description='EFlowCalc: An Efficient Calculator of Ecological Streamflow Characteristics in Python',
+    description='EFlowCalc: A Calculator of Streamflow Characteristics in Python',
     long_description=long_desc,
-    long_description_content_type="text/markdown",
+    long_description_content_type="text/x-rst",
 
-    url='https://thibhlln.github.io/eflowcalc',
+    download_url="https://pypi.python.org/pypi/eflowcalc",
+    project_urls={
+        "Bug Tracker": "https://github.com/thibhlln/eflowcalc/issues",
+        "Source Code": "https://github.com/thibhlln/eflowcalc",
+        "Documentation": "https://thibhlln.github.io/eflowcalc",
+    },
 
     author='Thibault Hallouin',
     author_email='thibault.hallouin@ucdconnect.ie',
