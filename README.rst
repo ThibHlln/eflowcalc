@@ -1,15 +1,22 @@
-.. currentmodule:: eflowcalc
-.. default-role:: obj
+A streamflow characteristics calculator in Python
+-------------------------------------------------
 
-Overview
-========
+.. image:: https://img.shields.io/badge/License-GPL%20v3-blue.svg
+   :target: https://www.gnu.org/licenses/gpl-3.0
+   :alt: License: GPL v3
+.. image:: https://badge.fury.io/py/eflowcalc.svg
+   :target: https://pypi.python.org/pypi/eflowcalc
+   :alt: PyPI Version
+.. image:: https://zenodo.org/badge/DOI/10.5281/zenodo.2566757.svg
+   :target: https://doi.org/10.5281/zenodo.2566757
+   :alt: DOI
 
-`eflowcalc` is an open-source `calculator` of streamflow characteristics
-in Python. It is licensed under GNU GPL-3.0 (see licence file provided).
+`eflowcalc` is an open-source `calculator` of ecological streamflow
+characteristics in Python. It is licensed under GNU GPL-3.0.
 The package currently gives the Python scientific community access
 to 159 ecologically relevant streamflow characteristics inventoried by
-`Olden and Poff (2003) <https://doi.org/10.1002/rra.700>`_. A key
-strength of `eflowcalc` is the vectorisation of all calculations (using
+`Olden and Poff (2003) <https://doi.org/10.1002/rra.700>`_. A key strength
+of `eflowcalc` is the vectorisation of all calculations (using
 `numpy <https://github.com/numpy/numpy>`_, and therefore C code in the
 background) which makes for very efficient computation of the streamflow
 characteristics.
@@ -19,9 +26,26 @@ follows (click on the link to get the DOI of a specific version):
 
 .. pull-quote::
 
-   *Hallouin, T. (XXXX). EFlowCalc: Ecological Streamflow Characteristics Calculator (Version X.X.X). Zenodo. https://doi.org/10.5281/zenodo.2566757*
+   *Hallouin, T. (XXXX). EFlowCalc: Ecological Streamflow Characteristics Calculator (Version X.X.X). Zenodo.* `<https://doi.org/10.5281/zenodo.2566757>`_
 
-.. rubric:: Streamflow Characteristics Available
+.. rubric:: Brief overview of the API
+
+.. code-block:: python
+
+   from datetime import datetime, timedelta
+   import numpy as np
+   import eflowcalc as efc
+
+   datetimes = np.array([datetime(2010, 1, 1) + timedelta(days=d) for d in range(3652)])
+   streamflows = np.random.uniform(3, 50, 3652)
+   drainage_area = 120.7
+
+   ma41 = efc.calculator(efc.ma41, datetimes, streamflows, drainage_area)
+
+   ma41, dh4, ra7 = efc.calculator((efc.ma41, efc.dh4, efc.ra7),
+                                   datetimes, streamflows, drainage_area)
+
+.. rubric:: Streamflow characteristics available
 
 The streamflow characteristics currently available in `eflowcalc` are
 as follows:
@@ -41,7 +65,7 @@ as follows:
      `mh18`, `mh19`, `mh20`, `mh21`, `mh22`, `mh23`
 * Frequency of flow events
    * Low flow events: `fl1`, `fl2`, `fl3`
-   * High flow events: `fh1`, `fh2`, `fh3`, `fh4`, `fh5`, `fh6`, `fh7`, `fh8`, 
+   * High flow events: `fh1`, `fh2`, `fh3`, `fh4`, `fh5`, `fh6`, `fh7`, `fh8`,
      `fh9`, `fh10`
 * Duration of flow events
    * Low flow events: `dl1`, `dl2`, `dl3`, `dl4`, `dl5`, `dl6`, `dl7`, `dl8`,
