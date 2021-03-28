@@ -1,8 +1,8 @@
 .. currentmodule:: eflowcalc
 .. default-role:: obj
 
-API
-===
+API Reference
+=============
 
 `eflowcalc` comes with a `calculator` that pre-processes the input
 arrays and calculates the desired streamflow characteristic(s) (SFC(s)).

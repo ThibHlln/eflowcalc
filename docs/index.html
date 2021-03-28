@@ -7,7 +7,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>eflowcalc python package &mdash; eflowcalc 0.0.3 documentation</title>
+  <title>A streamflow characteristics calculator in Python &mdash; eflowcalc 0.0.3 documentation</title>
   
 
   
@@ -40,7 +40,7 @@
     
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
-    <link rel="next" title="Overview" href="overview.html" /> 
+    <link rel="next" title="Installation" href="installation.html" /> 
 </head>
 
 <body class="wy-body-for-nav">
@@ -89,15 +89,10 @@
               
             
             
-              <p class="caption"><span class="caption-text">Contents</span></p>
-<ul>
-<li class="toctree-l1"><a class="reference internal" href="overview.html">Overview</a></li>
+              <ul>
 <li class="toctree-l1"><a class="reference internal" href="installation.html">Installation</a></li>
-<li class="toctree-l1"><a class="reference internal" href="api.html">API</a></li>
+<li class="toctree-l1"><a class="reference internal" href="api_reference.html">API Reference</a></li>
 <li class="toctree-l1"><a class="reference internal" href="tutorial.html">Tutorial</a></li>
-</ul>
-<p class="caption"><span class="caption-text">Appendices</span></p>
-<ul>
 <li class="toctree-l1"><a class="reference internal" href="genindex.html">Index</a></li>
 <li class="toctree-l1"><a class="reference internal" href="licence.html">Licence</a></li>
 </ul>
@@ -146,7 +141,7 @@
     
       <li><a href="#" class="icon icon-home"></a> &raquo;</li>
         
-      <li><strong>eflowcalc python package</strong></li>
+      <li>A streamflow characteristics calculator in Python</li>
     
     
       <li class="wy-breadcrumbs-aside">
@@ -187,25 +182,41 @@
     text-align: unset;
 }
 </style>
-<div class="section" id="eflowcalc-python-package">
-<h1><strong>eflowcalc python package</strong><a class="headerlink" href="#eflowcalc-python-package" title="Permalink to this headline">¶</a></h1>
-<div class="section" id="overview">
-<h2>Overview<a class="headerlink" href="#overview" title="Permalink to this headline">¶</a></h2>
-<p><code class="xref py py-obj docutils literal notranslate"><span class="pre">eflowcalc</span></code> is an open-source <a class="reference internal" href="functions/eflowcalc.calculator.html#eflowcalc.calculator" title="eflowcalc.calculator"><code class="xref py py-obj docutils literal notranslate"><span class="pre">calculator</span></code></a> of streamflow characteristics
-in Python. It is licensed under GNU GPL-3.0 (see licence file provided).
+<div class="section" id="a-streamflow-characteristics-calculator-in-python">
+<h1>A streamflow characteristics calculator in Python<a class="headerlink" href="#a-streamflow-characteristics-calculator-in-python" title="Permalink to this headline">¶</a></h1>
+<a class="reference external image-reference" href="https://www.gnu.org/licenses/gpl-3.0"><img alt="License: GPL v3" src="https://img.shields.io/badge/License-GPL%20v3-blue.svg" /></a>
+<a class="reference external image-reference" href="https://pypi.python.org/pypi/eflowcalc"><img alt="PyPI Version" src="https://badge.fury.io/py/eflowcalc.svg" /></a>
+<a class="reference external image-reference" href="https://doi.org/10.5281/zenodo.2566757"><img alt="DOI" src="https://zenodo.org/badge/DOI/10.5281/zenodo.2566757.svg" /></a>
+<p><code class="xref py py-obj docutils literal notranslate"><span class="pre">eflowcalc</span></code> is an open-source <a class="reference internal" href="functions/eflowcalc.calculator.html#eflowcalc.calculator" title="eflowcalc.calculator"><code class="xref py py-obj docutils literal notranslate"><span class="pre">calculator</span></code></a> of ecological streamflow
+characteristics in Python. It is licensed under GNU GPL-3.0.
 The package currently gives the Python scientific community access
 to 159 ecologically relevant streamflow characteristics inventoried by
-<a class="reference external" href="https://doi.org/10.1002/rra.700">Olden and Poff (2003)</a>. A key
-strength of <code class="xref py py-obj docutils literal notranslate"><span class="pre">eflowcalc</span></code> is the vectorisation of all calculations (using
+<a class="reference external" href="https://doi.org/10.1002/rra.700">Olden and Poff (2003)</a>. A key strength
+of <code class="xref py py-obj docutils literal notranslate"><span class="pre">eflowcalc</span></code> is the vectorisation of all calculations (using
 <a class="reference external" href="https://github.com/numpy/numpy">numpy</a>, and therefore C code in the
 background) which makes for very efficient computation of the streamflow
 characteristics.</p>
 <p>If you are using <code class="xref py py-obj docutils literal notranslate"><span class="pre">eflowcalc</span></code>, please consider citing the software as
 follows (click on the link to get the DOI of a specific version):</p>
 <blockquote class="pull-quote">
-<div><p><em>Hallouin, T. (XXXX). EFlowCalc: Ecological Streamflow Characteristics Calculator (Version X.X.X). Zenodo. https://doi.org/10.5281/zenodo.2566757</em></p>
+<div><p><em>Hallouin, T. (XXXX). EFlowCalc: Ecological Streamflow Characteristics Calculator (Version X.X.X). Zenodo.</em> <a class="reference external" href="https://doi.org/10.5281/zenodo.2566757">https://doi.org/10.5281/zenodo.2566757</a></p>
 </div></blockquote>
-<p class="rubric">Streamflow Characteristics Available</p>
+<p class="rubric">Brief overview of the API</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">datetime</span> <span class="kn">import</span> <span class="n">datetime</span><span class="p">,</span> <span class="n">timedelta</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">eflowcalc</span> <span class="k">as</span> <span class="nn">efc</span>
+
+<span class="n">datetimes</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="n">datetime</span><span class="p">(</span><span class="mi">2010</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span> <span class="o">+</span> <span class="n">timedelta</span><span class="p">(</span><span class="n">days</span><span class="o">=</span><span class="n">d</span><span class="p">)</span> <span class="k">for</span> <span class="n">d</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">3652</span><span class="p">)])</span>
+<span class="n">streamflows</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">uniform</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="mi">50</span><span class="p">,</span> <span class="mi">3652</span><span class="p">)</span>
+<span class="n">drainage_area</span> <span class="o">=</span> <span class="mf">120.7</span>
+
+<span class="n">ma41</span> <span class="o">=</span> <span class="n">efc</span><span class="o">.</span><span class="n">calculator</span><span class="p">(</span><span class="n">efc</span><span class="o">.</span><span class="n">ma41</span><span class="p">,</span> <span class="n">datetimes</span><span class="p">,</span> <span class="n">streamflows</span><span class="p">,</span> <span class="n">drainage_area</span><span class="p">)</span>
+
+<span class="n">ma41</span><span class="p">,</span> <span class="n">dh4</span><span class="p">,</span> <span class="n">ra7</span> <span class="o">=</span> <span class="n">efc</span><span class="o">.</span><span class="n">calculator</span><span class="p">((</span><span class="n">efc</span><span class="o">.</span><span class="n">ma41</span><span class="p">,</span> <span class="n">efc</span><span class="o">.</span><span class="n">dh4</span><span class="p">,</span> <span class="n">efc</span><span class="o">.</span><span class="n">ra7</span><span class="p">),</span>
+                                <span class="n">datetimes</span><span class="p">,</span> <span class="n">streamflows</span><span class="p">,</span> <span class="n">drainage_area</span><span class="p">)</span>
+</pre></div>
+</div>
+<p class="rubric">Streamflow characteristics available</p>
 <p>The streamflow characteristics currently available in <code class="xref py py-obj docutils literal notranslate"><span class="pre">eflowcalc</span></code> are
 as follows:</p>
 <ul class="simple">
@@ -277,9 +288,6 @@ neither endorsed by these authors nor by the U.S. Geological Survey.</p>
 Ireland’s Environmental Protection Agency (Grant Number 2014-W-LS-5).</p>
 <div class="toctree-wrapper compound">
 </div>
-<div class="toctree-wrapper compound">
-</div>
-</div>
 </div>
 
 
@@ -294,9 +302,9 @@ Ireland’s Environmental Protection Agency (Grant Number 2014-W-LS-5).</p>
   <div role="contentinfo">
     <p>
         
-        &copy; Copyright 2020, Thibault Hallouin.
+        &copy; Copyright 2021, Thibault Hallouin.
       <span class="lastupdated">
-        Last updated on Nov 02, 2020.
+        Last updated on Mar 28, 2021.
       </span>
 
     </p>

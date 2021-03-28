@@ -1,27 +1,14 @@
 .. currentmodule:: eflowcalc
 .. default-role:: obj
 
-**eflowcalc python package**
-############################
-
-.. include:: overview.rst
-
+.. include:: ../../README.rst
 
 .. toctree::
    :hidden:
    :maxdepth: 1
-   :caption: Contents
 
-   overview
    installation
-   api
+   api_reference
    tutorial
-
-
-.. toctree::
-   :hidden:
-   :maxdepth: 1
-   :caption: Appendices
-
    genindex
    licence

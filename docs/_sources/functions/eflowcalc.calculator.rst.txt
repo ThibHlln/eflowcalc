@@ -1,5 +1,5 @@
-Calculator on array
-===================
+Calculator
+==========
 
 .. currentmodule:: eflowcalc
 .. default-role:: obj
