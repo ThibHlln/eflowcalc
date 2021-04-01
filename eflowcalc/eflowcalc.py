@@ -47,13 +47,15 @@ def calculator(sfcs, datetimes, streamflows, drainage_area,
 
                 sfcs=everything
 
-        datetimes: `numpy.ndarray`
-            The array of datetimes corresponding to the
-            date and time of the *streamflows* values.
+        datetimes: array-like object
+            The array of datetimes corresponding to the date and time
+            of the *streamflows* values. Must be uni-dimensional.
 
-        streamflows: `numpy.ndarray`
+        streamflows: array-like object
             The array of daily streamflow values in cubic metres per
-            second on which to calculate the given *sfcs*.
+            second on which to calculate the given *sfcs*. Note, the
+            array can be one- or two-dimensional. If it is 2D, the time
+            dimension must be the one specified through *axis*.
 
         drainage_area: `int` or `float`
             The drainage area of the catchment in square kilometres
@@ -72,28 +74,32 @@ def calculator(sfcs, datetimes, streamflows, drainage_area,
             whole series is considered by the calculator.
 
         axis: `int`, optional
-            The axis along which the *streamflows* time dimension is.
-            If not provided, set to default value 0.
+            The axis along which the *streamflows* time dimension is
+            if *streamflows* is a 2D array. If not provided, set to
+            default value 0.
 
     """
     # check the format of the different arguments given,
     # if not compliant, abort
-    if not isinstance(datetimes, np.ndarray):
-        raise Exception('The DateTimes given are not in a NumPy array.')
-    if not datetimes.ndim == 1:
-        raise Exception('The DateTimes array is not uni-dimensional.')
+    datetimes = np.asarray(datetimes)
+    if not datetimes.shape:
+        raise TypeError('datetimes must be an array')
     if not np.issubdtype(datetimes.dtype, np.dtype(datetime)):
-        raise Exception('The DateTimes array does not contain '
-                        'DateTime objects.')
-    if not isinstance(streamflows, np.ndarray):
-        raise Exception('The streamflow data given is not in a NumPy array.')
-    if not ((axis == 0) or (axis == 1)):
-        raise Exception('The index for axis must be 0 or 1.')
+        raise TypeError('datetimes array must contain datetimes')
+    if not datetimes.ndim == 1:
+        raise ValueError('datetimes array must be uni-dimensional')
+    streamflows = np.asarray(streamflows)
+    if not datetimes.shape:
+        raise TypeError('streamflows must be an array')
+    if not np.issubdtype(streamflows.dtype, np.number):
+        raise TypeError('streamflows array must contain numerical values')
+    if axis not in (0, 1):
+        raise IndexError('index for axis must be 0 or 1')
     try:
         datetime.strptime(hydro_year, '%d/%m')
     except ValueError:
-        raise Exception('The \'hydro_year\' argument does not match the '
-                        'format \'%d/%m\' or it is semantically incorrect.')
+        raise ValueError('\'hydro_year\' argument does not match format '
+                         '\'%d/%m\' or is semantically incorrect')
 
     # check the dimensions of the streamflow data provided
     if streamflows.ndim == 1:
@@ -107,8 +113,7 @@ def calculator(sfcs, datetimes, streamflows, drainage_area,
             my_streamflow = streamflows.T
     else:
         # if the array is neither 1D nor 2D, abort
-        raise Exception('The streamflow array contains more '
-                        'than 2 dimensions.')
+        raise ValueError('streamflows array contains more than 2 dimensions')
 
     # subset only full hydrological years and determine mask
     # for each hydrological year
@@ -149,12 +154,12 @@ def calculator(sfcs, datetimes, streamflows, drainage_area,
 
             # check that there is no invalid or missing data
             if np.isnan(my_streamflow[my_masks_hy[y, :], :]).any():
-                raise Exception('The hydrological year {} contain(s) '
-                                'invalid values (NaN).'.format(hydro_year))
+                raise ValueError('hydrological year {} with invalid '
+                                 'values (NaN)'.format(hydro_year))
             if not (my_streamflow[my_masks_hy[y, :], :].shape[0]
                     == (end_hydro_year - start_hydro_year).days + 1):
-                raise Exception('The hydrological year {} is not complete '
-                                '(missing days).'.format(hydro_year))
+                raise ValueError('hydrological year {} not complete '
+                                 '(missing days).'.format(hydro_year))
 
     else:
         # i.e. user did not provide specific hydrological years,
@@ -182,11 +187,9 @@ def calculator(sfcs, datetimes, streamflows, drainage_area,
 
         # check that there is no invalid or missing data
         if np.isnan(my_streamflow).any():
-            raise Exception('The simulation(s) time series contain(s) '
-                            'invalid values (NaN).')
+            raise ValueError('streamflow series with invalid values (NaN)')
         if not my_streamflow.shape[0] == (my_time[-1] - my_time[0]).days + 1:
-            raise Exception('The simulation(s) time series is (are) '
-                            'not complete (missing days).')
+            raise Exception('streamflow series not complete (missing days)')
 
         # determine mask for each hydrological year in the whole series
         # (from start to end)
