@@ -222,6 +222,8 @@ def calculator(sfcs, datetimes, streamflows, drainage_area,
         calc_sfc[:] = np.nan
         calc_sfc[0, :] = sfcs(my_streamflow, my_time, my_masks_hy,
                               drainage_area)
+        if streamflows.ndim == 1:
+            calc_sfc = calc_sfc[0]
 
     # return array in its original orientation
     if axis == 0:
