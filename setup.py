@@ -60,4 +60,8 @@ setup(
         'numpy',
         'pandas'
     ],
+
+    extras_require={
+        'tests': ['netCDF4', 'cftime']
+    }
 )
