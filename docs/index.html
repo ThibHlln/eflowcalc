@@ -7,7 +7,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>A streamflow characteristics calculator in Python &mdash; eflowcalc 0.0.3 documentation</title>
+  <title>A streamflow characteristics calculator in Python &mdash; eflowcalc 0.1.0 documentation</title>
   
 
   
@@ -64,7 +64,7 @@
             
             
               <div class="version">
-                0.0.3
+                0.1.0
               </div>
             
           
@@ -93,6 +93,7 @@
 <li class="toctree-l1"><a class="reference internal" href="installation.html">Installation</a></li>
 <li class="toctree-l1"><a class="reference internal" href="api_reference.html">API Reference</a></li>
 <li class="toctree-l1"><a class="reference internal" href="tutorial.html">Tutorial</a></li>
+<li class="toctree-l1"><a class="reference internal" href="support.html">Support</a></li>
 <li class="toctree-l1"><a class="reference internal" href="genindex.html">Index</a></li>
 <li class="toctree-l1"><a class="reference internal" href="licence.html">Licence</a></li>
 </ul>
@@ -184,9 +185,10 @@
 </style>
 <div class="section" id="a-streamflow-characteristics-calculator-in-python">
 <h1>A streamflow characteristics calculator in Python<a class="headerlink" href="#a-streamflow-characteristics-calculator-in-python" title="Permalink to this headline">¶</a></h1>
+<a class="reference external image-reference" href="https://pypi.python.org/pypi/eflowcalc"><img alt="PyPI Version" src="https://img.shields.io/pypi/v/eflowcalc?color=blue" /></a>
+<a class="reference external image-reference" href="https://zenodo.org/badge/latestdoi/153001813"><img alt="DOI" src="https://zenodo.org/badge/153001813.svg" /></a>
 <a class="reference external image-reference" href="https://www.gnu.org/licenses/gpl-3.0"><img alt="License: GPL v3" src="https://img.shields.io/badge/License-GPL%20v3-blue.svg" /></a>
-<a class="reference external image-reference" href="https://pypi.python.org/pypi/eflowcalc"><img alt="PyPI Version" src="https://badge.fury.io/py/eflowcalc.svg" /></a>
-<a class="reference external image-reference" href="https://doi.org/10.5281/zenodo.2566757"><img alt="DOI" src="https://zenodo.org/badge/DOI/10.5281/zenodo.2566757.svg" /></a>
+<a class="reference external image-reference" href="https://github.com/ThibHlln/eflowcalc/actions/workflows/tests.yml"><img alt="GitHub Actions Test Workflow Status" src="https://img.shields.io/github/workflow/status/ThibHlln/eflowcalc/Tests?label=tests" /></a>
 <p><code class="xref py py-obj docutils literal notranslate"><span class="pre">eflowcalc</span></code> is an open-source <a class="reference internal" href="functions/eflowcalc.calculator.html#eflowcalc.calculator" title="eflowcalc.calculator"><code class="xref py py-obj docutils literal notranslate"><span class="pre">calculator</span></code></a> of ecological streamflow
 characteristics in Python. It is licensed under GNU GPL-3.0.
 The package currently gives the Python scientific community access
@@ -206,7 +208,7 @@ follows (click on the link to get the DOI of a specific version):</p>
 <span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
 <span class="kn">import</span> <span class="nn">eflowcalc</span> <span class="k">as</span> <span class="nn">efc</span>
 
-<span class="n">datetimes</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="n">datetime</span><span class="p">(</span><span class="mi">2010</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span> <span class="o">+</span> <span class="n">timedelta</span><span class="p">(</span><span class="n">days</span><span class="o">=</span><span class="n">d</span><span class="p">)</span> <span class="k">for</span> <span class="n">d</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">3652</span><span class="p">)])</span>
+<span class="n">datetimes</span> <span class="o">=</span> <span class="p">[</span><span class="n">datetime</span><span class="p">(</span><span class="mi">2010</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span> <span class="o">+</span> <span class="n">timedelta</span><span class="p">(</span><span class="n">days</span><span class="o">=</span><span class="n">d</span><span class="p">)</span> <span class="k">for</span> <span class="n">d</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">3652</span><span class="p">)]</span>
 <span class="n">streamflows</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">uniform</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="mi">50</span><span class="p">,</span> <span class="mi">3652</span><span class="p">)</span>
 <span class="n">drainage_area</span> <span class="o">=</span> <span class="mf">120.7</span>
 
@@ -304,7 +306,7 @@ Ireland’s Environmental Protection Agency (Grant Number 2014-W-LS-5).</p>
         
         &copy; Copyright 2021, Thibault Hallouin.
       <span class="lastupdated">
-        Last updated on Mar 28, 2021.
+        Last updated on Apr 25, 2021.
       </span>
 
     </p>
@@ -333,23 +335,20 @@ Ireland’s Environmental Protection Agency (Grant Number 2014-W-LS-5).</p>
     <span class="fa fa-archive"> eflowcalc</span>
   </div>
   <div style="float:right;">
-    v: 0.0.3
+    v: 0.1.0
     <span class="fa fa-caret-down"></span>
   </div>
 </span>
 <div class="rst-other-versions">
   
   <dl>
-    <dt>Versions</dt>
-    
-      <dd><a href="https://thibhlln.github.io/eflowcalc/">v0.0.3</a></dd>
-    
-  </dl>
-  
-  <dl>
     <dt>External Links</dt>
     
-      <dd><a href="https://github.com/ThibHlln/eflowcalc.git"><span class="fa fa-github"> GitHub Repository</a></dd>
+      <dd><a href="https://github.com/ThibHlln/eflowcalc.git"><span class="fa fa-code"> Source Code</a></dd>
+    
+      <dd><a href="https://github.com/ThibHlln/eflowcalc/issues"><span class="fa fa-bug"> Issue Tracker</a></dd>
+    
+      <dd><a href="https://github.com/ThibHlln/eflowcalc/discussions"><span class="fa fa-users"> User Support</a></dd>
     
   </dl>
   
