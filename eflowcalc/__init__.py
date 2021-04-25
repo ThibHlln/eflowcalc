@@ -46,6 +46,7 @@ from .flow_rate_change import (
 
 from .version import __version__
 
+#: Tuple containing all SFC functions on magnitude of flow events.
 magnitude = (
     ma1, ma2, ma3, ma4, ma5, ma6, ma7, ma8, ma9, ma10, ma11, ma12, ma13, ma14,
     ma15, ma16, ma17, ma18, ma19, ma20, ma21, ma22, ma23, ma24, ma25, ma26,
@@ -56,22 +57,27 @@ magnitude = (
     mh12, mh13, mh14, mh15, mh16, mh17, mh18, mh19, mh20, mh21, mh22, mh23
 )
 
+#: Tuple containing all SFC functions on frequency of flow events.
 frequency = (
     fl1, fl2, fl3, fh1, fh2, fh3, fh4, fh5, fh6, fh7, fh8, fh9, fh10
 )
 
+#: Tuple containing all SFC functions on duration of flow events.
 duration = (
     dl1, dl2, dl3, dl4, dl5, dl6, dl7, dl8, dl9, dl10, dl11, dl12, dl13, dl14,
     dl15, dl16, dl17, dl18, dl19, dl20, dh1, dh2, dh3, dh4, dh5, dh6, dh7, dh8,
     dh9, dh10, dh11, dh12, dh13, dh14, dh15, dh16, dh17, dh18, dh19, dh20, dh21
 )
 
+#: Tuple containing all SFC functions on timing of flow events.
 timing = (
     ta1, ta2, tl1, tl2, th1, th2
 )
 
+#: Tuple containing all SFC functions on rate of change in flow events.
 rate_change = (
     ra1, ra2, ra3, ra4, ra5, ra6, ra7, ra8, ra9
 )
 
+#: Tuple containing all SFC functions.
 everything = magnitude + frequency + duration + timing + rate_change
