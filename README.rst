@@ -7,6 +7,12 @@ A streamflow characteristics calculator in Python
 .. image:: https://zenodo.org/badge/153001813.svg
    :target: https://zenodo.org/badge/latestdoi/153001813
    :alt: DOI
+.. image:: https://img.shields.io/badge/License-GPL%20v3-blue.svg
+   :target: https://www.gnu.org/licenses/gpl-3.0
+   :alt: License: GPL v3
+.. image:: https://img.shields.io/github/workflow/status/ThibHlln/eflowcalc/Tests?label=tests
+   :target: https://github.com/ThibHlln/eflowcalc/actions/workflows/tests.yml
+   :alt: GitHub Actions Test Workflow Status
 
 `eflowcalc` is an open-source `calculator` of ecological streamflow
 characteristics in Python. It is licensed under GNU GPL-3.0.
