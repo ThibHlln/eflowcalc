@@ -115,6 +115,13 @@ def calculator(sfcs, datetimes, streamflows, drainage_area,
         # if the array is neither 1D nor 2D, abort
         raise ValueError('streamflows array contains more than 2 dimensions')
 
+    # check streamflows' time dimension compatible with datetimes
+    if my_streamflow.shape[0] != datetimes.shape[0]:
+        raise RuntimeError(
+            'streamflows time length ({}) not equal to datetimes '
+            'length ({})'.format(my_streamflow.shape[0], datetimes.shape[0])
+        )
+
     # subset only full hydrological years and determine mask
     # for each hydrological year
     if years and hasattr(years, '__iter__'):
