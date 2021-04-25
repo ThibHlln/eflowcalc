@@ -1,14 +1,11 @@
 A streamflow characteristics calculator in Python
 -------------------------------------------------
 
-.. image:: https://img.shields.io/badge/License-GPL%20v3-blue.svg
-   :target: https://www.gnu.org/licenses/gpl-3.0
-   :alt: License: GPL v3
-.. image:: https://badge.fury.io/py/eflowcalc.svg
+.. image:: https://img.shields.io/pypi/v/eflowcalc?color=blue
    :target: https://pypi.python.org/pypi/eflowcalc
    :alt: PyPI Version
-.. image:: https://zenodo.org/badge/DOI/10.5281/zenodo.2566757.svg
-   :target: https://doi.org/10.5281/zenodo.2566757
+.. image:: https://zenodo.org/badge/153001813.svg
+   :target: https://zenodo.org/badge/latestdoi/153001813
    :alt: DOI
 
 `eflowcalc` is an open-source `calculator` of ecological streamflow
