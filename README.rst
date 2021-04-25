@@ -39,7 +39,7 @@ follows (click on the link to get the DOI of a specific version):
    import numpy as np
    import eflowcalc as efc
 
-   datetimes = np.array([datetime(2010, 1, 1) + timedelta(days=d) for d in range(3652)])
+   datetimes = [datetime(2010, 1, 1) + timedelta(days=d) for d in range(3652)]
    streamflows = np.random.uniform(3, 50, 3652)
    drainage_area = 120.7
 
