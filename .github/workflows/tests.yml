@@ -42,7 +42,7 @@ jobs:
           mamba install pandas
 
       - name: install package test dependencies
-          run: |
+        run: |
           mamba install cftime
           mamba install netCDF4
 
