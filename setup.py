@@ -58,6 +58,6 @@ setup(
     ],
 
     extras_require={
-        'tests': ['netCDF4', 'cftime']
+        'tests': ['netCDF4']
     }
 )

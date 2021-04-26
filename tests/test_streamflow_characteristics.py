@@ -1,8 +1,7 @@
 import unittest
 import numpy
-from netCDF4 import Dataset
+from netCDF4 import Dataset, num2date
 from datetime import datetime
-import cftime
 
 import eflowcalc
 
@@ -13,9 +12,9 @@ class TestStreamflowCharacteristics(unittest.TestCase):
     with Dataset('../sample_data/catchment.sim.flow.nc', 'r') as ds:
         ds.set_always_mask(False)
         flows = ds.variables['flow'][[0]].T
-        datetimes = cftime.num2date(ds.variables['time'][:],
-                                    ds.variables['time'].units,
-                                    only_use_cftime_datetimes=False)
+        datetimes = num2date(ds.variables['time'][:],
+                             ds.variables['time'].units,
+                             only_use_cftime_datetimes=False)
 
     # construct hydrological years mask
     hydro_year = '01/10'

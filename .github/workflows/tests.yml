@@ -44,7 +44,6 @@ jobs:
 
       - name: install package test dependencies
         run: |
-          pip install cftime
           mamba install netCDF4
 
       - name: install package
