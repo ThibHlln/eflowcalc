@@ -76,7 +76,33 @@ def calculator(sfcs, datetimes, streamflows, drainage_area,
         axis: `int`, optional
             The axis along which the *streamflows* time dimension is
             if *streamflows* is a 2D array. If not provided, set to
-            default value 0.
+            default value 0 (i.e. time along first axis).
+
+    **Examples**
+
+    >>> from datetime import datetime, timedelta
+    >>> times = [datetime(2010, 1, 1) + timedelta(days=d) for d in range(3652)]
+    >>> import numpy
+    >>> numpy.random.seed(7)
+    >>> flows = numpy.random.uniform(3, 50, 3652)
+    >>> import eflowcalc as efc
+    >>> print(efc.calculator(efc.ma1, times, flows, drainage_area=147.))
+    [26.29431]
+    >>> print(efc.calculator([efc.ma1, efc.dh7], times, flows, drainage_area=147.))
+    [[26.29431  ]
+     [ 2.8495195]]
+
+    Computations on multiple streamflow series at once are possible.
+
+    >>> flows = numpy.random.uniform(3, 50, (3652, 3))
+    >>> print(efc.calculator([efc.ma1, efc.dh7], times, flows, drainage_area=147.))
+    [[26.548698  26.465912  26.271872 ]
+     [ 2.4092593  2.8745487  2.2962854]]
+    >>> flows = numpy.random.uniform(3, 50, (3, 3652))
+    >>> print(efc.calculator([efc.ma1, efc.dh7], times, flows, drainage_area=147., axis=1))
+    [[26.409723   4.8691554]
+     [26.398853   3.6545587]
+     [26.251245   3.4656363]]
 
     """
     # check the format of the different arguments given,
@@ -114,6 +140,13 @@ def calculator(sfcs, datetimes, streamflows, drainage_area,
     else:
         # if the array is neither 1D nor 2D, abort
         raise ValueError('streamflows array contains more than 2 dimensions')
+
+    # check streamflows' time dimension compatible with datetimes
+    if my_streamflow.shape[0] != datetimes.shape[0]:
+        raise RuntimeError(
+            'streamflows time length ({}) not equal to datetimes '
+            'length ({})'.format(my_streamflow.shape[0], datetimes.shape[0])
+        )
 
     # subset only full hydrological years and determine mask
     # for each hydrological year

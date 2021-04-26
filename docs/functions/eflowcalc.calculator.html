@@ -7,7 +7,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>Calculator &mdash; eflowcalc 0.0.3 documentation</title>
+  <title>Calculator &mdash; eflowcalc 0.1.0 documentation</title>
   
 
   
@@ -65,7 +65,7 @@
             
             
               <div class="version">
-                0.0.3
+                0.1.0
               </div>
             
           
@@ -99,9 +99,11 @@
 <li class="toctree-l2"><a class="reference internal" href="eflowcalc.flow_frequency.html">Characteristics on flow frequency</a></li>
 <li class="toctree-l2"><a class="reference internal" href="eflowcalc.flow_rate_change.html">Characteristics on flow rate of change</a></li>
 <li class="toctree-l2"><a class="reference internal" href="eflowcalc.flow_timing.html">Characteristics on flow timing</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../bundles/eflowcalc.bundles.html">Bundles of Characteristics</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="../tutorial.html">Tutorial</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../support.html">Support</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../genindex.html">Index</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../licence.html">Licence</a></li>
 </ul>
@@ -220,11 +222,13 @@ calculated for the given <em>streamflows</em> series.</p>
 </pre></div>
 </div>
 </dd>
-<dt>datetimes: <a class="reference external" href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" title="(in NumPy v1.20)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">numpy.ndarray</span></code></a></dt><dd><p>The array of datetimes corresponding to the
-date and time of the <em>streamflows</em> values.</p>
+<dt>datetimes: array-like object</dt><dd><p>The array of datetimes corresponding to the date and time
+of the <em>streamflows</em> values. Must be uni-dimensional.</p>
 </dd>
-<dt>streamflows: <a class="reference external" href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" title="(in NumPy v1.20)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">numpy.ndarray</span></code></a></dt><dd><p>The array of daily streamflow values in cubic metres per
-second on which to calculate the given <em>sfcs</em>.</p>
+<dt>streamflows: array-like object</dt><dd><p>The array of daily streamflow values in cubic metres per
+second on which to calculate the given <em>sfcs</em>. Note, the
+array can be one- or two-dimensional. If it is 2D, the time
+dimension must be the one specified through <em>axis</em>.</p>
 </dd>
 <dt>drainage_area: <a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.9)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">int</span></code></a> or <a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.9)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">float</span></code></a></dt><dd><p>The drainage area of the catchment in square kilometres
 for which <em>streamflows</em> are provided.</p>
@@ -239,12 +243,39 @@ value ‘01/10’.</p>
 series. If not provided, no subset is carried out and the
 whole series is considered by the calculator.</p>
 </dd>
-<dt>axis: <a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.9)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">int</span></code></a>, optional</dt><dd><p>The axis along which the <em>streamflows</em> time dimension is.
-If not provided, set to default value 0.</p>
+<dt>axis: <a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.9)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">int</span></code></a>, optional</dt><dd><p>The axis along which the <em>streamflows</em> time dimension is
+if <em>streamflows</em> is a 2D array. If not provided, set to
+default value 0 (i.e. time along first axis).</p>
 </dd>
 </dl>
 </dd>
 </dl>
+<p><strong>Examples</strong></p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">datetime</span> <span class="kn">import</span> <span class="n">datetime</span><span class="p">,</span> <span class="n">timedelta</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">times</span> <span class="o">=</span> <span class="p">[</span><span class="n">datetime</span><span class="p">(</span><span class="mi">2010</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span> <span class="o">+</span> <span class="n">timedelta</span><span class="p">(</span><span class="n">days</span><span class="o">=</span><span class="n">d</span><span class="p">)</span> <span class="k">for</span> <span class="n">d</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">3652</span><span class="p">)]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">numpy</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">numpy</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">seed</span><span class="p">(</span><span class="mi">7</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">flows</span> <span class="o">=</span> <span class="n">numpy</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">uniform</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="mi">50</span><span class="p">,</span> <span class="mi">3652</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">eflowcalc</span> <span class="k">as</span> <span class="nn">efc</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="n">efc</span><span class="o">.</span><span class="n">calculator</span><span class="p">(</span><span class="n">efc</span><span class="o">.</span><span class="n">ma1</span><span class="p">,</span> <span class="n">times</span><span class="p">,</span> <span class="n">flows</span><span class="p">,</span> <span class="n">drainage_area</span><span class="o">=</span><span class="mf">147.</span><span class="p">))</span>
+<span class="go">[26.29431]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="n">efc</span><span class="o">.</span><span class="n">calculator</span><span class="p">([</span><span class="n">efc</span><span class="o">.</span><span class="n">ma1</span><span class="p">,</span> <span class="n">efc</span><span class="o">.</span><span class="n">dh7</span><span class="p">],</span> <span class="n">times</span><span class="p">,</span> <span class="n">flows</span><span class="p">,</span> <span class="n">drainage_area</span><span class="o">=</span><span class="mf">147.</span><span class="p">))</span>
+<span class="go">[[26.29431  ]</span>
+<span class="go"> [ 2.8495195]]</span>
+</pre></div>
+</div>
+<p>Computations on multiple streamflow series at once are possible.</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">flows</span> <span class="o">=</span> <span class="n">numpy</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">uniform</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="mi">50</span><span class="p">,</span> <span class="p">(</span><span class="mi">3652</span><span class="p">,</span> <span class="mi">3</span><span class="p">))</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="n">efc</span><span class="o">.</span><span class="n">calculator</span><span class="p">([</span><span class="n">efc</span><span class="o">.</span><span class="n">ma1</span><span class="p">,</span> <span class="n">efc</span><span class="o">.</span><span class="n">dh7</span><span class="p">],</span> <span class="n">times</span><span class="p">,</span> <span class="n">flows</span><span class="p">,</span> <span class="n">drainage_area</span><span class="o">=</span><span class="mf">147.</span><span class="p">))</span>
+<span class="go">[[26.548698  26.465912  26.271872 ]</span>
+<span class="go"> [ 2.4092593  2.8745487  2.2962854]]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">flows</span> <span class="o">=</span> <span class="n">numpy</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">uniform</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="mi">50</span><span class="p">,</span> <span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="mi">3652</span><span class="p">))</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="n">efc</span><span class="o">.</span><span class="n">calculator</span><span class="p">([</span><span class="n">efc</span><span class="o">.</span><span class="n">ma1</span><span class="p">,</span> <span class="n">efc</span><span class="o">.</span><span class="n">dh7</span><span class="p">],</span> <span class="n">times</span><span class="p">,</span> <span class="n">flows</span><span class="p">,</span> <span class="n">drainage_area</span><span class="o">=</span><span class="mf">147.</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">))</span>
+<span class="go">[[26.409723   4.8691554]</span>
+<span class="go"> [26.398853   3.6545587]</span>
+<span class="go"> [26.251245   3.4656363]]</span>
+</pre></div>
+</div>
 </dd></dl>
 
 </div>
@@ -263,7 +294,7 @@ If not provided, set to default value 0.</p>
         
         &copy; Copyright 2021, Thibault Hallouin.
       <span class="lastupdated">
-        Last updated on Mar 28, 2021.
+        Last updated on Apr 25, 2021.
       </span>
 
     </p>
@@ -292,23 +323,20 @@ If not provided, set to default value 0.</p>
     <span class="fa fa-archive"> eflowcalc</span>
   </div>
   <div style="float:right;">
-    v: 0.0.3
+    v: 0.1.0
     <span class="fa fa-caret-down"></span>
   </div>
 </span>
 <div class="rst-other-versions">
   
   <dl>
-    <dt>Versions</dt>
-    
-      <dd><a href="https://thibhlln.github.io/eflowcalc/">v0.0.3</a></dd>
-    
-  </dl>
-  
-  <dl>
     <dt>External Links</dt>
     
-      <dd><a href="https://github.com/ThibHlln/eflowcalc.git"><span class="fa fa-github"> GitHub Repository</a></dd>
+      <dd><a href="https://github.com/ThibHlln/eflowcalc.git"><span class="fa fa-code"> Source Code</a></dd>
+    
+      <dd><a href="https://github.com/ThibHlln/eflowcalc/issues"><span class="fa fa-bug"> Issue Tracker</a></dd>
+    
+      <dd><a href="https://github.com/ThibHlln/eflowcalc/discussions"><span class="fa fa-users"> User Support</a></dd>
     
   </dl>
   

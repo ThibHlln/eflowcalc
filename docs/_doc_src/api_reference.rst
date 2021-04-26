@@ -27,3 +27,8 @@ flow, average flow, and or high flow events.
    functions/eflowcalc.flow_frequency.rst
    functions/eflowcalc.flow_rate_change.rst
    functions/eflowcalc.flow_timing.rst
+
+.. toctree::
+   :maxdepth: 1
+
+   bundles/eflowcalc.bundles.rst

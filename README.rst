@@ -1,15 +1,18 @@
 A streamflow characteristics calculator in Python
 -------------------------------------------------
 
+.. image:: https://img.shields.io/pypi/v/eflowcalc?color=blue
+   :target: https://pypi.python.org/pypi/eflowcalc
+   :alt: PyPI Version
+.. image:: https://zenodo.org/badge/153001813.svg
+   :target: https://zenodo.org/badge/latestdoi/153001813
+   :alt: DOI
 .. image:: https://img.shields.io/badge/License-GPL%20v3-blue.svg
    :target: https://www.gnu.org/licenses/gpl-3.0
    :alt: License: GPL v3
-.. image:: https://badge.fury.io/py/eflowcalc.svg
-   :target: https://pypi.python.org/pypi/eflowcalc
-   :alt: PyPI Version
-.. image:: https://zenodo.org/badge/DOI/10.5281/zenodo.2566757.svg
-   :target: https://doi.org/10.5281/zenodo.2566757
-   :alt: DOI
+.. image:: https://img.shields.io/github/workflow/status/ThibHlln/eflowcalc/Tests?label=tests
+   :target: https://github.com/ThibHlln/eflowcalc/actions/workflows/tests.yml
+   :alt: GitHub Actions Test Workflow Status
 
 `eflowcalc` is an open-source `calculator` of ecological streamflow
 characteristics in Python. It is licensed under GNU GPL-3.0.
@@ -36,7 +39,7 @@ follows (click on the link to get the DOI of a specific version):
    import numpy as np
    import eflowcalc as efc
 
-   datetimes = np.array([datetime(2010, 1, 1) + timedelta(days=d) for d in range(3652)])
+   datetimes = [datetime(2010, 1, 1) + timedelta(days=d) for d in range(3652)]
    streamflows = np.random.uniform(3, 50, 3652)
    drainage_area = 120.7
 
