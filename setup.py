@@ -1,5 +1,5 @@
-# Copyright (C) 2019-2021  Thibault Hallouin
-from setuptools import setup
+# Copyright (C) 2018-2021  Thibault Hallouin
+from setuptools import setup, find_packages
 
 
 with open("README.rst", "r") as fh:
@@ -62,7 +62,7 @@ setup(
         'Programming Language :: Python :: Implementation :: CPython'
     ],
 
-    packages=['eflowcalc'],
+    packages=find_packages(exclude=["docs*"]),
 
     install_requires=requirements('requirements.txt'),
 
