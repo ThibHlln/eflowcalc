@@ -201,7 +201,8 @@ class TestStreamflowCharacteristics(unittest.TestCase):
                     getattr(eflowcalc, sfc)(
                         self.flows, self.datetimes,
                         self.hydro_years, self.drainage_area)[0],
-                    self.expected[sfc]
+                    self.expected[sfc],
+                    decimal=5
                 )
 
 
