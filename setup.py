@@ -8,6 +8,18 @@ with open("README.rst", "r") as fh:
 with open('eflowcalc/version.py') as fv:
     exec(fv.read())
 
+
+def requirements(filename):
+    requires = []
+    with open(filename, 'r') as fr:
+        for line in fr:
+            package = line.strip()
+            if package:
+                requires.append(package)
+
+    return requires
+
+
 setup(
     name='eflowcalc',
 
@@ -52,10 +64,7 @@ setup(
 
     packages=['eflowcalc'],
 
-    install_requires=[
-        'numpy',
-        'pandas'
-    ],
+    install_requires=requirements('requirements.txt'),
 
     extras_require={
         'tests': ['netCDF4']
