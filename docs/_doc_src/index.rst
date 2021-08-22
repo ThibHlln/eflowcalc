@@ -11,5 +11,6 @@
    api_reference
    tutorial
    support
-   genindex
+   changelog
    licence
+   genindex

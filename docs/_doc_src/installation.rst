@@ -4,20 +4,25 @@
 Installation
 ============
 
-`eflowcalc` is available on PyPI, so you can simply use pip and the name of the package:
+If you wish to install the most recent stable version of `eflowcalc`,
+it is available on the Python Package Index (PyPI), simply run:
 
 .. code-block:: bash
 
    python -m pip install eflowcalc
 
-You can also use pip and a link to the GitHub repository directly:
+If you need the latest, potentially unstable, features listed in the
+:doc:`change log <changelog>`, please use the *dev* branch on the
+GitHub repository:
 
 .. code-block:: bash
 
-   python -m pip install git+https://github.com/ThibHlln/eflowcalc.git
+   python -m pip install git+https://github.com/ThibHlln/eflowcalc.git@dev
 
-Alternatively, you can download the source code (*i.e.* the GitHub repository) and, from the downloaded directory itself, run the command:
 
-.. code-block:: bash
+.. rubric:: Requirements
 
-   python setup.py install
+The following packages are required to use `eflowcalc`:
+
+.. literalinclude:: ../../requirements.txt
+   :language: none
