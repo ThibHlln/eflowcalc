@@ -11,7 +11,7 @@ Released on 2021-04-26.
 
 .. rubric:: API changes
 
-* `calculator` now supports any array-like object, e.g. `numpy.array`, `list`
+* `calculator` now supports any array-like object, e.g. `numpy.ndarray`, `list`
 * `calculator` now returns an array with the same number of dimensions as
   streamflow input array
 
@@ -33,9 +33,9 @@ Released on 2019-09-08.
 
 .. rubric:: Algorithm
 
-* check for the format of the keyword parameter *hydro_year* in `Calculator`
+* check for the format of the keyword parameter *hydro_year* in `calculator`
   to make sure it is a valid 2-digit day/2-digit month format
-* add a conditional statement on the return of `Calculator` to send back
+* add a conditional statement on the return of `calculator` to send back
   the output array in the same orientation as the input streamflow array
 * for `dl19`: deal with zero divide issues and returns zeros in place of NaNs
   when the denominator is null
@@ -50,7 +50,7 @@ Released on 2019-09-08.
 .. rubric:: Bug fixes
 
 * remove hard coded month and year of start of hydrological year that prevented
-  `Calculator` from honouring the use of its keyword parameter *hydro_year*
+  `calculator` from honouring the use of its keyword parameter *hydro_year*
   (if a value different from '01/10' was required)
 * for `count_reversal`: correct error on the array index used to replace null
   difference by the most recent non-null value (low likelihood of having
@@ -79,7 +79,7 @@ Released on 2019-02-16.
 
 * change default array orientation to *axis=0*
 * add possibility to select specific years where to calculate the SFCs using
-  the keyword argument `years`
+  the keyword parameter *years*
 * add gathering functions for each flow category (`magnitude`, `frequency`,
   `timing`, `duration`, `rate_change`) and for all SFCs (`everything`)
 
