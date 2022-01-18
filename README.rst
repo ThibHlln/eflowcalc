@@ -43,14 +43,13 @@ Brief overview of the API
    import numpy as np
    import eflowcalc as efc
 
-   datetimes = [datetime(2010, 1, 1) + timedelta(days=d) for d in range(3652)]
-   streamflows = np.random.uniform(3, 50, 3652)
-   drainage_area = 120.7
+   times = [datetime(2010, 1, 1) + timedelta(days=d) for d in range(3652)]
+   flows = np.random.uniform(3, 50, 3652)
+   area = 120.7  # km2
 
-   ma41 = efc.calculator(efc.ma41, datetimes, streamflows, drainage_area)
+   ma41 = efc.calculator(efc.ma41, times, flows, area)
 
-   ma41, dh4, ra7 = efc.calculator((efc.ma41, efc.dh4, efc.ra7),
-                                   datetimes, streamflows, drainage_area)
+   ma41, dh4, ra7 = efc.calculator((efc.ma41, efc.dh4, efc.ra7), times, flows, area)
 
 Streamflow characteristics available
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
