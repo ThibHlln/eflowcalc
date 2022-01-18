@@ -24,11 +24,11 @@ clean:
 	@$(SPHINXBUILD) -M $@ "$(SOURCEDIR)" "$(BUILDDIR)" $(SPHINXOPTS) $(O)
 
 github_clean:
-	@make local_clean
 	find . \( -type d -maxdepth 1 ! -name "." \) \
 	-and \( -type d -maxdepth 1 ! -name "*.*.*" \) \
 	-and \( -type d -maxdepth 1 ! -name "_doc_*" \) \
 	-exec rm -rf {} +
+	rm -f *.html *.js *.inv .buildinfo
 
 github_html:
 	@make github_clean

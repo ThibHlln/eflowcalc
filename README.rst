@@ -1,16 +1,19 @@
 A streamflow characteristics calculator in Python
 -------------------------------------------------
 
-.. image:: https://img.shields.io/pypi/v/eflowcalc?color=blue
+.. image:: https://img.shields.io/pypi/v/eflowcalc?style=flat-square
    :target: https://pypi.python.org/pypi/eflowcalc
    :alt: PyPI Version
-.. image:: https://zenodo.org/badge/153001813.svg
+.. image:: https://img.shields.io/badge/dynamic/json?url=https://zenodo.org/api/records/2566757&label=doi&query=doi&style=flat-square
    :target: https://zenodo.org/badge/latestdoi/153001813
    :alt: DOI
-.. image:: https://img.shields.io/badge/License-GPL%20v3-blue.svg
+.. image:: https://img.shields.io/badge/License-GPL%20v3-blue.svg?style=flat-square
    :target: https://www.gnu.org/licenses/gpl-3.0
    :alt: License: GPL v3
-.. image:: https://img.shields.io/github/workflow/status/ThibHlln/eflowcalc/Tests?label=tests
+.. image:: https://img.shields.io/badge/fair-%E2%97%8F%20%20%E2%97%8F%20%20%E2%97%8F%20%20%E2%97%8F%20%20%E2%97%8B-yellow?style=flat-square
+   :target: https://fair-software.eu
+   :alt: FAIR Software Compliance
+.. image:: https://img.shields.io/github/workflow/status/ThibHlln/eflowcalc/Tests?style=flat-square&label=tests
    :target: https://github.com/ThibHlln/eflowcalc/actions/workflows/tests.yml
    :alt: GitHub Actions Test Workflow Status
 
@@ -29,9 +32,10 @@ follows (click on the link to get the DOI of a specific version):
 
 .. pull-quote::
 
-   *Hallouin, T. (XXXX). EFlowCalc: Ecological Streamflow Characteristics Calculator (Version X.X.X). Zenodo.* `<https://doi.org/10.5281/zenodo.2566757>`_
+   *Hallouin, T. (XXXX). eflowcalc: a streamflow characteristics calculator in Python (Version X.X.X). Zenodo.* `<https://doi.org/10.5281/zenodo.2566757>`_
 
-.. rubric:: Brief overview of the API
+Brief overview of the API
+~~~~~~~~~~~~~~~~~~~~~~~~~
 
 .. code-block:: python
 
@@ -39,16 +43,16 @@ follows (click on the link to get the DOI of a specific version):
    import numpy as np
    import eflowcalc as efc
 
-   datetimes = [datetime(2010, 1, 1) + timedelta(days=d) for d in range(3652)]
-   streamflows = np.random.uniform(3, 50, 3652)
-   drainage_area = 120.7
+   times = [datetime(2010, 1, 1) + timedelta(days=d) for d in range(3652)]
+   flows = np.random.uniform(3, 50, 3652)
+   area = 120.7  # km2
 
-   ma41 = efc.calculator(efc.ma41, datetimes, streamflows, drainage_area)
+   ma41 = efc.calculator(efc.ma41, times, flows, area)
 
-   ma41, dh4, ra7 = efc.calculator((efc.ma41, efc.dh4, efc.ra7),
-                                   datetimes, streamflows, drainage_area)
+   ma41, dh4, ra7 = efc.calculator((efc.ma41, efc.dh4, efc.ra7), times, flows, area)
 
-.. rubric:: Streamflow characteristics available
+Streamflow characteristics available
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 The streamflow characteristics currently available in `eflowcalc` are
 as follows:
@@ -91,7 +95,8 @@ as follows:
    <https://doi.org/10.3133/ofr20061093>`_, however `eflowcalc` is
    neither endorsed by these authors nor by the U.S. Geological Survey.
 
-.. rubric:: Acknowledgement
+Acknowledgement
+~~~~~~~~~~~~~~~
 
 Early versions of this tool were developed with the financial support of
 Ireland's Environmental Protection Agency (Grant Number 2014-W-LS-5).

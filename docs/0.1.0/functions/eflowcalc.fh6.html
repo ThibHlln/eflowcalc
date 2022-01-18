@@ -1,215 +1,1102 @@
 
-
 <!DOCTYPE html>
-<html class="writer-html5" lang="en" >
-<head>
-  <meta charset="utf-8" />
-  
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  
-  <title>eflowcalc.fh6 &mdash; eflowcalc v0.1.0 documentation</title>
-  
 
-  
-  <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
-  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
-  <link rel="stylesheet" href="../_static/theme_overrides.css" type="text/css" />
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>eflowcalc.fh6 &#8212; eflowcalc v0.1.0 documentation</title>
+    
+  <link href="../_static/css/theme.css" rel="stylesheet" />
+  <link href="../_static/css/index.c5995385ac14fb8791e8eb36b4908be2.css" rel="stylesheet" />
 
-  
-  
+    
+  <link rel="stylesheet"
+    href="../_static/vendor/fontawesome/5.13.0/css/all.min.css">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../_static/vendor/fontawesome/5.13.0/webfonts/fa-solid-900.woff2">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2">
 
-  
-  
+    
+      
 
-  
+    
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/basic.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/custom.css" />
+    
+  <link rel="preload" as="script" href="../_static/js/index.1c5a1a01449ed65a7b51.js">
+
+    <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+    <script src="../_static/jquery.js"></script>
+    <script src="../_static/underscore.js"></script>
+    <script src="../_static/doctools.js"></script>
     <link rel="canonical" href="https://thibhlln.github.io/eflowcalc/functions/eflowcalc.fh6.html" />
-
-  
-  <!--[if lt IE 9]>
-    <script src="../_static/js/html5shiv.min.js"></script>
-  <![endif]-->
-  
-    
-      <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
-        <script src="../_static/jquery.js"></script>
-        <script src="../_static/underscore.js"></script>
-        <script src="../_static/doctools.js"></script>
-        <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
-    
-    <script type="text/javascript" src="../_static/js/theme.js"></script>
-
-    
+    <link rel="shortcut icon" href="../_static/eflowcalc-favicon.ico"/>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
     <link rel="next" title="eflowcalc.fh7" href="eflowcalc.fh7.html" />
-    <link rel="prev" title="eflowcalc.fh5" href="eflowcalc.fh5.html" /> 
-</head>
-
-<body class="wy-body-for-nav">
-
-   
-  <div class="wy-grid-for-nav">
+    <link rel="prev" title="eflowcalc.fh5" href="eflowcalc.fh5.html" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="docsearch:language" content="en" />
     
-    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
-      <div class="wy-side-scroll">
-        <div class="wy-side-nav-search" >
-          
+  </head>
+  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="80">
+    
+    <div class="container-fluid" id="banner"></div>
 
-          
-            <a href="../index.html" class="icon icon-home"> eflowcalc
-          
+    
+    <nav class="navbar navbar-light navbar-expand-lg bg-light fixed-top bd-navbar" id="navbar-main"><div class="container-xl">
 
-          
-          </a>
+    <div id="navbar-start">
+      <ul class="navbar-nav">
+          <li class="nav-item">
+            <a class="navbar-brand" href="../index.html">
+              <img src="../_static/eflowcalc-logo.svg" class="logo" alt="logo">
+            </a>
+          </li>
+      </ul>
+    </div>
 
-          
-            
-            
-              <div class="version">
-                v0.1.0
-              </div>
-            
-          
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbar-menu" aria-controls="navbar-menu" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+    </button>
 
-          
-<div role="search">
-  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
-    <input type="text" name="q" placeholder="Search docs" />
-    <input type="hidden" name="check_keywords" value="yes" />
-    <input type="hidden" name="area" value="default" />
-  </form>
-</div>
+    
+    <div id="navbar-menu" class=" collapse navbar-collapse">
+      <ul class="navbar-nav mr-auto">
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+              v0.1.0
+            </a>
+            <div class="dropdown-menu" aria-labelledby="navbarDropdown" id="version-menu">
+              
+                <a class="dropdown-item" href="https://thibhlln.github.io/eflowcalc">latest</a>
+              
+                <a class="dropdown-item" href="https://thibhlln.github.io/eflowcalc/0.1.0">v0.1.0</a>
+              
+            </div>
+          </li>
+      </ul>
 
-          
-        </div>
+      <ul id="navbar-main-elements" class="navbar-nav mr-auto">
+        <li class="toctree-l1 nav-item">
+ <a class="reference internal nav-link" href="../installation.html">
+  Installation
+ </a>
+</li>
+
+<li class="toctree-l1 current active nav-item">
+ <a class="reference internal nav-link" href="../api_reference.html">
+  API Reference
+ </a>
+</li>
+
+<li class="toctree-l1 nav-item">
+ <a class="reference internal nav-link" href="../tutorial.html">
+  Tutorial
+ </a>
+</li>
+
+<li class="toctree-l1 nav-item">
+ <a class="reference internal nav-link" href="../support.html">
+  Support
+ </a>
+</li>
+
+<li class="toctree-l1 nav-item">
+ <a class="reference internal nav-link" href="../changelog.html">
+  Change Log
+ </a>
+</li>
+
+<li class="toctree-l1 nav-item">
+ <a class="reference internal nav-link" href="../licence.html">
+  Licence
+ </a>
+</li>
+
+<li class="toctree-l1 nav-item">
+ <a class="reference internal nav-link" href="../genindex.html">
+  Index
+ </a>
+</li>
 
         
-        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+      </ul>
+
+      <ul id="navbar-icon-links" class="navbar-nav" aria-label="Icon Links">
+        <li class="nav-item">
+          <a class="nav-link" href="https://github.com/ThibHlln/eflowcalc" rel="noopener" target="_blank" title="GitHub">
+            <span><i class="fab fa-github"></i></span>
+            <label class="sr-only">GitHub</label>
+          </a>
+        </li>
+      </ul>
+    </div>
+</div>
+    </nav>
+    
+
+    <div class="container-xl">
+      <div class="row">
           
             
+            <!-- Only show if we have sidebars configured, else just a small margin  -->
+            <div class="col-12 col-md-3 bd-sidebar"><form class="bd-search d-flex align-items-center" action="../search.html" method="get">
+  <i class="icon fas fa-search"></i>
+  <input type="search" class="form-control" name="q" id="search-input" placeholder="Search the docs ..." aria-label="Search the docs ..." autocomplete="off" >
+</form><nav class="bd-links" id="bd-docs-nav" aria-label="Main navigation">
+  <div class="bd-toc-item active">
+    <ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="eflowcalc.calculator.html">
+   Calculator
+  </a>
+ </li>
+</ul>
+<ul class="current nav bd-sidenav">
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="eflowcalc.flow_duration.html">
+   Characteristics on flow duration
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" type="checkbox"/>
+  <label for="toctree-checkbox-1">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="eflowcalc.dl1.html">
+     eflowcalc.dl1
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="eflowcalc.dl2.html">
+     eflowcalc.dl2
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="eflowcalc.dl3.html">
+     eflowcalc.dl3
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="eflowcalc.dl4.html">
+     eflowcalc.dl4
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="eflowcalc.dl5.html">
+     eflowcalc.dl5
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="eflowcalc.dl6.html">
+     eflowcalc.dl6
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="eflowcalc.dl7.html">
+     eflowcalc.dl7
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="eflowcalc.dl8.html">
+     eflowcalc.dl8
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="eflowcalc.dl9.html">
+     eflowcalc.dl9
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="eflowcalc.dl10.html">
+     eflowcalc.dl10
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="eflowcalc.dl11.html">
+     eflowcalc.dl11
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="eflowcalc.dl12.html">
+     eflowcalc.dl12
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="eflowcalc.dl13.html">
+     eflowcalc.dl13
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="eflowcalc.dl14.html">
+     eflowcalc.dl14
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="eflowcalc.dl15.html">
+     eflowcalc.dl15
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="eflowcalc.dl16.html">
+     eflowcalc.dl16
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="eflowcalc.dl17.html">
+     eflowcalc.dl17
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="eflowcalc.dl18.html">
+     eflowcalc.dl18
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="eflowcalc.dl19.html">
+     eflowcalc.dl19
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="eflowcalc.dl20.html">
+     eflowcalc.dl20
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="eflowcalc.dh1.html">
+     eflowcalc.dh1
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="eflowcalc.dh2.html">
+     eflowcalc.dh2
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="eflowcalc.dh3.html">
+     eflowcalc.dh3
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="eflowcalc.dh4.html">
+     eflowcalc.dh4
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="eflowcalc.dh5.html">
+     eflowcalc.dh5
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="eflowcalc.dh6.html">
+     eflowcalc.dh6
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="eflowcalc.dh7.html">
+     eflowcalc.dh7
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="eflowcalc.dh8.html">
+     eflowcalc.dh8
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="eflowcalc.dh9.html">
+     eflowcalc.dh9
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="eflowcalc.dh10.html">
+     eflowcalc.dh10
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="eflowcalc.dh11.html">
+     eflowcalc.dh11
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="eflowcalc.dh12.html">
+     eflowcalc.dh12
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="eflowcalc.dh13.html">
+     eflowcalc.dh13
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="eflowcalc.dh14.html">
+     eflowcalc.dh14
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="eflowcalc.dh15.html">
+     eflowcalc.dh15
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="eflowcalc.dh16.html">
+     eflowcalc.dh16
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="eflowcalc.dh17.html">
+     eflowcalc.dh17
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="eflowcalc.dh18.html">
+     eflowcalc.dh18
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="eflowcalc.dh19.html">
+     eflowcalc.dh19
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="eflowcalc.dh20.html">
+     eflowcalc.dh20
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="eflowcalc.dh21.html">
+     eflowcalc.dh21
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="eflowcalc.flow_magnitude.html">
+   Characteristics on flow magnitude
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" type="checkbox"/>
+  <label for="toctree-checkbox-2">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="eflowcalc.ma1.html">
+     eflowcalc.ma1
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="eflowcalc.ma2.html">
+     eflowcalc.ma2
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="eflowcalc.ma3.html">
+     eflowcalc.ma3
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="eflowcalc.ma4.html">
+     eflowcalc.ma4
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="eflowcalc.ma5.html">
+     eflowcalc.ma5
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="eflowcalc.ma6.html">
+     eflowcalc.ma6
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="eflowcalc.ma7.html">
+     eflowcalc.ma7
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="eflowcalc.ma8.html">
+     eflowcalc.ma8
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="eflowcalc.ma9.html">
+     eflowcalc.ma9
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="eflowcalc.ma10.html">
+     eflowcalc.ma10
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="eflowcalc.ma11.html">
+     eflowcalc.ma11
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="eflowcalc.ma12.html">
+     eflowcalc.ma12
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="eflowcalc.ma13.html">
+     eflowcalc.ma13
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="eflowcalc.ma14.html">
+     eflowcalc.ma14
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="eflowcalc.ma15.html">
+     eflowcalc.ma15
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="eflowcalc.ma16.html">
+     eflowcalc.ma16
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="eflowcalc.ma17.html">
+     eflowcalc.ma17
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="eflowcalc.ma18.html">
+     eflowcalc.ma18
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="eflowcalc.ma19.html">
+     eflowcalc.ma19
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="eflowcalc.ma20.html">
+     eflowcalc.ma20
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="eflowcalc.ma21.html">
+     eflowcalc.ma21
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="eflowcalc.ma22.html">
+     eflowcalc.ma22
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="eflowcalc.ma23.html">
+     eflowcalc.ma23
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="eflowcalc.ma24.html">
+     eflowcalc.ma24
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="eflowcalc.ma25.html">
+     eflowcalc.ma25
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="eflowcalc.ma26.html">
+     eflowcalc.ma26
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="eflowcalc.ma27.html">
+     eflowcalc.ma27
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="eflowcalc.ma28.html">
+     eflowcalc.ma28
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="eflowcalc.ma29.html">
+     eflowcalc.ma29
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="eflowcalc.ma30.html">
+     eflowcalc.ma30
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="eflowcalc.ma31.html">
+     eflowcalc.ma31
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="eflowcalc.ma32.html">
+     eflowcalc.ma32
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="eflowcalc.ma33.html">
+     eflowcalc.ma33
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="eflowcalc.ma34.html">
+     eflowcalc.ma34
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="eflowcalc.ma35.html">
+     eflowcalc.ma35
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="eflowcalc.ma36.html">
+     eflowcalc.ma36
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="eflowcalc.ma37.html">
+     eflowcalc.ma37
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="eflowcalc.ma38.html">
+     eflowcalc.ma38
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="eflowcalc.ma39.html">
+     eflowcalc.ma39
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="eflowcalc.ma40.html">
+     eflowcalc.ma40
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="eflowcalc.ma41.html">
+     eflowcalc.ma41
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="eflowcalc.ma42.html">
+     eflowcalc.ma42
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="eflowcalc.ma43.html">
+     eflowcalc.ma43
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="eflowcalc.ma44.html">
+     eflowcalc.ma44
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="eflowcalc.ma45.html">
+     eflowcalc.ma45
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="eflowcalc.ml1.html">
+     eflowcalc.ml1
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="eflowcalc.ml2.html">
+     eflowcalc.ml2
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="eflowcalc.ml3.html">
+     eflowcalc.ml3
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="eflowcalc.ml4.html">
+     eflowcalc.ml4
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="eflowcalc.ml5.html">
+     eflowcalc.ml5
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="eflowcalc.ml6.html">
+     eflowcalc.ml6
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="eflowcalc.ml7.html">
+     eflowcalc.ml7
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="eflowcalc.ml8.html">
+     eflowcalc.ml8
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="eflowcalc.ml9.html">
+     eflowcalc.ml9
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="eflowcalc.ml10.html">
+     eflowcalc.ml10
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="eflowcalc.ml11.html">
+     eflowcalc.ml11
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="eflowcalc.ml12.html">
+     eflowcalc.ml12
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="eflowcalc.ml13.html">
+     eflowcalc.ml13
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="eflowcalc.ml14.html">
+     eflowcalc.ml14
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="eflowcalc.ml15.html">
+     eflowcalc.ml15
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="eflowcalc.ml16.html">
+     eflowcalc.ml16
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="eflowcalc.ml17.html">
+     eflowcalc.ml17
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="eflowcalc.ml18.html">
+     eflowcalc.ml18
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="eflowcalc.ml19.html">
+     eflowcalc.ml19
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="eflowcalc.ml20.html">
+     eflowcalc.ml20
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="eflowcalc.ml21.html">
+     eflowcalc.ml21
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="eflowcalc.ml22.html">
+     eflowcalc.ml22
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="eflowcalc.mh1.html">
+     eflowcalc.mh1
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="eflowcalc.mh2.html">
+     eflowcalc.mh2
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="eflowcalc.mh3.html">
+     eflowcalc.mh3
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="eflowcalc.mh4.html">
+     eflowcalc.mh4
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="eflowcalc.mh5.html">
+     eflowcalc.mh5
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="eflowcalc.mh6.html">
+     eflowcalc.mh6
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="eflowcalc.mh7.html">
+     eflowcalc.mh7
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="eflowcalc.mh8.html">
+     eflowcalc.mh8
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="eflowcalc.mh9.html">
+     eflowcalc.mh9
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="eflowcalc.mh10.html">
+     eflowcalc.mh10
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="eflowcalc.mh11.html">
+     eflowcalc.mh11
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="eflowcalc.mh12.html">
+     eflowcalc.mh12
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="eflowcalc.mh13.html">
+     eflowcalc.mh13
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="eflowcalc.mh14.html">
+     eflowcalc.mh14
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="eflowcalc.mh15.html">
+     eflowcalc.mh15
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="eflowcalc.mh16.html">
+     eflowcalc.mh16
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="eflowcalc.mh17.html">
+     eflowcalc.mh17
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="eflowcalc.mh18.html">
+     eflowcalc.mh18
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="eflowcalc.mh19.html">
+     eflowcalc.mh19
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="eflowcalc.mh20.html">
+     eflowcalc.mh20
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="eflowcalc.mh21.html">
+     eflowcalc.mh21
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="eflowcalc.mh22.html">
+     eflowcalc.mh22
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="eflowcalc.mh23.html">
+     eflowcalc.mh23
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1 current active has-children">
+  <a class="reference internal" href="eflowcalc.flow_frequency.html">
+   Characteristics on flow frequency
+  </a>
+  <input checked="" class="toctree-checkbox" id="toctree-checkbox-3" name="toctree-checkbox-3" type="checkbox"/>
+  <label for="toctree-checkbox-3">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul class="current">
+   <li class="toctree-l2">
+    <a class="reference internal" href="eflowcalc.fl1.html">
+     eflowcalc.fl1
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="eflowcalc.fl2.html">
+     eflowcalc.fl2
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="eflowcalc.fl3.html">
+     eflowcalc.fl3
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="eflowcalc.fh1.html">
+     eflowcalc.fh1
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="eflowcalc.fh2.html">
+     eflowcalc.fh2
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="eflowcalc.fh3.html">
+     eflowcalc.fh3
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="eflowcalc.fh4.html">
+     eflowcalc.fh4
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="eflowcalc.fh5.html">
+     eflowcalc.fh5
+    </a>
+   </li>
+   <li class="toctree-l2 current active">
+    <a class="current reference internal" href="#">
+     eflowcalc.fh6
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="eflowcalc.fh7.html">
+     eflowcalc.fh7
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="eflowcalc.fh8.html">
+     eflowcalc.fh8
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="eflowcalc.fh9.html">
+     eflowcalc.fh9
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="eflowcalc.fh10.html">
+     eflowcalc.fh10
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="eflowcalc.flow_rate_change.html">
+   Characteristics on flow rate of change
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-4" name="toctree-checkbox-4" type="checkbox"/>
+  <label for="toctree-checkbox-4">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="eflowcalc.ra1.html">
+     eflowcalc.ra1
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="eflowcalc.ra2.html">
+     eflowcalc.ra2
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="eflowcalc.ra3.html">
+     eflowcalc.ra3
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="eflowcalc.ra4.html">
+     eflowcalc.ra4
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="eflowcalc.ra5.html">
+     eflowcalc.ra5
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="eflowcalc.ra6.html">
+     eflowcalc.ra6
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="eflowcalc.ra7.html">
+     eflowcalc.ra7
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="eflowcalc.ra8.html">
+     eflowcalc.ra8
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="eflowcalc.ra9.html">
+     eflowcalc.ra9
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="eflowcalc.flow_timing.html">
+   Characteristics on flow timing
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-5" name="toctree-checkbox-5" type="checkbox"/>
+  <label for="toctree-checkbox-5">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="eflowcalc.ta1.html">
+     eflowcalc.ta1
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="eflowcalc.ta2.html">
+     eflowcalc.ta2
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="eflowcalc.tl1.html">
+     eflowcalc.tl1
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="eflowcalc.tl2.html">
+     eflowcalc.tl2
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="eflowcalc.th1.html">
+     eflowcalc.th1
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="eflowcalc.th2.html">
+     eflowcalc.th2
+    </a>
+   </li>
+  </ul>
+ </li>
+</ul>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../bundles/eflowcalc.bundles.html">
+   Bundles of Characteristics
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-6" name="toctree-checkbox-6" type="checkbox"/>
+  <label for="toctree-checkbox-6">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../bundles/eflowcalc.magnitude.html">
+     eflowcalc.magnitude
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../bundles/eflowcalc.frequency.html">
+     eflowcalc.frequency
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../bundles/eflowcalc.duration.html">
+     eflowcalc.duration
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../bundles/eflowcalc.timing.html">
+     eflowcalc.timing
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../bundles/eflowcalc.rate_change.html">
+     eflowcalc.rate_change
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../bundles/eflowcalc.everything.html">
+     eflowcalc.everything
+    </a>
+   </li>
+  </ul>
+ </li>
+</ul>
+
+  </div>
+</nav>
+            </div>
+            
+          
+
+          
+          <div class="d-none d-xl-block col-xl-2 bd-toc">
             
               
+              <div class="toc-item">
+                
+
+<nav id="bd-toc-nav">
+    
+</nav>
+              </div>
+              
+              <div class="toc-item">
+                
+              </div>
+              
             
-            
-              <ul class="current">
-<li class="toctree-l1"><a class="reference internal" href="../installation.html">Installation</a></li>
-<li class="toctree-l1 current"><a class="reference internal" href="../api_reference.html">API Reference</a><ul class="current">
-<li class="toctree-l2"><a class="reference internal" href="eflowcalc.calculator.html">Calculator</a></li>
-<li class="toctree-l2"><a class="reference internal" href="eflowcalc.flow_duration.html">Characteristics on flow duration</a></li>
-<li class="toctree-l2"><a class="reference internal" href="eflowcalc.flow_magnitude.html">Characteristics on flow magnitude</a></li>
-<li class="toctree-l2 current"><a class="reference internal" href="eflowcalc.flow_frequency.html">Characteristics on flow frequency</a><ul class="current">
-<li class="toctree-l3"><a class="reference internal" href="eflowcalc.flow_frequency.html#low-flow-events">Low flow events</a></li>
-<li class="toctree-l3 current"><a class="reference internal" href="eflowcalc.flow_frequency.html#high-flow-events">High flow events</a></li>
-</ul>
-</li>
-<li class="toctree-l2"><a class="reference internal" href="eflowcalc.flow_rate_change.html">Characteristics on flow rate of change</a></li>
-<li class="toctree-l2"><a class="reference internal" href="eflowcalc.flow_timing.html">Characteristics on flow timing</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../bundles/eflowcalc.bundles.html">Bundles of Characteristics</a></li>
-</ul>
-</li>
-<li class="toctree-l1"><a class="reference internal" href="../tutorial.html">Tutorial</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../support.html">Support</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../changelog.html">Change Log</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../licence.html">Licence</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../genindex.html">Index</a></li>
-</ul>
-
-            
-          
-        </div>
-        
-      </div>
-    </nav>
-
-    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
-
-      
-      <nav class="wy-nav-top" aria-label="top navigation">
-        
-          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
-          <a href="../index.html">eflowcalc</a>
-        
-      </nav>
-
-
-      <div class="wy-nav-content">
-        
-        <div class="rst-content">
-        
+          </div>
           
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-<div role="navigation" aria-label="breadcrumbs navigation">
-
-  <ul class="wy-breadcrumbs">
-    
-      <li><a href="../index.html" class="icon icon-home"></a> &raquo;</li>
-        
-          <li><a href="../api_reference.html">API Reference</a> &raquo;</li>
-        
-          <li><a href="eflowcalc.flow_frequency.html">Characteristics on flow frequency</a> &raquo;</li>
-        
-      <li>eflowcalc.fh6</li>
-    
-    
-      <li class="wy-breadcrumbs-aside">
-        
           
-        
-      </li>
-    
-  </ul>
-
-  
-  <hr/>
-</div>
-          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
-           <div itemprop="articleBody">
+          
             
-  
-<style>
-/* CSS overrides for sphinx_rtd_theme */
-
-/* 24px margin */
-.nbinput.nblast.container,
-.nboutput.nblast.container {
-    margin-bottom: 19px;  /* padding has already 5px */
-}
-
-/* ... except between code cells! */
-.nblast.container + .nbinput.container {
-    margin-top: -19px;
-}
-
-.admonition > p:before {
-    margin-right: 4px;  /* make room for the exclamation icon */
-}
-
-/* Fix math alignment, see https://github.com/rtfd/sphinx_rtd_theme/pull/686 */
-.math {
-    text-align: unset;
-}
-</style>
-<div class="section" id="eflowcalc-fh6">
-<h1>eflowcalc.fh6<a class="headerlink" href="#eflowcalc-fh6" title="Permalink to this headline">¶</a></h1>
+          
+          <main class="col-12 col-md-9 col-xl-7 py-md-5 pl-md-5 pr-md-4 bd-content" role="main">
+              
+              <div>
+                
+  <div class="section" id="eflowcalc-fh6">
+<h1>eflowcalc.fh6<a class="headerlink" href="#eflowcalc-fh6" title="Permalink to this headline"><span class="fa fa-link"></a></h1>
 <dl class="py function">
-<dt id="eflowcalc.fh6">
-<code class="sig-prename descclassname">eflowcalc.</code><code class="sig-name descname">fh6</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">flows</span></em>, <em class="sig-param"><span class="n">datetimes</span></em>, <em class="sig-param"><span class="n">hydro_years</span></em>, <em class="sig-param"><span class="n">drainage_area</span></em><span class="sig-paren">)</span><a class="headerlink" href="#eflowcalc.fh6" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="eflowcalc.fh6">
+<span class="sig-prename descclassname"><span class="pre">eflowcalc.</span></span><span class="sig-name descname"><span class="pre">fh6</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">flows</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">datetimes</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">hydro_years</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">drainage_area</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#eflowcalc.fh6" title="Permalink to this definition"><span class="fa fa-link"></a></dt>
 <dd><p>Frequency of moderate floods.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Calculation Details</dt>
@@ -223,84 +1110,31 @@ Calculate the mean of these number of events.</p>
 </div>
 
 
-           </div>
-           
-          </div>
-          <footer>
+              </div>
+              
+              
+          </main>
+          
 
-  <hr/>
-
-  <div role="contentinfo">
-    <p>
-        &#169; Copyright 2018-2021, Thibault Hallouin.
-      <span class="lastupdated">
-        Last updated on Aug 22, 2021.
-      </span>
-
-    </p>
-  </div>
-    
-    
-    
-    Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
-    
-    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
-    
-    provided by <a href="https://readthedocs.org">Read the Docs</a>. 
-
-</footer>
-        </div>
       </div>
+    </div>
+  
+  <script src="../_static/js/index.1c5a1a01449ed65a7b51.js"></script>
 
-    </section>
-
+  <footer class="footer mt-5 mt-md-0">
+  <div class="container">
+    <div class="footer-item">
+      <p class="copyright">
+            &copy; Copyright 2018-2021, Thibault Hallouin.
+      </p>
+    </div>
+    <div class="footer-item">
+      <p class="sphinx-version">
+        Created using <a href="http://sphinx-doc.org/">Sphinx</a> 4.2.0.
+        Last updated on Apr 26, 2021.<br>
+      </p>
+    </div>
   </div>
-  
-<div class="rst-versions" data-toggle="rst-versions" role="note" aria-label="versions">
-<span class="rst-current-version" data-toggle="rst-current-version">
-  <div style="float:left;">
-    <span class="fa fa-bars"> </span>
-  </div>
-  <div style="float:right;">
-    v: 0.1.0
-    <span class="fa fa-caret-down"></span>
-  </div>
-</span>
-<div class="rst-other-versions">
-  
-  <dl>
-    <dt>Versions</dt>
-    
-      <dd><a href="https://thibhlln.github.io/eflowcalc">latest</a></dd>
-    
-      <dd><a href="https://thibhlln.github.io/eflowcalc/0.1.0">v0.1.0</a></dd>
-    
-  </dl>
-  
-  <dl>
-    <dt>External Links</dt>
-    
-      <dd><a href="https://github.com/ThibHlln/eflowcalc.git">Source Code</a></dd>
-    
-      <dd><a href="https://github.com/ThibHlln/eflowcalc/issues">Issue Tracker</a></dd>
-    
-      <dd><a href="https://github.com/ThibHlln/eflowcalc/discussions">User Support</a></dd>
-    
-  </dl>
-  
-</div>
-</div>
-
-  <script type="text/javascript">
-      jQuery(function () {
-          SphinxRtdTheme.Navigation.enable(true);
-      });
-  </script>
-
-  
-  
-    
-   
-
-</body>
+</footer>
+  </body>
 </html>
