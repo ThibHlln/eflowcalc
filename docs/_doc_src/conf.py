@@ -10,7 +10,7 @@
 # add these directories to sys.path here. If the directory is relative to the
 # documentation root, use os.path.abspath to make it absolute, like shown here.
 #
-import sphinx_rtd_theme
+import pydata_sphinx_theme
 from datetime import datetime
 import os
 import sys
@@ -44,14 +44,11 @@ else:
 # extensions coming with Sphinx (named 'sphinx.ext.*') or your custom
 # ones.
 extensions = [
-    'sphinx_rtd_theme',
     'sphinx.ext.autodoc',
     'sphinx.ext.autosummary',
     'sphinx.ext.intersphinx',
     'sphinx.ext.doctest',
-    'sphinx.ext.githubpages',
-    'nbsphinx',
-    'sphinx.ext.mathjax'
+    'sphinx.ext.githubpages'
 ]
 
 # Boolean indicating whether to scan all found documents for
@@ -118,7 +115,7 @@ todo_include_todos = False
 # The theme to use for HTML and HTML Help pages.  See the documentation for
 # a list of builtin themes.
 #
-html_theme = 'sphinx_rtd_theme'
+html_theme = 'pydata_sphinx_theme'
 
 # Add any paths that contain custom static files (such as style sheets) here,
 # relative to this directory. They are copied after the builtin static files,
@@ -130,26 +127,33 @@ htmlhelp_basename = 'eflowcalcdoc'
 
 # Paths (filenames) here must be relative to (under) html_static_path as above:
 html_css_files = [
-    'theme_overrides.css'
+    'custom.css'
 ]
 
 # Custom sidebar templates, maps document names to template names.
-html_sidebars = {
-    '**': ['about.html',
-           'navigation.html',
-           'searchbox.html',
-           'versions.html']
-}
+html_sidebars = {}
 
 # https://alabaster.readthedocs.io/en/latest/customization.html
 # https://github.com/bitprophet/alabaster/blob/master/alabaster/theme.conf
 
 html_baseurl = 'https://thibhlln.github.io/eflowcalc'
 
+html_logo = '../_doc_img/eflowcalc-logo.svg'
+
+html_favicon = '../_doc_img/eflowcalc-favicon.ico'
+
+html_permalinks_icon = '<span class="fa fa-link">'
+
 html_theme_options = {
-    'prev_next_buttons_location': None,
-    'navigation_depth': 3,
-    'display_version': True
+    "icon_links": [
+        {
+            "name": "GitHub",
+            "url": "https://github.com/ThibHlln/eflowcalc",
+            "icon": "fab fa-github",
+        }
+    ],
+    "show_prev_next": False,
+    "navbar_align": "left"
 }
 
 # If not '', a 'Last updated on:' timestamp is inserted at every page
