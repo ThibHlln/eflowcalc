@@ -1,16 +1,19 @@
 A streamflow characteristics calculator in Python
 -------------------------------------------------
 
-.. image:: https://img.shields.io/pypi/v/eflowcalc?color=blue
+.. image:: https://img.shields.io/pypi/v/eflowcalc?style=flat-square
    :target: https://pypi.python.org/pypi/eflowcalc
    :alt: PyPI Version
-.. image:: https://zenodo.org/badge/153001813.svg
+.. image:: https://img.shields.io/badge/dynamic/json?url=https://zenodo.org/api/records/2566757&label=doi&query=doi&style=flat-square
    :target: https://zenodo.org/badge/latestdoi/153001813
    :alt: DOI
-.. image:: https://img.shields.io/badge/License-GPL%20v3-blue.svg
+.. image:: https://img.shields.io/badge/License-GPL%20v3-blue.svg?style=flat-square
    :target: https://www.gnu.org/licenses/gpl-3.0
    :alt: License: GPL v3
-.. image:: https://img.shields.io/github/workflow/status/ThibHlln/eflowcalc/Tests?label=tests
+.. image:: https://img.shields.io/badge/fair-%E2%97%8F%20%20%E2%97%8F%20%20%E2%97%8F%20%20%E2%97%8F%20%20%E2%97%8B-yellow?style=flat-square
+   :target: https://fair-software.eu
+   :alt: FAIR Software Compliance
+.. image:: https://img.shields.io/github/workflow/status/ThibHlln/eflowcalc/Tests?style=flat-square&label=tests
    :target: https://github.com/ThibHlln/eflowcalc/actions/workflows/tests.yml
    :alt: GitHub Actions Test Workflow Status
 
