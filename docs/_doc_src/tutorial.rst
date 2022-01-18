@@ -12,7 +12,7 @@ calculate streamflow characteristics (SFCs) from streamflow time series.
 
    >>> import eflowcalc
    >>> print(eflowcalc.__version__)
-   0.0.3
+   0.1.0
 
 
 Load streamflow time series
