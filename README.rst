@@ -32,7 +32,7 @@ follows (click on the link to get the DOI of a specific version):
 
 .. pull-quote::
 
-   *Hallouin, T. (XXXX). EFlowCalc: Ecological Streamflow Characteristics Calculator (Version X.X.X). Zenodo.* `<https://doi.org/10.5281/zenodo.2566757>`_
+   *Hallouin, T. (XXXX). eflowcalc: a streamflow characteristics calculator in Python (Version X.X.X). Zenodo.* `<https://doi.org/10.5281/zenodo.2566757>`_
 
 .. rubric:: Brief overview of the API
 
