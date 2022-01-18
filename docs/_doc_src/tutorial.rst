@@ -15,7 +15,8 @@ calculate streamflow characteristics (SFCs) from streamflow time series.
    0.0.3
 
 
-.. rubric:: Load streamflow time series
+Load streamflow time series
+~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 An example file is provided in the folder *sample_data/* in order for anyone
 to reproduce this tutorial. Because this is a NetCDF file, we are going
@@ -55,7 +56,8 @@ datetimes first.
    2004-10-01 00:00:00 2016-09-30 00:00:00
 
 
-.. rubric:: Calculate one or more streamflow characteristics
+Calculate one or more streamflow characteristics
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 Now that the dataset is loaded in memory, it is time to use `eflowcalc`
 to calculate the streamflow characteristics from the hydrograph(s). To

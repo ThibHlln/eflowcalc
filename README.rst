@@ -34,7 +34,8 @@ follows (click on the link to get the DOI of a specific version):
 
    *Hallouin, T. (XXXX). eflowcalc: a streamflow characteristics calculator in Python (Version X.X.X). Zenodo.* `<https://doi.org/10.5281/zenodo.2566757>`_
 
-.. rubric:: Brief overview of the API
+Brief overview of the API
+~~~~~~~~~~~~~~~~~~~~~~~~~
 
 .. code-block:: python
 
@@ -51,7 +52,8 @@ follows (click on the link to get the DOI of a specific version):
    ma41, dh4, ra7 = efc.calculator((efc.ma41, efc.dh4, efc.ra7),
                                    datetimes, streamflows, drainage_area)
 
-.. rubric:: Streamflow characteristics available
+Streamflow characteristics available
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 The streamflow characteristics currently available in `eflowcalc` are
 as follows:
@@ -94,7 +96,8 @@ as follows:
    <https://doi.org/10.3133/ofr20061093>`_, however `eflowcalc` is
    neither endorsed by these authors nor by the U.S. Geological Survey.
 
-.. rubric:: Acknowledgement
+Acknowledgement
+~~~~~~~~~~~~~~~
 
 Early versions of this tool were developed with the financial support of
 Ireland's Environmental Protection Agency (Grant Number 2014-W-LS-5).
