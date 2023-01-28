@@ -7,7 +7,7 @@ A streamflow characteristics calculator in Python
 .. image:: https://img.shields.io/badge/dynamic/json?url=https://zenodo.org/api/records/2566757&label=doi&query=doi&style=flat-square
    :target: https://zenodo.org/badge/latestdoi/153001813
    :alt: DOI
-.. image:: https://img.shields.io/badge/License-GPL%20v3-blue.svg?style=flat-square
+.. image:: https://img.shields.io/badge/License-GPL%20v3-green.svg?style=flat-square
    :target: https://www.gnu.org/licenses/gpl-3.0
    :alt: License: GPL v3
 .. image:: https://img.shields.io/badge/fair-%E2%97%8F%20%20%E2%97%8F%20%20%E2%97%8F%20%20%E2%97%8F%20%20%E2%97%8B-yellow?style=flat-square
